@@ -11,6 +11,7 @@ import galleryTallA from "../assets/photo_2026-04-16_19-36-08.jpg";
 import galleryTallB from "../assets/photo_2026-04-16_19-39-498.jpg";
 import capabilitiesImage from "../assets/capabilities_hero.png";
 import homeHeroImage from "../assets/home_hero.png";
+import logo from "../assets/Logo.svg";
 import { pageOrder, pages, primaryLinks, footerData } from "./siteData";
 
 const pageTransition = {
@@ -40,21 +41,6 @@ const revealUp = {
   }),
 };
 
-const goldPlaceholders = [
-  {
-    currency: "USD",
-    value: "$154.80",
-    trend: "up",
-    note: "+1.6% today",
-  },
-  {
-    currency: "ETB",
-    value: "20,850 ETB",
-    trend: "down",
-    note: "-0.6% today",
-  },
-];
-
 const homeGalleryImages = [
   {
     src: galleryWide,
@@ -62,29 +48,32 @@ const homeGalleryImages = [
     layout: "is-wide",
   },
   {
-    src: galleryTallA,
-    alt: "Armada Mining site image 2",
-    layout: "is-tall-a",
-  },
-  {
-    src: galleryPortraitA,
-    alt: "Armada Mining site image 3",
-    layout: "is-portrait-a",
-  },
-  {
     src: galleryPortraitB,
     alt: "Armada Mining site image 4",
     layout: "is-portrait-b",
   },
   {
-    src: galleryPortraitC,
-    alt: "Armada Mining site image 5",
-    layout: "is-small-tall",
-  },
-  {
     src: galleryTallB,
     alt: "Armada Mining site image 6",
     layout: "is-wide-low",
+  },
+];
+
+const esgPrinciples = [
+  {
+    category: "Environmental",
+    details:
+      "Reprocessing tailings reduces land disturbance and environmental waste legacy.",
+  },
+  {
+    category: "Social Impact",
+    details:
+      "Supporting mining communities through training and disciplined workforce organization.",
+  },
+  {
+    category: "Governance",
+    details:
+      "Structured custody and formal revenue pathways integrated with NBE systems.",
   },
 ];
 
@@ -114,30 +103,58 @@ function App() {
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname));
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [goldPrices, setGoldPrices] = useState([
+    {
+      currency: "USD",
+      value: "$154.80",
+      trend: "up",
+      note: "+1.6% today",
+    },
+    {
+      currency: "ETB",
+      value: "20,850 ETB",
+      trend: "down",
+      note: "-0.6% today",
+    },
+  ]);
   const navActionsRef = useRef(null);
   const heroRef = useRef(null);
+  const navPanelRef = useRef(null);
+
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.1,
-      smoothWheel: true,
-      touchMultiplier: 1.05,
-      lerp: 0.085,
-    });
+    const fetchGoldPrices = async () => {
+      try {
+        const response = await fetch("https://api.nbe.gov.et/api/filter-gold-rates");
+        const apiResult = await response.json();
+        const rates = Array.isArray(apiResult.data) ? apiResult.data : [];
+        const primaryRate = rates.find((item) => item.gold_type?.karat === "24") || rates[0];
 
-    let frameId = 0;
+        if (!primaryRate) {
+          return;
+        }
 
-    const frame = (time) => {
-      lenis.raf(time);
-      frameId = requestAnimationFrame(frame);
+        setGoldPrices([
+          {
+            currency: "USD",
+            value: `$${Number(primaryRate.price_usd).toFixed(2)}`,
+            trend: "neutral",
+            note: `24K / ${primaryRate.date}`,
+          },
+          {
+            currency: "ETB",
+            value: `${Number(primaryRate.price_birr).toLocaleString()} ETB`,
+            trend: "neutral",
+            note: `24K / ${primaryRate.date}`,
+          },
+        ]);
+      } catch (error) {
+        console.error("Failed to fetch gold prices:", error);
+      }
     };
 
-    frameId = requestAnimationFrame(frame);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      lenis.destroy();
-    };
+    fetchGoldPrices();
   }, []);
 
   useEffect(() => {
@@ -159,6 +176,7 @@ function App() {
       } else {
         setIsScrolled(window.scrollY > window.innerHeight * 0.9);
       }
+      setShowScrollTop(window.scrollY > 320);
     };
     // Defer by one frame so heroRef is guaranteed to be set
     const raf = requestAnimationFrame(checkScroll);
@@ -171,7 +189,8 @@ function App() {
 
   useEffect(() => {
     const page = pages[pathname] ?? pages["/"];
-    document.title = `${page.title} | Armada Mining`;
+    const baseTitle = "Armada Mining";
+    document.title = page.slug === "home" ? baseTitle : `${baseTitle} - ${page.title}`;
   }, [pathname]);
 
   useEffect(() => {
@@ -180,9 +199,14 @@ function App() {
     }
 
     const handlePointerDown = (event) => {
-      if (navActionsRef.current && !navActionsRef.current.contains(event.target)) {
-        setMenuOpen(false);
+      const target = event.target;
+      if (
+        (navActionsRef.current && navActionsRef.current.contains(target)) ||
+        (navPanelRef.current && navPanelRef.current.contains(target))
+      ) {
+        return;
       }
+      setMenuOpen(false);
     };
 
     const handleKeyDown = (event) => {
@@ -247,16 +271,12 @@ function App() {
               aria-label="Armada Mining home"
               onClick={(event) => onNavClick(event, "/")}
             >
-              <BrandMark />
-              <span className="brand-wordmark">
-                <span>Armada</span>
-                <span>Mining</span>
-              </span>
+              <img src={logo} alt="Armada Mining" className="brand-logo" />
             </a>
 
             <div className={`nav-market${isScrolled ? " is-visible" : ""}`} aria-label="Indicative gold price">
               <div className="nav-market-grid">
-                {goldPlaceholders.map((item) => (
+                {goldPrices.map((item) => (
                   <article key={item.currency} className="nav-market-card">
                     <div className="nav-market-topline">
                       <span className="nav-market-value">
@@ -284,30 +304,18 @@ function App() {
                 <span />
                 <span />
               </button>
-
-              <nav className={`nav-panel${menuOpen ? " is-open" : ""}`} aria-label="Primary">
-                <div className="nav-links">
-                  {primaryLinks.map((link) => (
-                    <a
-                      key={link.path}
-                      href={link.path}
-                      className={currentPath === link.path ? "is-active" : ""}
-                      onClick={(event) => onNavClick(event, link.path)}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-
-                <a
-                  className="button button-accent nav-button"
-                  href="/contact"
-                  onClick={(event) => onNavClick(event, "/contact")}
-                >
-                  Start a conversation
-                </a>
-              </nav>
             </div>
+            <nav ref={navPanelRef} className={`nav-panel${menuOpen ? " is-open" : ""}`} aria-label="Primary">
+              <div className="nav-links">
+                {primaryLinks.map((link) => (
+                  <a key={link.path} href={link.path}
+                    className={currentPath === link.path ? "is-active" : ""}
+                    onClick={(event) => onNavClick(event, link.path)}>
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </nav>
           </div>
         </div>
       </header>
@@ -331,12 +339,36 @@ function App() {
         </motion.main>
       </AnimatePresence>
 
+      <button
+        type="button"
+        className={`scroll-top-button${showScrollTop ? " is-visible" : ""}`}
+        aria-label="Scroll to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <span className="scroll-top-icon" aria-hidden="true" />
+      </button>
+
       <Footer onNavClick={onNavClick} />
     </div>
   );
 }
 
 function Footer({ onNavClick }) {
+  const [hoveredDetail, setHoveredDetail] = useState(null);
+  const [copiedDetail, setCopiedDetail] = useState(null);
+
+  const handleCopy = (detail) => {
+    navigator.clipboard.writeText(detail);
+    setCopiedDetail(detail);
+    setTimeout(() => setCopiedDetail(null), 2000); // Hide after 2 seconds
+  };
+
+  const handleGo = (detail) => {
+    const isEmail = detail.includes('@');
+    const url = isEmail ? `mailto:${detail}` : `tel:${detail}`;
+    window.location.href = url;
+  };
+
   return (
     <footer className="site-footer">
       <div className="shell">
@@ -354,6 +386,46 @@ function Footer({ onNavClick }) {
               </span>
             </a>
             <p className="footer-description">{footerData.brand.description}</p>
+            <div className="footer-social">
+              <p className="card-label">Follow us</p>
+              <div className="footer-social-links">
+                <a
+                  className="footer-social-link"
+                  href="https://www.facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Facebook"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99H7.9v-2.9h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.55v1.87h2.78l-.44 2.9h-2.34V22C18.34 21.12 22 16.99 22 12Z" />
+                  </svg>
+                </a>
+                <a
+                  className="footer-social-link"
+                  href="https://t.me"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Telegram"
+                >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
+                </svg>
+
+                </a>
+                <a
+                  className="footer-social-link"
+                  href="https://www.linkedin.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+                </svg>
+
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="footer-columns">
@@ -375,7 +447,22 @@ function Footer({ onNavClick }) {
                 ) : (
                   <div className="footer-contact-details">
                     {column.details.map((detail) => (
-                      <p key={detail}>{detail}</p>
+                      <div
+                        key={detail}
+                        className="footer-contact-item"
+                        onMouseEnter={() => setHoveredDetail(detail)}
+                        onMouseLeave={() => setHoveredDetail(null)}
+                      >
+                        <p>{detail}</p>
+                        {hoveredDetail === detail && (
+                          <div className="footer-contact-actions">
+                            <button onClick={() => handleCopy(detail)}>
+                              {copiedDetail === detail ? 'Copied!' : 'Copy'}
+                            </button>
+                            <button onClick={() => handleGo(detail)}>Go</button>
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}
@@ -499,9 +586,11 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
             {page.focusAreas.map((item, index) => (
               <motion.article
                 key={item.title}
-                className={`home-focus-card${index === 1 ? " is-accent" : ""}`}
+                className={`home-focus-card${index === 1 || index === 2 ? " is-accent" : ""}`}
                 initial="hidden"
                 whileInView="show"
+                whileHover={{ scale: 1.05, y: -6 }}
+                transition={{ stiffness: 300 }}
                 viewport={{ once: true, amount: 0.24 }}
                 custom={index * 0.08}
                 variants={revealUp}
@@ -772,6 +861,71 @@ function ContactPageSection({ page, onNavClick, revealUp }) {
   );
 }
 
+function ESGPageSection({ page, revealUp }) {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <>
+      <section className="page-hero">
+        <div className="page-hero-media">
+          <img src={page.heroImage || heroImage} alt={page.heading} />
+        </div>
+        <div className="page-hero-overlay" />
+        <div className="page-hero-pattern">
+          <img src={pattern} alt="" aria-hidden="true" />
+        </div>
+
+        <div className="shell page-hero-grid">
+          <motion.div className="page-hero-copy" initial="hidden" animate="show" variants={revealUp}>
+            <h1>{page.heading}</h1>
+            <p className="lead-copy">{page.lead}</p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="esg-section shell">
+        <div className="section-intro reveal">
+          <p className="eyebrow">{page.introTag}</p>
+          <h2>{page.introHeading}</h2>
+          <p className="description-text">{page.introBody}</p>
+        </div>
+
+        <div className="esg-grid reveal reveal-stagger">
+          {esgPrinciples.map((item) => (
+            <article key={item.category} className="service-card service-card--icon">
+              <div className="service-icon">
+                {item.category === "Environmental"
+                  ? "🌿"
+                  : item.category === "Social Impact"
+                  ? "🤝"
+                  : "🏛"}
+              </div>
+              <h3>{item.category}</h3>
+              <p>{item.details}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
 function PageSection({ page, currentPath, onNavClick, revealUp, heroRef }) {
   if (page.slug === "home") {
     return <HomePageSection page={page} onNavClick={onNavClick} revealUp={revealUp} heroRef={heroRef} />;
@@ -779,6 +933,10 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef }) {
 
   if (page.slug === "contact") {
     return <ContactPageSection page={page} onNavClick={onNavClick} revealUp={revealUp} />;
+  }
+
+  if (page.slug === "esg") {
+    return <ESGPageSection page={page} revealUp={revealUp} />;
   }
 
   const previousPath =

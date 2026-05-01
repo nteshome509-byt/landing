@@ -5,6 +5,7 @@ export const primaryLinks = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Capabilities", path: "/capabilities" },
+  { label: "ESG", path: "/esg" },
   { label: "Approach", path: "/approach" },
   { label: "Contact", path: "/contact" },
 ];
@@ -93,7 +94,7 @@ export const pages = {
     title: "About",
     eyebrow: "About Armada",
     heading:
-      "A mining company built to make Ethiopian gold easier to understand and operate.",
+      "Making Ethiopian gold mining simple and accessible",
     lead:
       "ARMADA Mining is building a technology-first platform for Ethiopian gold mining, combining sector intelligence, operational readiness, and disciplined field execution.",
     primaryAction: { label: "See the approach", path: "/approach" },
@@ -204,6 +205,37 @@ export const pages = {
       "By combining intelligence, execution systems, and human capital development, we help the sector work more effectively from plan to production.",
     heroImage: capabilitiesImage,
     detailImage: capabilitiesImage,
+  },
+  "/esg": {
+    slug: "esg",
+    title: "ESG",
+    eyebrow: "ESG",
+    heading: "Sustainable Gold Production",
+    lead:
+      "ARMADA Mining is committed to transparent and sustainable operations that integrate Environmental, Social, and Governance principles into every stage.",
+    primaryAction: { label: "Contact Us", path: "/contact" },
+    secondaryAction: { label: "View capabilities", path: "/capabilities" },
+    introTag: "Responsible Mining",
+    introHeading: "Sustainable Gold Production",
+    introBody:
+      "Armada Mining is committed to transparent and sustainable operations that integrate Environmental, Social, and Governance principles into every stage.",
+    esgPrinciples: [
+      {
+        category: "Environmental",
+        details:
+          "Reprocessing tailings reduces land disturbance and environmental waste legacy.",
+      },
+      {
+        category: "Social Impact",
+        details:
+          "Supporting mining communities through training and disciplined workforce organization.",
+      },
+      {
+        category: "Governance",
+        details:
+          "Structured custody and formal revenue pathways integrated with NBE systems.",
+      },
+    ],
   },
   "/approach": {
     slug: "approach",
