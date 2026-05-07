@@ -4,15 +4,18 @@ import Lenis from "lenis";
 import pattern from "../assets/pattern.svg";
 import heroImage from "../assets/heroimage.webp";
 import galleryWide from "../assets/image_2026-04-16_16-14-43.png";
-import galleryPortraitA from "../assets/image_2026-04-16_16-11-55.png";
 import galleryPortraitB from "../assets/image_2026-04-16_19-37-21.png";
-import galleryPortraitC from "../assets/image_2026-04-16_19-38-28.png";
-import galleryTallA from "../assets/photo_2026-04-16_19-36-08.jpg";
 import galleryTallB from "../assets/photo_2026-04-16_19-39-498.jpg";
-import capabilitiesImage from "../assets/capabilities_hero.png";
 import homeHeroImage from "../assets/home_hero.png";
 import logo from "../assets/Logo.svg";
-import { pageOrder, pages, primaryLinks, footerData } from "./siteData";
+import {
+  getFooterData,
+  getPages,
+  getPrimaryLinks,
+  getUiText,
+  pageOrder,
+  supportedLanguages,
+} from "./siteData";
 
 const pageTransition = {
   initial: { opacity: 0, y: 18 },
@@ -42,39 +45,9 @@ const revealUp = {
 };
 
 const homeGalleryImages = [
-  {
-    src: galleryWide,
-    alt: "Armada Mining site image 1",
-    layout: "is-wide",
-  },
-  {
-    src: galleryPortraitB,
-    alt: "Armada Mining site image 4",
-    layout: "is-portrait-b",
-  },
-  {
-    src: galleryTallB,
-    alt: "Armada Mining site image 6",
-    layout: "is-wide-low",
-  },
-];
-
-const esgPrinciples = [
-  {
-    category: "Environmental",
-    details:
-      "Reprocessing tailings reduces land disturbance and environmental waste legacy.",
-  },
-  {
-    category: "Social Impact",
-    details:
-      "Supporting mining communities through training and disciplined workforce organization.",
-  },
-  {
-    category: "Governance",
-    details:
-      "Structured custody and formal revenue pathways integrated with NBE systems.",
-  },
+  { src: galleryWide, alt: "Armada Mining site image 1", layout: "is-wide" },
+  { src: galleryPortraitB, alt: "Armada Mining site image 2", layout: "is-portrait-b" },
+  { src: galleryTallB, alt: "Armada Mining site image 3", layout: "is-wide-low" },
 ];
 
 function BrandMark() {
@@ -99,29 +72,64 @@ function normalizePath(pathname) {
   return trimmed || "/";
 }
 
+function getStoredLanguage() {
+  const savedLanguage = window.localStorage.getItem("armada-language");
+  return supportedLanguages.some((item) => item.code === savedLanguage) ? savedLanguage : "en";
+}
+
 function App() {
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname));
+  const [language, setLanguage] = useState(getStoredLanguage);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [goldPrices, setGoldPrices] = useState([
-    {
-      currency: "USD",
-      value: "$154.80",
-      trend: "up",
-      note: "+1.6% today",
-    },
-    {
-      currency: "ETB",
-      value: "20,850 ETB",
-      trend: "down",
-      note: "-0.6% today",
-    },
-  ]);
+  const [goldRateSnapshot, setGoldRateSnapshot] = useState(null);
   const navActionsRef = useRef(null);
   const heroRef = useRef(null);
   const navPanelRef = useRef(null);
 
+  const primaryLinks = getPrimaryLinks(language);
+  const pages = getPages(language);
+  const footerData = getFooterData(language);
+  const uiText = getUiText(language);
+
+  const goldPrices = goldRateSnapshot
+    ? [
+        {
+          currency: "USD",
+          value: `$${Number(goldRateSnapshot.usd).toFixed(2)}`,
+          trend: "neutral",
+          note: uiText.goldRateNote(goldRateSnapshot.date),
+        },
+        {
+          currency: "ETB",
+          value: `${Number(goldRateSnapshot.birr).toLocaleString()} ETB`,
+          trend: "neutral",
+          note: uiText.goldRateNote(goldRateSnapshot.date),
+        },
+      ]
+    : uiText.defaultGoldPrices;
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      lerp: 0.08,
+      smoothWheel: true,
+    });
+
+    let rafId = 0;
+
+    const raf = (time) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    };
+
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     const fetchGoldPrices = async () => {
@@ -135,20 +143,11 @@ function App() {
           return;
         }
 
-        setGoldPrices([
-          {
-            currency: "USD",
-            value: `$${Number(primaryRate.price_usd).toFixed(2)}`,
-            trend: "neutral",
-            note: `24K / ${primaryRate.date}`,
-          },
-          {
-            currency: "ETB",
-            value: `${Number(primaryRate.price_birr).toLocaleString()} ETB`,
-            trend: "neutral",
-            note: `24K / ${primaryRate.date}`,
-          },
-        ]);
+        setGoldRateSnapshot({
+          usd: primaryRate.price_usd,
+          birr: primaryRate.price_birr,
+          date: primaryRate.date,
+        });
       } catch (error) {
         console.error("Failed to fetch gold prices:", error);
       }
@@ -156,6 +155,11 @@ function App() {
 
     fetchGoldPrices();
   }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("armada-language", language);
+    document.documentElement.lang = language === "am" ? "am" : "en";
+  }, [language]);
 
   useEffect(() => {
     const onPopState = () => {
@@ -178,20 +182,23 @@ function App() {
       }
       setShowScrollTop(window.scrollY > 320);
     };
-    // Defer by one frame so heroRef is guaranteed to be set
-    const raf = requestAnimationFrame(checkScroll);
+
+    const rafId = requestAnimationFrame(checkScroll);
     window.addEventListener("scroll", checkScroll, { passive: true });
+
     return () => {
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", checkScroll);
     };
   }, [pathname]);
 
   useEffect(() => {
-    const page = pages[pathname] ?? pages["/"];
-    const baseTitle = "Armada Mining";
-    document.title = page.slug === "home" ? baseTitle : `${baseTitle} - ${page.title}`;
-  }, [pathname]);
+    const currentLocalizedPage = pages[pathname] ?? pages["/"];
+    document.title =
+      currentLocalizedPage.slug === "home"
+        ? uiText.baseTitle
+        : `${uiText.baseTitle} - ${currentLocalizedPage.title}`;
+  }, [language, pages, pathname, uiText.baseTitle]);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -256,7 +263,7 @@ function App() {
   };
 
   return (
-    <div className="site-shell">
+    <div className="site-shell" data-language={language}>
       <div className="site-backdrop" aria-hidden="true">
         <div className="site-backdrop-glow site-backdrop-glow-left" />
         <div className="site-backdrop-glow site-backdrop-glow-right" />
@@ -268,19 +275,19 @@ function App() {
             <a
               className="brand-lockup"
               href="/"
-              aria-label="Armada Mining home"
+              aria-label={uiText.brandHomeAria}
               onClick={(event) => onNavClick(event, "/")}
             >
               <img src={logo} alt="Armada Mining" className="brand-logo" />
             </a>
 
-            <div className={`nav-market${isScrolled ? " is-visible" : ""}`} aria-label="Indicative gold price">
+            <div className={`nav-market${isScrolled ? " is-visible" : ""}`} aria-label={uiText.goldPriceAria}>
               <div className="nav-market-grid">
                 {goldPrices.map((item) => (
                   <article key={item.currency} className="nav-market-card">
                     <div className="nav-market-topline">
                       <span className="nav-market-value">
-                        {item.currency} / gm: {item.value}
+                        {item.currency} / {uiText.goldUnit}: {item.value}
                       </span>
                     </div>
                     <p className={`nav-market-change trend-${item.trend}`}>
@@ -293,11 +300,24 @@ function App() {
             </div>
 
             <div ref={navActionsRef} className="nav-actions">
+              <div className="language-toggle" role="group" aria-label={uiText.languageToggleAria}>
+                {supportedLanguages.map((item) => (
+                  <button
+                    key={item.code}
+                    type="button"
+                    className={`language-toggle-button${language === item.code ? " is-active" : ""}`}
+                    onClick={() => setLanguage(item.code)}
+                  >
+                    {item.toggleLabel}
+                  </button>
+                ))}
+              </div>
+
               <button
                 type="button"
                 className="menu-toggle"
                 aria-expanded={menuOpen}
-                aria-label="Toggle navigation"
+                aria-label={uiText.menuToggleAria}
                 onClick={() => setMenuOpen((open) => !open)}
               >
                 <span />
@@ -305,12 +325,20 @@ function App() {
                 <span />
               </button>
             </div>
-            <nav ref={navPanelRef} className={`nav-panel${menuOpen ? " is-open" : ""}`} aria-label="Primary">
+
+            <nav
+              ref={navPanelRef}
+              className={`nav-panel${menuOpen ? " is-open" : ""}`}
+              aria-label={uiText.primaryNavAria}
+            >
               <div className="nav-links">
                 {primaryLinks.map((link) => (
-                  <a key={link.path} href={link.path}
+                  <a
+                    key={link.path}
+                    href={link.path}
                     className={currentPath === link.path ? "is-active" : ""}
-                    onClick={(event) => onNavClick(event, link.path)}>
+                    onClick={(event) => onNavClick(event, link.path)}
+                  >
                     {link.label}
                   </a>
                 ))}
@@ -322,7 +350,7 @@ function App() {
 
       <AnimatePresence mode="wait">
         <motion.main
-          key={currentPath}
+          key={`${currentPath}-${language}`}
           className="page-frame"
           initial="initial"
           animate="animate"
@@ -335,6 +363,7 @@ function App() {
             onNavClick={onNavClick}
             revealUp={revealUp}
             heroRef={heroRef}
+            uiText={uiText}
           />
         </motion.main>
       </AnimatePresence>
@@ -342,31 +371,39 @@ function App() {
       <button
         type="button"
         className={`scroll-top-button${showScrollTop ? " is-visible" : ""}`}
-        aria-label="Scroll to top"
+        aria-label={uiText.scrollToTopAria}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
         <span className="scroll-top-icon" aria-hidden="true" />
       </button>
 
-      <Footer onNavClick={onNavClick} />
+      <Footer onNavClick={onNavClick} footerData={footerData} uiText={uiText} />
     </div>
   );
 }
 
-function Footer({ onNavClick }) {
+function Footer({ onNavClick, footerData, uiText }) {
   const [hoveredDetail, setHoveredDetail] = useState(null);
   const [copiedDetail, setCopiedDetail] = useState(null);
 
-  const handleCopy = (detail) => {
-    navigator.clipboard.writeText(detail);
+  const handleCopy = async (detail) => {
+    await navigator.clipboard.writeText(detail);
     setCopiedDetail(detail);
-    setTimeout(() => setCopiedDetail(null), 2000); // Hide after 2 seconds
+    window.setTimeout(() => setCopiedDetail(null), 2000);
   };
 
   const handleGo = (detail) => {
-    const isEmail = detail.includes('@');
-    const url = isEmail ? `mailto:${detail}` : `tel:${detail}`;
-    window.location.href = url;
+    const isEmail = detail.includes("@");
+    const isPhone = detail.includes("+") || /^\d/.test(detail);
+
+    if (isEmail) {
+      window.location.href = `mailto:${detail}`;
+      return;
+    }
+
+    if (isPhone) {
+      window.location.href = `tel:${detail}`;
+    }
   };
 
   return (
@@ -374,11 +411,7 @@ function Footer({ onNavClick }) {
       <div className="shell">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a
-              href="/"
-              className="brand-lockup"
-              onClick={(event) => onNavClick(event, "/")}
-            >
+            <a href="/" className="brand-lockup" onClick={(event) => onNavClick(event, "/")}>
               <BrandMark />
               <span className="brand-wordmark">
                 <span>Armada</span>
@@ -387,42 +420,22 @@ function Footer({ onNavClick }) {
             </a>
             <p className="footer-description">{footerData.brand.description}</p>
             <div className="footer-social">
-              <p className="card-label">Follow us</p>
+              <p className="card-label">{uiText.footerFollow}</p>
               <div className="footer-social-links">
-                <a
-                  className="footer-social-link"
-                  href="https://www.facebook.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Facebook"
-                >
+                <a className="footer-social-link" href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99H7.9v-2.9h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.55v1.87h2.78l-.44 2.9h-2.34V22C18.34 21.12 22 16.99 22 12Z" />
                   </svg>
                 </a>
-                <a
-                  className="footer-social-link"
-                  href="https://t.me"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Telegram"
-                >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
-                </svg>
-
+                <a className="footer-social-link" href="https://t.me" target="_blank" rel="noreferrer" aria-label="Telegram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
+                  </svg>
                 </a>
-                <a
-                  className="footer-social-link"
-                  href="https://www.linkedin.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="LinkedIn"
-                >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
-                </svg>
-
+                <a className="footer-social-link" href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+                  </svg>
                 </a>
               </div>
             </div>
@@ -435,11 +448,7 @@ function Footer({ onNavClick }) {
                 {column.links ? (
                   <nav className="footer-nav">
                     {column.links.map((link) => (
-                      <a
-                        key={link.path}
-                        href={link.path}
-                        onClick={(event) => onNavClick(event, link.path)}
-                      >
+                      <a key={link.path} href={link.path} onClick={(event) => onNavClick(event, link.path)}>
                         {link.label}
                       </a>
                     ))}
@@ -456,10 +465,14 @@ function Footer({ onNavClick }) {
                         <p>{detail}</p>
                         {hoveredDetail === detail && (
                           <div className="footer-contact-actions">
-                            <button onClick={() => handleCopy(detail)}>
-                              {copiedDetail === detail ? 'Copied!' : 'Copy'}
+                            <button type="button" onClick={() => handleCopy(detail)}>
+                              {copiedDetail === detail ? uiText.copied : uiText.copy}
                             </button>
-                            <button onClick={() => handleGo(detail)}>Go</button>
+                            {(detail.includes("@") || detail.includes("+")) && (
+                              <button type="button" onClick={() => handleGo(detail)}>
+                                {uiText.go}
+                              </button>
+                            )}
                           </div>
                         )}
                       </div>
@@ -479,7 +492,7 @@ function Footer({ onNavClick }) {
   );
 }
 
-function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
+function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
   return (
     <>
       <section className="page-hero page-hero-home" ref={heroRef}>
@@ -492,12 +505,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
         </div>
 
         <div className="shell home-hero-layout">
-          <motion.div
-            className="home-hero-copy"
-            initial="hidden"
-            animate="show"
-            variants={revealUp}
-          >
+          <motion.div className="home-hero-copy" initial="hidden" animate="show" variants={revealUp}>
             <p className="home-hero-kicker">{page.heroKicker}</p>
             <h1>{page.heading}</h1>
             <p className="lead-copy">{page.lead}</p>
@@ -518,8 +526,6 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
               </a>
             </div>
           </motion.div>
-
-
         </div>
       </section>
 
@@ -556,7 +562,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
             custom={0.08}
             variants={revealUp}
           >
-            <p className="card-label">At a glance</p>
+            <p className="card-label">{uiText.atAGlance}</p>
             <div className="home-intro-facts">
               {page.introFacts.map((fact, index) => (
                 <article key={fact}>
@@ -628,7 +634,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
             custom={0.08}
             variants={revealUp}
           >
-            <p className="card-label">Core pillars</p>
+            <p className="card-label">{uiText.corePillars}</p>
             <div className="home-philosophy-points">
               {page.philosophyPoints.map((point, index) => (
                 <motion.div
@@ -734,7 +740,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
             <img src={pattern} alt="" />
           </div>
           <div className="global-cta-content">
-            <p className="eyebrow">Next steps</p>
+            <p className="eyebrow">{uiText.nextSteps}</p>
             <h2>{page.globalCTA.heading}</h2>
             <p>{page.globalCTA.body}</p>
             <div className="global-cta-actions">
@@ -760,12 +766,12 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef }) {
   );
 }
 
-function ContactPageSection({ page, onNavClick, revealUp }) {
+function ContactPageSection({ page, revealUp, uiText }) {
   return (
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={heroImage} alt="Armada Contact" />
+          <img src={heroImage} alt={page.heading} />
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
@@ -773,12 +779,7 @@ function ContactPageSection({ page, onNavClick, revealUp }) {
         </div>
 
         <div className="shell page-hero-grid">
-          <motion.div
-            className="page-hero-copy"
-            initial="hidden"
-            animate="show"
-            variants={revealUp}
-          >
+          <motion.div className="page-hero-copy" initial="hidden" animate="show" variants={revealUp}>
             <h1>{page.heading}</h1>
             <p className="lead-copy">{page.lead}</p>
           </motion.div>
@@ -825,33 +826,33 @@ function ContactPageSection({ page, onNavClick, revealUp }) {
             custom={0.1}
             variants={revealUp}
           >
-            <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+            <form className="contact-form" onSubmit={(event) => event.preventDefault()}>
               <div className="form-grid">
                 <div className="form-group">
-                  <label htmlFor="name">Full Name</label>
-                  <input type="text" id="name" placeholder="E.g. John Doe" />
+                  <label htmlFor="name">{uiText.form.fullName}</label>
+                  <input type="text" id="name" placeholder={uiText.form.fullNamePlaceholder} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
+                  <label htmlFor="email">{uiText.form.emailAddress}</label>
                   <input type="email" id="email" placeholder="john@example.com" />
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="subject">Subject</label>
+                <label htmlFor="subject">{uiText.form.subject}</label>
                 <select id="subject">
-                  <option value="">Select an option</option>
-                  <option value="investment">Investment Inquiry</option>
-                  <option value="partnership">Partnership</option>
-                  <option value="operations">Operations</option>
-                  <option value="other">Other</option>
+                  <option value="">{uiText.form.selectOption}</option>
+                  <option value="investment">{uiText.form.subjectOptions.investment}</option>
+                  <option value="partnership">{uiText.form.subjectOptions.partnership}</option>
+                  <option value="operations">{uiText.form.subjectOptions.operations}</option>
+                  <option value="other">{uiText.form.subjectOptions.other}</option>
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea id="message" rows="5" placeholder="How can we help?"></textarea>
+                <label htmlFor="message">{uiText.form.message}</label>
+                <textarea id="message" rows="5" placeholder={uiText.form.messagePlaceholder} />
               </div>
               <button type="submit" className="button button-accent">
-                Send Message
+                {uiText.form.sendMessage}
               </button>
             </form>
           </motion.div>
@@ -871,11 +872,11 @@ function ESGPageSection({ page, revealUp }) {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
 
     const elements = document.querySelectorAll(".reveal");
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
   }, []);
@@ -907,15 +908,9 @@ function ESGPageSection({ page, revealUp }) {
         </div>
 
         <div className="esg-grid reveal reveal-stagger">
-          {esgPrinciples.map((item) => (
+          {page.esgPrinciples.map((item) => (
             <article key={item.category} className="service-card service-card--icon">
-              <div className="service-icon">
-                {item.category === "Environmental"
-                  ? "🌿"
-                  : item.category === "Social Impact"
-                  ? "🤝"
-                  : "🏛"}
-              </div>
+              <div className="service-icon">{item.icon}</div>
               <h3>{item.category}</h3>
               <p>{item.details}</p>
             </article>
@@ -926,13 +921,21 @@ function ESGPageSection({ page, revealUp }) {
   );
 }
 
-function PageSection({ page, currentPath, onNavClick, revealUp, heroRef }) {
+function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText }) {
   if (page.slug === "home") {
-    return <HomePageSection page={page} onNavClick={onNavClick} revealUp={revealUp} heroRef={heroRef} />;
+    return (
+      <HomePageSection
+        page={page}
+        onNavClick={onNavClick}
+        revealUp={revealUp}
+        heroRef={heroRef}
+        uiText={uiText}
+      />
+    );
   }
 
   if (page.slug === "contact") {
-    return <ContactPageSection page={page} onNavClick={onNavClick} revealUp={revealUp} />;
+    return <ContactPageSection page={page} revealUp={revealUp} uiText={uiText} />;
   }
 
   if (page.slug === "esg") {
@@ -957,12 +960,7 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef }) {
         </div>
 
         <div className="shell page-hero-grid">
-          <motion.div
-            className="page-hero-copy"
-            initial="hidden"
-            animate="show"
-            variants={revealUp}
-          >
+          <motion.div className="page-hero-copy" initial="hidden" animate="show" variants={revealUp}>
             <h1>{page.heading}</h1>
             <p className="lead-copy">{page.lead}</p>
             <div className="hero-actions">
@@ -1035,10 +1033,10 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef }) {
               <div className="visual-panel-pattern">
                 <img src={pattern} alt="" aria-hidden="true" />
               </div>
-              <img className="visual-panel-image" src={page.detailImage || heroImage} alt={page.title + " visual"} />
+              <img className="visual-panel-image" src={page.detailImage || heroImage} alt={`${page.title} visual`} />
               {page.visualQuote && (
                 <div className="visual-panel-copy">
-                  <p className="card-label">In our own words</p>
+                  <p className="card-label">{uiText.inOurOwnWords}</p>
                   <strong>{page.visualQuote}</strong>
                 </div>
               )}
@@ -1079,25 +1077,17 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef }) {
           variants={revealUp}
         >
           <div>
-            <p className="eyebrow">Continue exploring</p>
+            <p className="eyebrow">{uiText.continueExploring}</p>
             <h2>{page.closerHeading}</h2>
             <p>{page.closerBody}</p>
           </div>
 
           <div className="pager-actions">
-            <a
-              className="button button-ghost"
-              href={previousPath}
-              onClick={(event) => onNavClick(event, previousPath)}
-            >
-              Previous page
+            <a className="button button-ghost" href={previousPath} onClick={(event) => onNavClick(event, previousPath)}>
+              {uiText.previousPage}
             </a>
-            <a
-              className="button button-accent"
-              href={nextPath}
-              onClick={(event) => onNavClick(event, nextPath)}
-            >
-              Next page
+            <a className="button button-accent" href={nextPath} onClick={(event) => onNavClick(event, nextPath)}>
+              {uiText.nextPage}
             </a>
           </div>
         </motion.div>
