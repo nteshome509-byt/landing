@@ -52,6 +52,8 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body { overflow-x: hidden; }
+
 body {
   margin: 0;
   min-width: 320px;
@@ -133,9 +135,14 @@ button {
   background: radial-gradient(circle at 88% 18%, rgba(120, 74, 40, 0.14), transparent 28%);
 }
 
+
 .shell {
-  width: min(1180px, calc(100% - 40px));
+  width: 100%;
+  max-width: 1180px;
+  /* Shrinks the side gaps dynamically on small screens instead of a hard -40px */
+  padding: 0 clamp(8px, 4vw, 20px); 
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .site-header {
@@ -147,289 +154,534 @@ button {
   padding: 0;
 }
 
+
+/* =========================================================
+   1. BASE LAYOUT
+========================================================= */
+.navbar > * {
+  min-width: 0;
+}
+
 .navbar {
   position: relative;
+
+  width: 100%;
+  min-height: 76px;
+
   display: flex;
   align-items: center;
-  gap: 26px;
-  margin-top: 20px;
-  padding: 14px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding:
+    clamp(8px, 2vw, 14px)
+    clamp(10px, 3vw, 22px);
+
+  box-sizing: border-box;
+
+  background: rgba(18, 11, 8, 0.72);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 22px;
-  background: rgba(18, 11, 8, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+
   transition:
-    background 0.4s ease,
-    border-color 0.4s ease,
-    backdrop-filter 0.4s ease;
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
+
+/* Scroll State */
 
 .navbar.is-scrolled {
+  background: rgba(20, 12, 8, 0.92);
+
   border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(20, 12, 8, 0.85);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
-.navbar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(135deg, rgba(242, 105, 41, 0.08), transparent 34%),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent 65%);
-  pointer-events: none;
-  opacity: 0.4;
-  transition: opacity 0.4s ease;
-}
-
-.navbar.is-scrolled::before {
-  opacity: 1;
-}
+/* =========================================================
+   2. LOGO
+========================================================= */
 
 .brand-lockup {
-  grid-area: brand;
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  flex: 0 0 250px;
+  flex-shrink: 1;
   min-width: 0;
-  color: var(--accent);
-  z-index: 1;
-}
 
-.brand-lockup svg {
-  width: 44px;
-  height: 60px;
-  flex: 0 0 auto;
-}
-
-.brand-wordmark {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  color: white;
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
+  align-items: center;
+
+  text-decoration: none;
 }
 
-.brand-wordmark span:last-child {
-  opacity: 0.92;
+.brand-logo {
+  display: block;
+
+  height: clamp(22px, 7vw, 80px);
+  width: auto;
+  object-fit: contain;
+
+  transition: transform 0.25s ease;
 }
+
+.brand-lockup:hover .brand-logo {
+  transform: scale(1.02);
+}
+
+/* =========================================================
+   3. NAVIGATION LINKS
+========================================================= */
 
 .nav-panel {
-  position: absolute;
-  top: calc(100% + 10px);   /* sits below navbar as a second bar */
-  left: 0;
-  right: 0;                  /* full navbar width, not actions width */
-  width: auto;               /* let left/right define width */
-  display: none;             /* hidden by default */
-  z-index: 3;
-  padding: 14px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 22px;       /* match navbar */
-  background:
-    linear-gradient(180deg, rgba(32, 19, 13, 0.95) 0%, rgba(47, 28, 18, 0.92) 100%);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-sizing: border-box;
-  overflow: visible;
-}
+  flex: 1;
 
-.nav-panel.is-open {
-display: block;
+  display: flex;
+  justify-content: center;
+
+  min-width: 0;
 }
 
 .nav-links {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;            /* wrap on narrow screens instead of overflow */
-  justify-content: center;
   align-items: center;
-  gap: 24px;
-  width: 100%;
+  justify-content: center;
+
+  gap: clamp(14px, 1.8vw, 28px);
+
+  flex-wrap: nowrap;
 }
 
 .nav-links a {
-  position: relative;          /* needed for ::after underline positioning */
-  display: inline-block;
-  width: auto;
-  padding: 10px 8px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  color: rgba(255, 243, 235, 0.82);
-  text-decoration: none;
-}
-
-.nav-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(242, 105, 41, 0.12), transparent 40%),
-    radial-gradient(circle at top right, rgba(255, 206, 140, 0.12), transparent 32%);
-  pointer-events: none;
-}
-.nav-market {
-  grid-area: market;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1 1 auto;
-  width: auto;
-  min-width: 0;
-  padding: 0;
-  z-index: 1;
-}
-
-.nav-market-label {
-  display: block;
-  margin: 0;
-  padding: 0;
-  color: rgba(255, 239, 229, 0.92);
-  font-size: 0.66rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.nav-market-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-}
-
-.nav-market-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 5px;
-  min-width: 0;
-  padding: 0 14px;
-}
-
-.nav-market-card:first-child {
-  padding-left: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.nav-market-card:last-child {
-  padding-right: 0;
-}
-
-.nav-market-topline {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0;
-}
-
-.nav-market-value {
-  color: white;
-  font-size: clamp(0.84rem, 0.94vw, 0.94rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  white-space: normal;
-}
-
-.nav-market-change {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin: 0;
-  font-size: 0.7rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.nav-market-change span {
-  color: rgba(255, 243, 235, 0.82);
-}
-
-.nav-actions {
-  grid-area: actions;
   position: relative;
-  display: flex;
-  align-items: center;
-  flex: 0 0 auto;
-  margin-left: auto;
-  gap: 12px;
-  z-index: 1;
-}
 
-.language-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-}
-
-.language-toggle-button {
-  min-width: 42px;
-  height: 36px;
-  padding: 0 12px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
   color: rgba(255, 243, 235, 0.82);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
 
-.language-toggle-button:hover {
-  color: white;
-}
+  text-decoration: none;
 
-.language-toggle-button.is-active {
-  background: linear-gradient(135deg, rgba(242, 105, 41, 0.92) 0%, rgba(255, 140, 74, 0.92) 100%);
-  color: white;
-  box-shadow: 0 8px 18px -10px rgba(242, 105, 41, 0.75);
-}
+  font-size: 0.95rem;
+  font-weight: 600;
 
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 2px;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.28s ease;
+  white-space: nowrap;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.is-active {
-  color: white;
+  color: #ffffff;
+}
+
+.nav-links a::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+
+  width: 100%;
+  height: 2px;
+
+  background: linear-gradient(90deg, #f26929, #ff9b61);
+
+  transform: scaleX(0);
+  transform-origin: center;
+
+  transition: transform 0.25s ease;
 }
 
 .nav-links a:hover::after,
 .nav-links a.is-active::after {
   transform: scaleX(1);
 }
+
+/* =========================================================
+   MARKET SECTION
+========================================================= */
+
+.nav-market {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-market-grid {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 10px 14px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.nav-market-card {
+  display: flex;
+  align-items: center;
+
+  padding: 0;
+
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.nav-market-topline {
+  display: flex;
+  align-items: center;
+}
+
+.nav-market-value {
+  color: #ffffff;
+
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.35);
+}
+
+/* =========================================================
+   5. ACTIONS / LANGUAGE
+========================================================= */
+
+.nav-actions {
+    flex-shrink: 0;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.language-toggle {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 4px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  border-radius: 999px;
+}
+
+.language-toggle-button {
+  min-width: unset;
+
+  height: 34px;
+
+  padding: 0 10px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: rgba(255,255,255,0.9);
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.language-toggle-button:hover {
+  transform: translateY(-1px);
+}
+
+.language-toggle-button.is-active {
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #f26929,
+    #ff934f
+  );
+}
+
+/* =========================================================
+   6. HAMBURGER
+========================================================= */
+
+.menu-toggle {
+  display: none;
+
+  width: 46px;
+  height: 46px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.05);
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 5px;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.menu-toggle span {
+  width: 20px;
+  height: 2px;
+
+  background: #ffffff;
+
+  border-radius: 999px;
+
+  transition: transform 0.25s ease;
+}
+
+/* =========================================================
+   7. MOBILE LANGUAGE TOGGLE
+========================================================= */
+
+.mobile-language-toggle {
+  display: none;
+}
+
+/* =========================================================
+   8. TABLET LAYOUT
+   [ Logo ] [ Nav Links ] [ Language ]
+========================================================= */
+
+@media (max-width: 1180px) {
+
+  /* Make navbar wider */
+  .site-header {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .shell {
+    max-width: 100%;
+  }
+
+  .navbar {
+    width: 100%;
+    padding: 14px 16px;
+    gap: 14px;
+  }
+
+  /* Hide market section */
+  .nav-market {
+    display: none;
+  }
+
+  /* KEEP language visible */
+  .desktop-language-toggle {
+    display: flex;
+  }
+
+  /* Remove hamburger */
+  .menu-toggle {
+    display: none;
+  }
+
+  /* Keep nav visible */
+  .nav-panel {
+    display: flex;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================================
+   9. MOBILE LAYOUT
+   [ Logo ] [ Language ] [ Hamburger ]
+========================================================= */
+
+@media (max-width: 860px) {
+
+  .site-header {
+    padding: 0;
+  }
+
+  .navbar {
+    min-height: 70px;
+    padding: clamp(8px, 2vw, 12px) clamp(10px, 3vw, 14px);
+    gap: clamp(6px, 2vw, 10px);
+  }
+
+  /* Smaller logo */
+  .brand-logo {
+      height: clamp(22px, 7vw, 80px);
+  width: auto;
+  }
+
+  /* Hide desktop nav */
+  .nav-panel {
+    display: none;
+  }
+
+  /* Hide market */
+  .nav-market {
+    display: none;
+  }
+
+  /* Keep language visible */
+  .desktop-language-toggle {
+    display: flex;
+  }
+
+  /* Show hamburger */
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+    gap: clamp(6px, 2vw, 10px);
+  }
+
+  /* MOBILE MENU */
+  .nav-panel.is-open {
+    position: absolute;
+
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 28px;
+
+    padding: 30px 24px;
+
+    background: rgba(18, 11, 8, 0.98);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+      0 20px 40px rgba(0,0,0,0.45);
+  }
+
+  .nav-panel.is-open .nav-links {
+    width: 100%;
+
+    flex-direction: column;
+
+    gap: 22px;
+  }
+
+  .nav-panel.is-open .nav-links a {
+    font-size: 1rem;
+  }
+
+  .mobile-language-toggle {
+    display: none;
+  }
+
+  .language-toggle {
+    padding: clamp(2px, 1vw, 4px);
+  }
+
+  .language-toggle-button {
+    /* Button automatically scales text and width based on screen size */
+    min-width: clamp(34px, 8vw, 42px);
+    height: clamp(28px, 7vw, 34px);
+    padding: 0 clamp(8px, 2vw, 12px);
+    font-size: clamp(0.65rem, 2vw, 0.74rem);
+  }
+
+  .menu-toggle {
+    /* Hamburger automatically scales down */
+    width: clamp(38px, 9vw, 46px);
+    height: clamp(38px, 9vw, 46px);
+  }
+}
+
+/* =========================================================
+   10. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 540px) {
+
+  .site-header {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .navbar {
+    padding: 10px 10px;
+  }
+
+  .brand-logo {
+    height: clamp(22px, 7vw, 80px);
+     width: auto;
+  }
+
+  .language-toggle-button {
+    min-width: 36px;
+    height: 30px;
+
+    padding: 0 10px;
+
+    font-size: 0.68rem;
+  }
+
+  .menu-toggle {
+    width: 42px;
+    height: 42px;
+  }
+}
+
 
 .button {
   display: inline-flex;
@@ -541,50 +793,6 @@ display: block;
   transform: rotate(45deg);
 }
 
-.menu-toggle {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
-  color: white;
-  backdrop-filter: blur(12px);
-  cursor: pointer;
-}
-
-.menu-toggle[aria-expanded="true"] span:first-child {
-  transform: translateY(5px) rotate(45deg);
-}
-
-.menu-toggle[aria-expanded="true"] span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle[aria-expanded="true"] span:last-child {
-  transform: translateY(-5px) rotate(-45deg);
-}
-
-.menu-toggle span {
-  display: block;
-  width: 18px;
-  height: 1.5px;
-  margin: 0;
-  border-radius: 999px;
-  background: currentColor;
-  transition:
-    transform 0.28s ease,
-    opacity 0.28s ease,
-    width 0.28s ease;
-}
-
-.menu-toggle span+span {
-  margin-top: 5px;
-}
 
 .page-frame {
   padding-bottom: 56px;
@@ -1519,6 +1727,7 @@ h6 {
 .home-gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 220px;
   gap: 18px;
   margin-top: 34px;
 }
@@ -1528,8 +1737,6 @@ h6 {
   overflow: hidden;
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.6);
-  aspect-ratio: 1 / 1;
-  min-height: 220px;
 }
 
 .home-gallery-tile::after {
@@ -1589,7 +1796,7 @@ h6 {
 
   .home-gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 200px;
+    grid-auto-rows: 240px;
   }
 
   .home-gallery-tile.is-wide,
@@ -1600,11 +1807,6 @@ h6 {
   .home-gallery-tile.is-wide-low {
     grid-column: span 1;
     grid-row: span 1;
-  }
-
-  .home-gallery-tile.is-wide,
-  .home-gallery-tile.is-wide-low {
-    grid-column: span 2;
   }
 
   .nav-market-card {
@@ -1623,70 +1825,6 @@ h6 {
 }
 
 
-@media (max-width: 860px) {
-  .site-header {
-    padding: 0;
-  }
-
-  .navbar {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    "brand actions"
-    "market market";
-  gap: 14px 18px;
-    padding: 16px 18px;
-  }
-
-  .brand-lockup {
-    grid-area: brand;
-    flex-basis: auto;
-  }
-
-  .nav-market {
-    grid-area: market;
-    min-height: auto;
-  }
-
-  .home-hero-layout {
-    gap: 24px;
-    padding: 124px 0 52px;
-  }
-
-  .home-gallery-grid {
-    grid-auto-rows: 180px;
-  }
-
-  .nav-actions {
-    grid-area: actions;
-    margin-left: 0;
-  }
-
-  .language-toggle-button {
-    min-width: 38px;
-    height: 34px;
-    padding: 0 10px;
-  }
-
- .nav-links {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-  flex-wrap: wrap; /* prevents overflow */
-}
-  .pager-actions {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .nav-button {
-    width: 100%;
-  }
-}
 
 @media (max-width: 760px) {
   .shell {
@@ -2154,25 +2292,104 @@ h6 {
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* 1. Section & Intro Styling */
 .esg-section {
-  padding: 100px 0;
+  padding: 80px 0;
 }
 
 .section-intro {
-  max-width: 780px;
-  margin-bottom: 40px;
+  max-width: 700px;
+  margin-bottom: 48px;
 }
 
-.section-intro h2 {
-  margin-bottom: 14px;
+.section-intro .eyebrow {
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
 }
 
 .description-text {
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* 2. The Responsive Grid Fix */
+.esg-grid {
+  display: grid;
+  /* This line is what makes it go vertical instead of shrinking the boxes too much */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+/* 3. The Card Styling */
+.service-card {
+  position: relative;
+  background: white;
+  border: 1px solid rgba(148, 124, 84, 0.12);
+  border-radius: 24px;
+  padding: 40px 32px;
+  transition: all 0.3s ease;
+  
+  /* Ensures the card grows if text is very long */
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+}
+
+/* Special padding for the icon version you have in JSX */
+.service-card--icon {
+  padding-top: 70px;
+}
+
+.service-icon {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  font-size: 1.8rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.service-card h3 {
+  margin-bottom: 16px;
+  color: var(--ink);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.service-card p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 1rem;
-  line-height: 1.75;
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
+
+/* Hover Effect */
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(242, 105, 41, 0.08);
+}
+
+/* 4. Small Mobile Adjustments */
+@media (max-width: 480px) {
+  .esg-grid {
+    grid-template-columns: 1fr; /* Force 1 column on very small phones */
+  }
+  
+  .service-card {
+    padding: 30px 24px;
+  }
+  
+  .service-card--icon {
+    padding-top: 70px;
+  }
+}
+
 
 .reveal {
   opacity: 0;
@@ -2208,50 +2425,7 @@ h6 {
   transition-delay: 0.3s;
 }
 
-.esg-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
 
-.service-card {
-  padding: 34px 28px;
-  background: white;
-  border: 1px solid rgba(148, 124, 84, 0.12);
-  border-radius: 28px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-  box-shadow: 0 18px 50px rgba(242, 105, 41, 0.12);
-}
-
-.service-card h3 {
-  margin: 0 0 14px;
-  color: var(--ink);
-  font-size: 1.1rem;
-}
-
-.service-card p {
-  margin: 0;
-  color: var(--ink-soft);
-}
-
-.service-card--icon {
-  position: relative;
-  padding-top: 52px;
-}
-
-.service-icon {
-  position: absolute;
-  top: 22px;
-  left: 22px;
-  font-size: 1.6rem;
-  color: var(--accent);
-  line-height: 1;
-}
 
 .contact-method-card:hover {
   transform: translateY(-4px);
@@ -2362,5 +2536,47 @@ h6 {
 
   .contact-form-panel {
     padding: 32px 24px;
+  }
+}
+
+/* Make footer logo match the navbar */
+.footer-brand .brand-logo {
+  width: 40px;        /* same visual size as navbar */
+  height: auto;
+}
+
+.footer-brand .brand-lockup {
+  color: var(--accent);   /* keep the orange, override .site-footer white */
+}
+
+.footer-brand .brand-lockup svg {
+  width: 32px;
+  height: 44px;
+  color: var(--accent);   /* SVG uses currentColor → forces orange */
+  fill: currentColor;
+}
+
+.footer-brand .brand-wordmark {       /* keep wordmark text white as before */
+  font-size: 1.05rem;
+}
+
+@media (max-width: 380px) {
+
+  .nav-actions {
+    gap: 4px;
+  }
+
+  .language-toggle {
+    transform: scale(0.9);
+    transform-origin: right center;
+  }
+
+  .menu-toggle {
+    width: 34px;
+    height: 34px;
+  }
+
+  .menu-toggle span {
+    width: 16px;
   }
 }

@@ -269,84 +269,81 @@ function App() {
         <div className="site-backdrop-glow site-backdrop-glow-right" />
       </div>
 
-      <header className="site-header">
-        <div className="shell">
-          <div className={`navbar${isScrolled ? " is-scrolled" : ""}`}>
+ <header className="site-header">
+  <div className="shell">
+    <div className={`navbar${isScrolled ? " is-scrolled" : ""}`}>
+      <a
+        className="brand-lockup"
+        href="/"
+        onClick={(event) => onNavClick(event, "/")}
+      >
+        <img src={logo} alt="Armada Mining" className="brand-logo" />
+      </a>
+      <nav
+        ref={navPanelRef}
+        className={`nav-panel${menuOpen ? " is-open" : ""}`}
+      >
+        <div className="nav-links">
+          {primaryLinks.map((link) => (
             <a
-              className="brand-lockup"
-              href="/"
-              aria-label={uiText.brandHomeAria}
-              onClick={(event) => onNavClick(event, "/")}
+              key={link.path}
+              href={link.path}
+              className={currentPath === link.path ? "is-active" : ""}
+              onClick={(event) => onNavClick(event, link.path)}
             >
-              <img src={logo} alt="Armada Mining" className="brand-logo" />
+              {link.label}
             </a>
-
-            <div className={`nav-market${isScrolled ? " is-visible" : ""}`} aria-label={uiText.goldPriceAria}>
-              <div className="nav-market-grid">
-                {goldPrices.map((item) => (
-                  <article key={item.currency} className="nav-market-card">
-                    <div className="nav-market-topline">
-                      <span className="nav-market-value">
-                        {item.currency} / {uiText.goldUnit}: {item.value}
-                      </span>
-                    </div>
-                    <p className={`nav-market-change trend-${item.trend}`}>
-                      <i aria-hidden="true" />
-                      <span>{item.note}</span>
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div ref={navActionsRef} className="nav-actions">
-              <div className="language-toggle" role="group" aria-label={uiText.languageToggleAria}>
-                {supportedLanguages.map((item) => (
-                  <button
-                    key={item.code}
-                    type="button"
-                    className={`language-toggle-button${language === item.code ? " is-active" : ""}`}
-                    onClick={() => setLanguage(item.code)}
-                  >
-                    {item.toggleLabel}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                type="button"
-                className="menu-toggle"
-                aria-expanded={menuOpen}
-                aria-label={uiText.menuToggleAria}
-                onClick={() => setMenuOpen((open) => !open)}
-              >
-                <span />
-                <span />
-                <span />
-              </button>
-            </div>
-
-            <nav
-              ref={navPanelRef}
-              className={`nav-panel${menuOpen ? " is-open" : ""}`}
-              aria-label={uiText.primaryNavAria}
-            >
-              <div className="nav-links">
-                {primaryLinks.map((link) => (
-                  <a
-                    key={link.path}
-                    href={link.path}
-                    className={currentPath === link.path ? "is-active" : ""}
-                    onClick={(event) => onNavClick(event, link.path)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </nav>
-          </div>
+          ))}
         </div>
-      </header>
+        <div className="mobile-language-toggle">
+          {supportedLanguages.map((item) => (
+            <button
+              key={item.code}
+              className={`language-toggle-button${language === item.code ? " is-active" : ""}`}
+              onClick={() => setLanguage(item.code)}
+            >
+              {item.toggleLabel}
+            </button>
+          ))}
+        </div>
+      </nav>
+      <div className={`nav-market${isScrolled ? " is-visible" : ""}`}>
+        <div className="nav-market-grid">
+          {goldPrices.map((item) => (
+            <article key={item.currency} className="nav-market-card">              
+              <div className="nav-market-topline">
+                <span className="nav-market-value">
+                  {item.currency}: {item.value}
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div ref={navActionsRef} className="nav-actions">
+        <div className="language-toggle desktop-language-toggle">
+          {supportedLanguages.map((item) => (
+            <button
+              key={item.code}
+              className={`language-toggle-button${language === item.code ? " is-active" : ""}`}
+              onClick={() => setLanguage(item.code)}
+            >
+              {item.toggleLabel}
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span /><span /><span />
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
 
       <AnimatePresence mode="wait">
         <motion.main
