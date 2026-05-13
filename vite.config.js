@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
+    allowedHosts: ['monsoon-certainty-prevail.ngrok-free.dev'],
     watch: {
       usePolling: true
     }
@@ -18,6 +19,9 @@ export default defineConfig({
         capabilities: resolve(__dirname, "capabilities/index.html"),
         approach: resolve(__dirname, "approach/index.html"),
         contact: resolve(__dirname, "contact/index.html"),
+        privacy: resolve(__dirname, "privacy/index.html"),
+        terms: resolve(__dirname, "terms/index.html"),
+        cookies: resolve(__dirname, "cookies/index.html"),
       },
     },
   },

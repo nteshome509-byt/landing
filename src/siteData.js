@@ -1,4 +1,4 @@
-import capabilitiesImage from "../assets/capabilities_hero.png";
+import capabilitiesImage from "../assets/capabilities_background.jpg";
 import homeHeroImage from "../assets/home_hero.png";
 
 export const pageOrder = ["/", "/about", "/capabilities", "/esg", "/approach", "/contact"];
@@ -26,11 +26,7 @@ const content = {
       primaryNavAria: "Primary",
       scrollToTopAria: "Scroll to top",
       languageToggleAria: "Change site language",
-      goldUnit: "gm",
-      defaultGoldPrices: [
-        { currency: "USD", value: "$154.80", trend: "up", note: "+1.6% today" },
-        { currency: "ETB", value: "20,850 ETB", trend: "down", note: "-0.6% today" },
-      ],
+      
       goldRateNote: (date) => `24K / ${date}`,
       footerFollow: "Follow us",
       copy: "Copy",
@@ -101,34 +97,34 @@ const content = {
         heroImage: homeHeroImage,
         primaryAction: { label: "Contact Us", path: "/contact" },
         secondaryAction: { label: "Explore Our Services", path: "/capabilities" },
-        introTag: "Who we are",
+        introTag: "Who Armada Mining is ?",
         introHeading: "Closing the information gap, then turning insight into execution",
         introBody: [
-          "We address the information gap that slows investors and operators down. We use intelligence, data, and mapping to make the Ethiopian gold sector more transparent and investable.",
-          "From that foundation, we move to execution: exploration planning, production readiness, and disciplined operations supported by modern systems and clear reporting.",
+          "Armada Mining addresses the information gap that slows investors and operators down. Armada uses intelligence, data, and mapping to make the Ethiopian gold sector more transparent and investable.",
+          "From that foundation, Armada moves to execution: exploration planning, production readiness, and disciplined operations supported by modern systems and clear reporting.",
         ],
         introFacts: [
-          "Mining | Founded 2025 | 11-50 employees",
+          "Mining | Founded 2025",
           "Headquartered in Addis Ababa, Ethiopia",
           "admin@armadaeth.com | +251 911 967 525",
         ],
         focusTag: "Core focus",
-        focusHeading: "What we do",
+        focusHeading: "What Armada Mining does",
         focusAreas: [
           {
             title: "Mining Intelligence",
             body:
-              "We build the information base that helps investors and operators understand the sector, reduce uncertainty, and make better decisions.",
+              "Armada builds the information base that helps investors and operators understand the sector, reduce uncertainty, and make better decisions.",
           },
           {
             title: "Strategic Planning",
             body:
-              "We convert intelligence into planning, mapping, and operating priorities that support field readiness and smarter deployment of resources.",
+              "Armada converts intelligence into planning, mapping, and operating priorities that support field readiness and smarter deployment of resources.",
           },
           {
             title: "Production & Ops",
             body:
-              "We help projects move into disciplined execution by organizing teams, tools, and structured reporting to run safer, more consistent operations.",
+              "Armada helps projects move into disciplined execution by organizing teams, tools, and structured reporting to run safer, more consistent operations.",
           },
           {
             title: "Ecosystem Building",
@@ -139,7 +135,7 @@ const content = {
         philosophyTag: "Our philosophy",
         philosophyHeading: "Turning insight into execution",
         philosophyBody: [
-          "We combine data, mapping, and modern operating systems with real investment in human capital, building a platform where intelligence and reporting are core infrastructure, not afterthoughts.",
+          "Armada Mining combines data, mapping, and modern operating systems with real investment in human capital, building a platform where intelligence and reporting are core infrastructure, not afterthoughts.",
           "The goal is to operate with better information, clearer reporting, and sharper decision quality across the full chain from planning to production.",
         ],
         philosophyPoints: [
@@ -151,7 +147,7 @@ const content = {
         responsibilityTag: "Responsibility",
         responsibilityHeading: "Building a stronger mining ecosystem",
         responsibilityBody: [
-          "We are helping shape the broader Ethiopian mining ecosystem by connecting networks of experts, supporting industry coordination, and advocating for stronger operating standards.",
+          "Armada Mining is helping shape the broader Ethiopian mining ecosystem by connecting networks of experts, supporting industry coordination, and advocating for stronger operating standards.",
           "Our aim is a more transparent sector, easier to understand, finance, and operate for investors, operators, and communities alike.",
         ],
         responsibilityPoints: ["Experts", "Coordination", "Advocacy", "Transparency"],
@@ -161,7 +157,7 @@ const content = {
           "A view into the environments, operating realities, and execution context behind ARMADA Mining's work in Ethiopia.",
         globalCTA: {
           heading: "Ready to discuss the future of mining?",
-          body: "Whether you are looking to invest, operate, or partner, we are building the platform to make it possible.",
+          body: "Whether you are looking to invest, operate, or partner, Armada Mining is building the platform to make it possible.",
           primaryAction: { label: "Get in touch", path: "/contact" },
           secondaryAction: { label: "Our capabilities", path: "/capabilities" },
         },
@@ -177,23 +173,23 @@ const content = {
         introTag: "Company overview",
         introHeading: "ARMADA Mining turns sector intelligence into real operating capability.",
         introBody:
-          "We begin by addressing the information gap that slows the mining sector down, then use that intelligence to support exploration planning, production readiness, and well-structured small-scale operations.",
+          "Armada begins by addressing the information gap that slows the mining sector down, then use that intelligence to support exploration planning, production readiness, and well-structured small-scale operations.",
         cards: [
           {
             label: "01",
-            title: "Who we serve",
+            title: "Who Armada Mining serves",
             body:
               "ARMADA supports investors, operators, and sector participants who need clearer information and more disciplined execution in Ethiopian gold mining.",
           },
           {
             label: "02",
-            title: "What we build",
+            title: "What Armada Mining builds",
             body:
-              "We build the systems, workflows, and reporting habits that make mining activity easier to plan, finance, and operate with confidence.",
+              "Armada Mining builds the systems, workflows, and reporting habits that make mining activity easier to plan, finance, and operate with confidence.",
           },
           {
             label: "03",
-            title: "Where we are based",
+            title: "Where Armada Mining is based",
             body:
               "Our headquarters are in Addis Ababa, Ethiopia, positioning us close to the policy, coordination, and network-building work shaping the sector.",
           },
@@ -213,13 +209,13 @@ const content = {
         introTag: "Capability framing",
         introHeading: "Our capabilities are designed to reduce friction and improve execution.",
         introBody:
-          "We focus on the capabilities that move the sector from uncertainty to action: better information, clearer planning, stronger team organization, and more transparent operating systems.",
+          "ARMADA Mining focuses on the capabilities that move the sector from uncertainty to action: better information, clearer planning, stronger team organization, and more transparent operating systems.",
         cards: [
           {
             label: "01",
             title: "Sector intelligence",
             body:
-              "We gather and organize information that helps clarify opportunities, operating constraints, and investment questions in Ethiopian gold mining.",
+              "ARMADA Mining gathers and organizes information that helps clarify opportunities, operating constraints, and investment questions in Ethiopian gold mining.",
           },
           {
             label: "02",
@@ -231,7 +227,7 @@ const content = {
             label: "03",
             title: "Team execution",
             body:
-              "We train and organize teams to execute safely and consistently, turning capability-building into practical day-to-day performance.",
+              "ARMADA trains and organizes teams to execute safely and consistently, turning capability-building into practical day-to-day performance.",
           },
         ],
         visualQuote: "Mining performance improves when planning, people, and reporting work together.",
@@ -242,13 +238,13 @@ const content = {
             number: "01",
             title: "Exploration planning",
             body:
-              "We support exploration planning with better information, clearer prioritization, and structured field preparation.",
+              "ARMADA supports exploration planning with better information, clearer prioritization, and structured field preparation.",
           },
           {
             number: "02",
             title: "Production readiness",
             body:
-              "We help projects build the systems and reporting discipline needed to move into more reliable production.",
+              "Armada helps projects build the systems and reporting discipline needed to move into more reliable production.",
           },
           {
             number: "03",
@@ -305,7 +301,7 @@ const content = {
         primaryAction: { label: "Visit contact", path: "/contact" },
         secondaryAction: { label: "View capabilities", path: "/capabilities" },
         introTag: "Operating model",
-        introHeading: "We turn information into execution through a clear operating model.",
+        introHeading: "Armada turns information into execution through a clear operating model.",
         introBody:
           "Our approach starts with understanding the sector better, then applying that intelligence to planning, readiness, and disciplined operating routines that teams can actually follow.",
         cards: [
@@ -313,13 +309,13 @@ const content = {
             label: "01",
             title: "Use better inputs",
             body:
-              "We rely on data, mapping, and structured intelligence to improve how opportunities and operational choices are evaluated.",
+              "Armada relies on data, mapping, and structured intelligence to improve how opportunities and operational choices are evaluated.",
           },
           {
             label: "02",
             title: "Build better teams",
             body:
-              "We invest in human capital by training and organizing people to execute safely, consistently, and with a clear operational rhythm.",
+              "Armada invests in human capital by training and organizing people to execute safely, consistently, and with a clear operational rhythm.",
           },
           {
             label: "03",
@@ -337,7 +333,7 @@ const content = {
             number: "01",
             title: "Decision quality",
             body:
-              "We use structured information and reporting to improve the quality of decisions before and during operations.",
+              "Armada uses structured information and reporting to improve the quality of decisions before and during operations.",
           },
           {
             number: "02",
@@ -386,8 +382,141 @@ const content = {
           },
         ],
       },
+      "/privacy": {
+        slug: "legal",
+        title: "Privacy Policy",
+        heading: "Privacy Policy",
+        lead: "Your privacy is important to Armada Mining. This policy explains how we collect, use, and protect your information.",
+        introTag: "Legal",
+        introHeading: "Our Commitment to Privacy",
+        introBody: "At Armada Mining, we are committed to protecting the privacy and security of our visitors and clients. This Privacy Policy outlines the types of information we collect, how we use it, and the steps we take to ensure your data remains protected.",
+        sections: [
+          {
+            title: "1. Information We Collect",
+            body: [
+              "We may collect personal information that you provide directly to us, such as your name, email address, and phone number when you fill out our contact form or subscribe to our updates.",
+              "We also automatically collect certain information when you visit our website, including your IP address, browser type, operating system, and information about your usage of our site through cookies and similar technologies."
+            ]
+          },
+          {
+            title: "2. How We Use Your Information",
+            body: [
+              "We use the information we collect to provide, maintain, and improve our services, including responding to your inquiries and providing you with updates about our operations and the Ethiopian mining sector.",
+              "Your information helps us understand how our website is used, allowing us to enhance the user experience and tailor our content to your interests."
+            ]
+          },
+          {
+            title: "3. Data Sharing and Disclosure",
+            body: [
+              "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy or required by law.",
+              "We may share your information with trusted service providers who assist us in operating our website and conducting our business, provided those parties agree to keep this information confidential."
+            ]
+          },
+          {
+            title: "4. Data Security",
+            body: [
+              "We implement a variety of security measures to maintain the safety of your personal information. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security."
+            ]
+          },
+          {
+            title: "5. Your Rights",
+            body: [
+              "You have the right to access, correct, or delete your personal information. If you wish to exercise these rights, please contact us at admin@armadaeth.com."
+            ]
+          },
+          {
+            title: "6. Changes to This Policy",
+            body: [
+              "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date."
+            ]
+          }
+        ]
+      },
+      "/terms": {
+        slug: "legal",
+        title: "Terms of Service",
+        heading: "Terms of Service",
+        lead: "Please read these Terms of Service carefully before using our website and services.",
+        introTag: "Legal",
+        introHeading: "General Terms",
+        introBody: "By accessing or using the Armada Mining website, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not access our website or use our services.",
+        sections: [
+          {
+            title: "1. Acceptance of Terms",
+            body: [
+              "Your access to and use of Armada Mining's website and services is conditioned on your acceptance of and compliance with these terms. These terms apply to all visitors, users, and others who access or use the service."
+            ]
+          },
+          {
+            title: "2. Intellectual Property",
+            body: [
+              "The content, features, and functionality of our website, including but not limited to text, graphics, logos, and images, are the exclusive property of Armada Mining and are protected by international copyright, trademark, and other intellectual property laws.",
+              "You may not reproduce, distribute, modify, or create derivative works of any part of our website without our express written permission."
+            ]
+          },
+          {
+            title: "3. Use of Service",
+            body: [
+              "You agree to use our website only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the site.",
+              "Prohibited behavior includes harassing or causing distress or inconvenience to any person, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within our site."
+            ]
+          },
+          {
+            title: "4. Disclaimer",
+            body: [
+              "The information provided on our website is for general informational purposes only. While we strive for accuracy, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, or availability of the information contained on the site."
+            ]
+          },
+          {
+            title: "5. Limitation of Liability",
+            body: [
+              "In no event shall Armada Mining be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with your use of our website or services."
+            ]
+          },
+          {
+            title: "6. Governing Law",
+            body: [
+              "These Terms of Service shall be governed by and construed in accordance with the laws of Ethiopia, without regard to its conflict of law provisions."
+            ]
+          }
+        ]
+      },
+      "/cookies": {
+        slug: "legal",
+        title: "Cookie Policy",
+        heading: "Cookie Policy",
+        lead: "This policy explains how Armada Mining uses cookies and similar technologies to improve your experience on our website.",
+        introTag: "Legal",
+        introHeading: "Understanding Cookies",
+        introBody: "Cookies are small text files that are stored on your device when you visit a website. They help us remember your preferences, understand how you interact with our site, and improve your overall browsing experience.",
+        sections: [
+          {
+            title: "1. How We Use Cookies",
+            body: [
+              "We use cookies for several reasons, including making our website work correctly, analyzing how visitors use our site, and remembering your language preferences and other settings.",
+              "Some cookies are essential for the operation of our site, while others are used for performance and functionality purposes."
+            ]
+          },
+          {
+            title: "2. Types of Cookies We Use",
+            body: [
+              "Essential Cookies: These are necessary for the website to function and cannot be switched off in our systems.",
+              "Performance Cookies: These allow us to count visits and traffic sources so we can measure and improve the performance of our site.",
+              "Functional Cookies: These enable the website to provide enhanced functionality and personalization."
+            ]
+          },
+          {
+            title: "3. Managing Your Cookies",
+            body: [
+              "Most web browsers allow you to control cookies through their settings preferences. You can choose to block or delete cookies, but this may affect your ability to use some features of our website.",
+              "To find out more about cookies, including how to see what cookies have been set and how to manage and delete them, visit www.aboutcookies.org or www.allaboutcookies.org."
+            ]
+          }
+        ]
+      },
     },
   },
+
   am: {
     primaryLinks: [
       { label: "መነሻ", path: "/" },
@@ -396,20 +525,16 @@ const content = {
       { label: "ESG", path: "/esg" },
       { label: "አቀራረብ", path: "/approach" },
       { label: "ያግኙን", path: "/contact" },
+      
     ],
     uiText: {
-      baseTitle: "አርማዳ ማዕድን",
-      brandHomeAria: "የአርማዳ ማዕድን መነሻ ገጽ",
+      baseTitle: "Armada Mining",
+      brandHomeAria: "የArmada Mining መነሻ ገጽ",
       goldPriceAria: "ጠቋሚ የወርቅ ዋጋ",
       menuToggleAria: "መንገድ መቀየሪያን ክፈት",
       primaryNavAria: "ዋና መንገድ",
       scrollToTopAria: "ወደ ላይ ተመለስ",
       languageToggleAria: "የጣቢያ ቋንቋ ቀይር",
-      goldUnit: "ግራም",
-      defaultGoldPrices: [
-        { currency: "USD", value: "$154.80", trend: "up", note: "+1.6% ዛሬ" },
-        { currency: "ETB", value: "20,850 ETB", trend: "down", note: "-0.6% ዛሬ" },
-      ],
       goldRateNote: (date) => `24K / ${date}`,
       footerFollow: "ይከተሉን",
       copy: "ቅዳ",
@@ -418,7 +543,7 @@ const content = {
       atAGlance: "በአጭሩ",
       corePillars: "ዋና ምሰሶዎች",
       nextSteps: "ቀጣይ እርምጃዎች",
-      inOurOwnWords: "በራሳችን አባባል",
+      inOurOwnWords: "በአርማዳ ማይኒንግ እይታ",
       continueExploring: "ማስረጃውን ቀጥሉ",
       previousPage: "ያለፈው ገጽ",
       nextPage: "ቀጣይ ገጽ",
@@ -441,7 +566,7 @@ const content = {
     },
     footerData: {
       brand: {
-        name: "አርማዳ ማዕድን",
+        name: "Armada Mining",
         description:
           "ለኢትዮጵያ የወርቅ ማዕድን ቴክኖሎጂን የሚመራ መድረክ እየገነባን ነው። የመረጃ ክፍተቱን በመዝጋት እውቀትን ወደ ተግባር እንቀይራለን።",
       },
@@ -467,7 +592,7 @@ const content = {
           details: ["አዲስ አበባ፣ ኢትዮጵያ", "+251 911 967 525", "admin@armadaeth.com"],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} አርማዳ ማዕድን። መብቶች ሁሉ የተጠበቁ ናቸው።`,
+      copyright: `© ${new Date().getFullYear()} Armada Mining። መብቶች ሁሉ የተጠበቁ ናቸው።`,
     },
     pages: {
       "/": {
@@ -480,14 +605,14 @@ const content = {
         heroImage: homeHeroImage,
         primaryAction: { label: "ያግኙን", path: "/contact" },
         secondaryAction: { label: "አገልግሎቶቻችንን ይመልከቱ", path: "/capabilities" },
-        introTag: "እኛ ማን ነን",
+        introTag: "Armada Mining ማነው?",
         introHeading: "የመረጃ ክፍተቱን እንዘጋለን፣ ከዚያም እውቀትን ወደ ተግባር እንቀይራለን",
         introBody: [
           "ባለሀብቶችንና ኦፕሬተሮችን የሚዘገይ የመረጃ ክፍተት ላይ እንሰራለን። የኢትዮጵያ የወርቅ ዘርፍ የበለጠ ግልፅና ለኢንቨስትመንት ምቹ እንዲሆን መረጃ፣ ውሂብ እና ካርታ እንጠቀማለን።",
           "ከዚያ መሠረት በኋላ ወደ ተግባር እንገባለን፤ የምርመራ እቅድ፣ የምርት ዝግጁነት እና በዘመናዊ ስርዓቶች እና ግልፅ ሪፖርት የተደገፈ የተደራጀ ኦፕሬሽን እንዲፈጠር እንረዳለን።",
         ],
         introFacts: [
-          "ማዕድን | በ2025 ተመሰረተ | 11-50 ሰራተኞች",
+          "Armada Mining  | በ2025 ተመሰረተ | 11-50 ሰራተኞች",
           "ዋና መስሪያ ቤት: አዲስ አበባ፣ ኢትዮጵያ",
           "admin@armadaeth.com | +251 911 967 525",
         ],
@@ -495,24 +620,24 @@ const content = {
         focusHeading: "የምንሰራው",
         focusAreas: [
           {
-            title: "የማዕድን መረጃ",
+            title: "የማዕድን መረጃ ጥናት",
             body:
-              "ባለሀብቶችና ኦፕሬተሮች ዘርፉን እንዲረዱ፣ ያልታወቀውን እንዲቀንሱ እና የተሻለ ውሳኔ እንዲወስኑ የሚያግዝ የመረጃ መሠረት እንገነባለን።",
+              "ባለሀብቶችና ኦፕሬተሮች ዘርፉን እንዲረዱ፣ ጥርጣሬ የሚቀንስ እና የተሻለ ውሳኔ እንዲወስኑ የሚያግዝ የመረጃ መሠረት እንገነባለን።",
           },
           {
-            title: "ስትራቴጂካዊ እቅድ",
+            title: "ስልታዊ እቅድ",
             body:
-              "መረጃን ወደ እቅድ፣ ካርታ እና የኦፕሬሽን ቅድሚያዎች እንቀይራለን እንዲሁም የመስክ ዝግጁነትን እና የሀብት አጠቃቀምን እናበረታታለን።",
+              "የተገኘውን መረጃ ለመስክ ዝግጁነትን እና የተሻለ የሀብት አጠቃቀምን ወደሚደግፉ እቅዶች፣ ካርታዎች እና የሥራ ቅድሚያዎች እንለውጣለን።",
           },
           {
-            title: "ምርት እና ኦፕሬሽን",
+            title: "ምርት እና የሥራ እንቅስቃሴ",
             body:
-              "ፕሮጀክቶች ቡድን፣ መሳሪያ እና የተደራጀ ሪፖርት በመደራጀት ወደ ተቆጣጠረ አፈፃፀም እንዲገቡ እንረዳለን።",
+              "ደህንነቱ የተጠበቀ እና ወጥ የሆነ ሥራ ለማካሄድ ቡድኖችን፣ መሣሪያዎችን እና ሥርዓታዊ ሪፖርቶችን በማደራጀት ፕሮጀክቶች ወደ ተግባር እንዲገቡ እንረዳለን።",
           },
           {
-            title: "የስርዓት ግንባታ",
+            title: "ሥነ-ምህዳር ግንባታ ",
             body:
-              "ARMADA አነስተኛ የኦፕሬሽን ሞዴሎችን ያዳብራል እና በኔትወርክ እና በመተባበር አጠቃላይ ዘርፉን እንዲጠናከር ያግዛል።",
+              "Armada አነስተኛ የሥራ ሞዴሎችን በማዘጋጀት እና በመደገፍ እንዲሁም በትስስር እና በቅንጅት ሰፊውን ዘርፍ ለመቅረጽ ይረዳል።",
           },
         ],
         philosophyTag: "ፍልስፍናችን",
@@ -523,19 +648,19 @@ const content = {
         ],
         philosophyPoints: ["በውሂብ የተመራ መረጃ", "የሰው ሀብት ልማት", "የተደራጀ ስርዓት", "የዘርፍ አመራር"],
         responsibilityTag: "ኃላፊነት",
-        responsibilityHeading: "ጠንካራ የማዕድን ስርዓት መገንባት",
+        responsibilityHeading: "ጠንካራ የማዕድን ሥነ-ምህዳር መገንባት",
         responsibilityBody: [
-          "ባለሙያዎችን በማገናኘት፣ የዘርፍ ትብብርን በማጠናከር እና ከፍተኛ የኦፕሬሽን ደረጃዎችን በመገፋት ሰፊውን የኢትዮጵያ የማዕድን ስርዓት እንዲጠናከር እየረዳን ነው።",
-          "ዓላማችን ለባለሀብቶች፣ ለኦፕሬተሮች እና ለማህበረሰቦች የበለጠ ግልፅ፣ ለመረዳት ለመደገፍ እና ለማስኬድ ቀላል የሆነ ዘርፍ መፍጠር ነው።",
+          "የባለሙያዎችን ትስስር በመፍጠር፣ የኢንዱስትሪ ቅንጅትን በመደገፍ እና ጠንካራ የሥራ ደረጃዎች እንዲኖሩ በመሟገት ሰፊውን የኢትዮጵያ ማዕድን ሥነ-ምህዳር ለመቅረጽ እየሰራን ነው።",
+          "ዓላማችን ባለሀብቶችን፣ ኦፕሬተሮችን እና ማህበረሰቦችን ለመረዳት፣ የገንዘብ ድጋፍ (ፋይናንስ )ላይ ይበልጥ ግልጽ የሆነ ዘርፍ ማስቀጠል ነው ።",
         ],
         responsibilityPoints: ["ባለሙያዎች", "ትብብር", "ጥብቅና", "ግልጽነት"],
         galleryTag: "የመስክ ማሳያ",
         galleryHeading: "በመሬት ላይ የምንሰራው",
         galleryLead:
-          "ARMADA Mining በኢትዮጵያ ውስጥ የሚሰራውን የስራ አካባቢ፣ የኦፕሬሽን እውነታዎች እና የአፈፃፀም አቀራረብ በአጭሩ የሚያሳይ እይታ ነው።",
+          "ARMADA Mining በኢትዮጵያ ውስጥ ስላለው የስራ አካባቢ፣ ተጨባጭ ስራዎች እና የአፈጻጸም ሁኔታዎች የሚያሳይ ምስል።",
         globalCTA: {
-          heading: "ስለ የወደፊቱ ማዕድን ለመወያየት ዝግጁ ነዎት?",
-          body: "ለመዋዕለ ንዋይ፣ ለኦፕሬሽን ወይም ለሽርክና ከሆነ ይህንን የሚያስችል መድረክ እየገነባን ነው።",
+          heading: "ስለማዕድን ቁፋሮ ቢዝነስ ለማወቅ እና ወደ ቢዝነሱ ለመቀላቀል ዝግጁ ናችሁ ? ",
+          body: "ኢንቨስት ለማድረግም ሆነ አብሮ ለመስራት ቢፈልጉ፣ እኛ ይህንን እውን የሚያደርግ አሰራር እያዘጋጀን ነው።",
           primaryAction: { label: "ያግኙን", path: "/contact" },
           secondaryAction: { label: "አቅሞቻችን", path: "/capabilities" },
         },
@@ -578,33 +703,33 @@ const content = {
       "/capabilities": {
         slug: "capabilities",
         title: "አቅሞች",
-        heading: "በእውቀት፣ በዝግጁነት እና በተደራጀ አፈፃፀም የተገነቡ አቅሞች።",
+        heading: "በእውቀትና በተግባር ላይ የተመሰረተ ብቃት",
         lead:
-          "ARMADA Mining የኢትዮጵያ የወርቅ ፕሮጀክቶች እንዴት እንደሚረዱ እና እንዴት እንደሚካሄዱ ለማሻሻል የማዕድን መረጃን፣ እቅድን፣ ስልጠናን እና የተደራጀ የኦፕሬሽን ስርዓቶችን ያጣምራል።",
+          "Armada Mining የማዕድን ዘርፉን እውቀት፣ ጥንቃቄ የተሞላበት እቅድ፣ ስልጠና እና የተደራጀ አሰራርን በማቀናጀት በኢትዮጵያ የወርቅ ማውጣት ስራዎች በተሻለ ሁኔታ እንዲመሩ ያደርጋል።",
         primaryAction: { label: "አድራሻን ይመልከቱ", path: "/contact" },
         secondaryAction: { label: "ስለ ARMADA ያንብቡ", path: "/about" },
         introTag: "የችሎታ አቀራረብ",
-        introHeading: "አቅሞቻችን ግጭትን ለመቀነስ እና አፈፃፀምን ለማሻሻል ተቀይረዋል።",
+        introHeading: " አገልግሎቶቻችን ስራን ለማቅለልና ውጤታማ ለማድረግ የተነደፉ ናቸው።",
         introBody:
-          "ዘርፉን ከግራ ወደ ተግባር የሚያንቀሳቅሱ ችሎታዎች ላይ እንሰራለን፤ የተሻለ መረጃ፣ ግልፅ እቅድ፣ ጠንካራ የቡድን አደረጃጀት እና ግልፅ የኦፕሬሽን ስርዓቶች።",
+          "አርማዳ ማይኒንግ ትኩረት የሚያደርገው በዘርፉ ያለውን ተግዳሮት የተሻለ መረጃ፣ ግልጽ እቅድ፣ ጠንካራ የቡድን አደረጃጀት እና ግልጽነት ያለው አሰራር እንዲኖር በማድረግ የተሻለ ማዘመን ላይ ነው ።",
         cards: [
           {
             label: "01",
-            title: "የዘርፍ መረጃ",
+            title: "የዘርፍ እውቀት",
             body:
-              "በኢትዮጵያ የወርቅ ማዕድን ውስጥ እድሎችን፣ የኦፕሬሽን ገደቦችን እና የኢንቨስትመንት ጥያቄዎችን ግልፅ ለማድረግ የሚያግዝ መረጃ እንሰበስባለን እና እናደራጃለን።",
+              "በኢትዮጵያ የወርቅ ቁፋሮ ላይ ያሉትን ዕድሎች፣ እንቅፋቶች እና ከኢንቨስትመንት ጋር የተያያዙ ጥያቄዎችን ለመመለስ የሚረዱ መረጃዎችን ሰብስበን እናደራጃለን።",
           },
           {
             label: "02",
-            title: "የኦፕሬሽን ስርዓቶች",
+            title: "የአሰራር ስርዓት ",
             body:
-              "ARMADA የውሳኔ ጥራትን፣ የስራ ወጥነትን እና የመስክ ምርታማነትን ለማሻሻል መሳሪያዎችን፣ ካርታን እና የተደራጀ የስራ ፍሰት ይጠቀማል።",
+              "ARMADA Mining በዚህ የቢዝነስ መስክ ላይ ያሉት ውሳኔዎች በጥራትና በወጥነት እንዲተላለፉ እንዲሁም ምርታማነት እንዲጨምር  ዘመናዊ መሣሪያዎችንና የተቀናጀ አሰራርን ይጠቀማል።",
           },
           {
             label: "03",
             title: "የቡድን አፈፃፀም",
             body:
-              "ቡድኖች በደህና እና በወጥነት እንዲሰሩ እናስተምራለን እና እናደራጃለን፤ ችሎታ ግንባታንም ወደ ዕለታዊ ውጤት እንቀይራለን።",
+              "ቡድኖች ስራቸውን በደህንነትና በብቃት እንዲወጡ እናሰለጥናለን፤ እናደራጃለን። ይህም የተማሩትን እውቀት ወደ ተግባር እንዲቀይሩት ይረዳቸዋል።",
           },
         ],
         visualQuote: "እቅድ፣ ሰዎች እና ሪፖርት በአንድነት ሲሰሩ የማዕድን አፈፃፀም ይሻሻላል።",
@@ -628,7 +753,7 @@ const content = {
           },
         ],
         closerHeading: "የARMADA አቅሞች ኦፕሬሽንንም እምነትንም ለማጠናከር ተዘጋጅተዋል።",
-        closerBody: "መረጃን፣ የአፈፃፀም ስርዓቶችን እና የሰው ሀብት ልማትን በማጣመር ዘርፉ ከእቅድ እስከ ምርት ድረስ የበለጠ ውጤታማ እንዲሆን እንረዳለን።",
+        closerBody: "የARMADA ዓላማ ዕውቀትን፣ የአሰራር ስርዓቶችን እና የሰው ኃይልን በማቀናጀት፣ ከዕቅድ እስከ ምርት ያለው ሂደት ይበልጥ ውጤታማ እንዲሆን ማድረግ ነው።",
         heroImage: capabilitiesImage,
         detailImage: capabilitiesImage,
       },
@@ -637,18 +762,18 @@ const content = {
         title: "ESG",
         heading: "ዘላቂ የወርቅ ምርት",
         lead:
-          "ARMADA Mining የአካባቢ፣ የማህበራዊ እና የአስተዳደር መርሆዎችን በእያንዳንዱ ደረጃ የሚያካትት ግልፅ እና ዘላቂ ኦፕሬሽን ለማካሄድ ቁርጠኛ ነው።",
+          "ARMADA Mining የአካባቢ ጥበቃን፣ ማህበራዊ ኃላፊነትን እና መልካም አስተዳደርን ባገናዘበ መልኩ በግልጽነት እና በዘላቂነት መስራትን ቅድሚያ የሚሰጠው ተግባር ነው።",
         primaryAction: { label: "ያግኙን", path: "/contact" },
         secondaryAction: { label: "አቅሞችን ይመልከቱ", path: "/capabilities" },
         introTag: "ኃላፊነት ያለው ማዕድን",
         introHeading: "ዘላቂ የወርቅ ምርት",
         introBody:
-          "ARMADA Mining የአካባቢ፣ የማህበራዊ እና የአስተዳደር መርሆዎችን በእያንዳንዱ ደረጃ የሚያካትት ግልፅ እና ዘላቂ ኦፕሬሽን ለማካሄድ ቁርጠኛ ነው።",
+          "ኩባንያችን በእያንዳንዱ የስራ ሂደት ውስጥ ለአካባቢ ጥበቃ፣ ለማህበረሰብ ደህንነት እና ለትክክለኛ አሰራር (ESG) ትኩረት ይሰጣል።",
         esgPrinciples: [
           {
             icon: "E",
             category: "አካባቢ",
-            details: "የቀረ ጭቃ እንደገና ማቀነባበር የመሬት እንክብካቤን ያሳንሳል እና የአካባቢ ቆሻሻ ተፅዕኖን ይቀንሳል።",
+            details: "የማዕድን ተረፈ-ምርቶችን መልሶ ጥቅም ላይ በማዋል፣ መሬት እንዳይበላሽ እና የአካባቢ ብክለት እንዳይከሰት ያደርጋል።",
           },
           {
             icon: "S",
@@ -658,7 +783,7 @@ const content = {
           {
             icon: "G",
             category: "አስተዳደር",
-            details: "የተደራጀ ንብረት እንክብካቤ እና መደበኛ የገቢ መንገዶች ከNBE ስርዓቶች ጋር ተያይዘው ይሰራሉ።",
+            details: "የተደራጀ ንብረት እንክብካቤ እና መደበኛ የገቢ መንገዶች ከኢትዮጵያ ብሔራዊ ባንክ ስርዓቶች ጋር ተያይዘው ይሰራሉ።",
           },
         ],
       },
@@ -667,42 +792,42 @@ const content = {
         title: "አቀራረብ",
         heading: "በውሂብ፣ በካርታ፣ በስርዓት እና በሰዎች ላይ የተመሠረተ አቀራረብ።",
         lead:
-          "ARMADA Mining ዘመናዊ የኦፕሬሽን ስርዓቶችን ከሰው ሀብት ኢንቨስትመንት ጋር ያጣምራል ይህም የማዕድን ውሳኔዎችና የመስክ አፈፃፀም የበለጠ ወጥነት ያለው፣ ግልፅ እና ምርታማ እንዲሆን ያግዛል።",
+          "ARMADA Mining አርማዳ ማይኒንግ ዘመናዊ አሰራርን ከሰው ኃይል ስልጠና ጋር በማቀናጀት፣ የማዕድን ውሳኔዎች እና የተግባር ስራዎች ወጥ፣ ግልጽ እና ውጤታማ እንዲሆኑ ያደርጋል።",
         primaryAction: { label: "ወደ አድራሻ ሂድ", path: "/contact" },
         secondaryAction: { label: "አቅሞችን ይመልከቱ", path: "/capabilities" },
-        introTag: "የኦፕሬሽን ሞዴል",
-        introHeading: "መረጃን በግልፅ የኦፕሬሽን ሞዴል ወደ ተግባር እንቀይራለን።",
+        introTag: "የአሰራር ሞዴል",
+        introHeading: "መረጃን ወደ ተግባር የምንቀይረው ግልጽ በሆነ የአሰራር ዘዴ ነው።",
         introBody:
-          "አቀራረባችን ዘርፉን በተሻለ ሁኔታ በመረዳት ይጀምራል፤ ከዚያም ያንን መረጃ ወደ እቅድ፣ ወደ ዝግጁነት እና ቡድኖች በተግባር ሊከተሉት የሚችሉ የተደራጀ የስራ ሂደቶች እንቀይራለን።",
+          "አሰራራችን የሚጀምረው ዘርፉን በሚገባ በመረዳት ሲሆን፣ ያገኘነውን ዕውቀት ለዕቅድ እና ቡድኖች በቀላሉ ሊተገብሩት ለሚችሉ የዕለት ተዕለት ተግባራት እናውለዋለን።",
         cards: [
           {
             label: "01",
-            title: "የተሻሉ ግቤቶችን ይጠቀሙ",
-            body: "እድሎችን እና የኦፕሬሽን ምርጫዎችን ለማሻሻል ውሂብን፣ ካርታን እና የተደራጀ መረጃን እንጠቀማለን።",
+            title: "ጥራት ያላቸው መረጃዎችን መጠቀም",
+            body: "ዕድሎችን እና የአሰራር ምርጫዎችን በትክክል ለመገምገም በመረጃዎች፣ በካርታዎች እና በተደራጁ ዕውቀቶች ላይ እንመሰረታለን።",
           },
           {
             label: "02",
-            title: "የተሻሉ ቡድኖችን ገንቡ",
+            title: "ጠንካራ ቡድኖችን መገንባት",
             body: "ሰዎች በደህና፣ በወጥነት እና በግልፅ የስራ ምት እንዲሰሩ በማስተማር እና በማደራጀት በሰው ሀብት ላይ እንወዳድራለን።",
           },
           {
             label: "03",
-            title: "በተጨማሪ ትክክለኛነት ያስኪዱ",
-            body: "የተደራጀ ሪፖርት እና ዘመናዊ የኦፕሬሽን ስርዓቶች ግልጽነትን፣ ምርታማነትን እና የውሳኔ ጥራትን በጊዜ ሂደት ያሻሽላሉ።",
+            title: "በተጠና መንገድ መምራት",
+            body: "የተደራጁ ሪፖርቶች እና ዘመናዊ አሰራሮች ግልጽነትን፣ ምርታማነትን እና የውሳኔ አሰጣጥ ጥራትን በጊዜ ሂደት እንዲሻሻሉ ይረዳሉ።",
           },
         ],
         visualQuote: "ጠንካራ አፈፃፀም ከጠንካራ መረጃ፣ ከጠንካራ ስርዓት እና አብረው ከሚሰሩ ጠንካራ ቡድኖች ይመጣል።",
         detailTag: "የአቀራረብ ዝርዝር",
-        detailHeading: "ARMADA የሚሰራባቸውን መርሆዎች የሚቀርጹ ነጥቦች።",
+        detailHeading: "የARMADA Mining አሰራር የሚመሩ ዋና ዋና መርሆዎች፦",
         details: [
           {
             number: "01",
             title: "የውሳኔ ጥራት",
-            body: "ከኦፕሬሽን በፊትና በመካከል የውሳኔ ጥራትን ለማሻሻል የተደራጀ መረጃን እና ሪፖርትን እንጠቀማለን።",
+            body: "ከስራ በፊትም ሆነ በስራ ወቅት የሚሰጡ ውሳኔዎች የተሻሉ እንዲሆኑ የተደራጁ መረጃዎችን እና ሪፖርቶችን እንጠቀማለን።",
           },
           {
             number: "02",
-            title: "የኦፕሬሽን ወጥነት",
+            title: "ወጥ የሆነ አሰራር",
             body: "የስራ ፍሰቶች ሲደራጁ፣ ሀላፊነቶች ሲገለጹ እና ስርዓቶች ሲደገሙ ቡድኖች የበለጠ ውጤታማ ይሆናሉ።",
           },
           {
@@ -743,6 +868,138 @@ const content = {
             body: "ዋና መስሪያ ቤት: አዲስ አበባ፣ ኢትዮጵያ።",
           },
         ],
+      },
+      "/privacy": {
+        slug: "legal",
+        title: "የግላዊነት ፖሊሲ",
+        heading: "የግላዊነት ፖሊሲ",
+        lead: "የእርስዎ ግላዊነት ለArmada Mining አስፈላጊ ነው። ይህ ፖሊሲ መረጃዎን እንዴት እንደምንሰበስብ፣ እንደምንጠቀም እና እንደምንጠብቅ ያብራራል።",
+        introTag: "ህጋዊ",
+        introHeading: "ለግላዊነት ያለን ቁርጠኝነት",
+        introBody: "በArmada Mining የጎብኚዎቻችንን እና የደንበኞቻችንን ግላዊነት እና ደህንነት ለመጠበቅ ቆርጠን ተነስተናል። ይህ የግላዊነት ፖሊሲ የምንሰበስባቸውን የመረጃ አይነቶች፣ እንዴት እንደምንጠቀምባቸው እና የርስዎ ውሂብ የተጠበቀ መሆኑን ለማረጋገጥ የምንወስዳቸውን እርምጃዎች ይዘረዝራል።",
+        sections: [
+          {
+            title: "1. የምንሰበስበው መረጃ",
+            body: [
+              "የእኛን የግንኙነት ፎርም ሲሞሉ ወይም ለዝማኔዎቻችን ሲመዘገቡ በቀጥታ የሚሰጡንን እንደ ስምዎ፣ የኢሜይል አድራሻዎ እና ስልክ ቁጥርዎ ያሉ የግል መረጃዎችን ልንሰበስብ እንችላለን።",
+              "እንዲሁም የእኛን ድህረ ገጽ ሲጎበኙ አንዳንድ መረጃዎችን በራስ-ሰር እንሰበስባለን፤ ይህም የእርስዎን የአይፒ አድራሻ፣ የብሮውዘር አይነት፣ የኦፕሬቲንግ ሲስተም እና ስለ ድህረ ገጻችን አጠቃቀም በኩኪዎች እና መሰል ቴክኖሎጂዎች አማካኝነት የሚገኝ መረጃን ይጨምራል።"
+            ]
+          },
+          {
+            title: "2. መረጃዎን እንዴት እንደምንጠቀምበት",
+            body: [
+              "የምንሰበስበውን መረጃ አገልግሎቶቻችንን ለማቅረብ፣ ለመጠገን እና ለማሻሻል እንጠቀምበታለን፤ ይህም ለጥያቄዎችዎ ምላሽ መስጠትን እና ስለ ስራችን እና ስለ ኢትዮጵያ የማዕድን ዘርፍ ዝማኔዎችን ለእርስዎ ማቅረብን ይጨምራል።",
+              "የእርስዎ መረጃ ድህረ ገጻችን እንዴት ጥቅም ላይ እንደሚውል እንድንረዳ ይረዳናል፣ ይህም የተጠቃሚውን ልምድ እንድናሻሽል እና ይዘታችንን ለእርስዎ ፍላጎት እንድንቀርጽ ያስችለናል።"
+            ]
+          },
+          {
+            title: "3. መረጃን ማጋራት እና ይፋ ማድረግ",
+            body: [
+              "በዚህ ፖሊሲ ውስጥ ከተገለጸው ወይም በህግ ከተጠየቀው በስተቀር የእርስዎን የግል መረጃ ያለእርስዎ ፍቃድ ለሶስተኛ ወገኖች አንሸጥም፣ አንለዋወጥም ወይም አናስተላልፍም።",
+              "እነዚያ ወገኖች ይህንን መረጃ በሚስጥር ለመጠበቅ እስከተስማሙ ድረስ ድህረ ገጻችንን ለማንቀሳቀስ እና ንግዶቻችንን ለማካሄድ ከሚረዱን ታማኝ የአገልግሎት ሰጪዎች ጋር መረጃዎን ልናጋራ እንችላለን።"
+            ]
+          },
+          {
+            title: "4. የውሂብ ደህንነት",
+            body: [
+              "የግል መረጃዎን ደህንነት ለመጠበቅ የተለያዩ የደህንነት እርምጃዎችን እንተገብራለን። ሆኖም፣ በኢንተርኔት ላይ የሚደረግ ምንም አይነት የማስተላለፊያ ዘዴ ወይም የኤሌክትሮኒክስ ማከማቻ 100% አስተማማኝ አይደለም፣ እና ሙሉ ደህንነትን ማረጋገጥ አንችልም።"
+            ]
+          },
+          {
+            title: "5. የእርስዎ መብቶች",
+            body: [
+              "የግል መረጃዎን የማግኘት፣ የማረም ወይም የመሰረዝ መብት አለዎት። እነዚህን መብቶች ለመጠቀም ከፈለጉ እባክዎን በ admin@armadaeth.com ያግኙን።"
+            ]
+          },
+          {
+            title: "6. በዚህ ፖሊሲ ላይ የሚደረጉ ለውጦች",
+            body: [
+              "ይህንን የግላዊነት ፖሊሲ ከጊዜ ወደ ጊዜ ልናሻሽለው እንችላለን። ማንኛቸውም ለውጦች በዚህ ገጽ ላይ ከተሻሻለው ቀን ጋር ይለጠፋሉ።"
+            ]
+          }
+        ]
+      },
+      "/terms": {
+        slug: "legal",
+        title: "የአጠቃቀም ደንቦች",
+        heading: "የአጠቃቀም ደንቦች",
+        lead: "እባክዎን የእኛን ድህረ ገጽ እና አገልግሎቶች ከመጠቀምዎ በፊት እነዚህን የአጠቃቀም ደንቦች በጥንቃቄ ያንብቡ።",
+        introTag: "ህጋዊ",
+        introHeading: "አጠቃላይ ደንቦች",
+        introBody: "የArmada Mining ድህረ ገጽን በመጠቀም በእነዚህ የአጠቃቀም ደንቦች ለመገዛት ተስማምተዋል። በማንኛውም የነዚህ ደንቦች ክፍል ካልተስማሙ ድህረ ገጻችንን ማግኘት ወይም አገልግሎቶቻችንን መጠቀም አይችሉም።",
+        sections: [
+          {
+            title: "1. ደንቦቹን መቀበል",
+            body: [
+              "የArmada Mining ድህረ ገጽ እና አገልግሎቶች አጠቃቀምዎ ለእነዚህ ደንቦች ባሎት ተገዢነት ላይ የተመሰረተ ነው። እነዚህ ደንቦች አገልግሎቱን ለሚጠቀሙ ወይም ለሚጎበኙ ሁሉ ተፈጻሚ ይሆናሉ።"
+            ]
+          },
+          {
+            title: "2. የአእምሮ ንብረት መብት",
+            body: [
+              "የድህረ ገጻችን ይዘት፣ ባህሪያት እና ተግባራት፤ ጽሁፎችን፣ ግራፊክስን፣ ሎጎዎችን እና ምስሎችን ጨምሮ የArmada Mining ብቸኛ ንብረት ናቸው እና በዓለም አቀፍ የቅጂ መብት፣ የንግድ ምልክት እና ሌሎች የአእምሮ ንብረት ህጎች የተጠበቁ ናቸው።",
+              "ያለእኛ ግልጽ የጽሁፍ ፍቃድ የድህረ ገጻችንን የትኛውንም ክፍል ማባዛት፣ ማሰራጨት፣ ማሻሻል ወይም ተዋጽኦ ስራዎችን መስራት አይፈቀድም።"
+            ]
+          },
+          {
+            title: "3. የአገልግሎት አጠቃቀም",
+            body: [
+              "ድህረ ገጻችንን ለህጋዊ ዓላማዎች ብቻ እና የሌሎችን መብት በማይጥስ ወይም የሌሎችን አጠቃቀም በማያስተጓጉል መልኩ ለመጠቀም ተስማምተዋል።",
+              "የተከለከሉ ባህሪያት ማንኛውንም ሰው ማዋከብ ወይም ስቃይ ወይም ችግር ማድረስ፣ ጸያፍ ወይም አፀያፊ ይዘትን ማስተላለፍ ወይም በጣቢያችን ውስጥ ያለውን መደበኛ የውይይት ፍሰት ማቋረጥን ይጨምራሉ።"
+            ]
+          },
+          {
+            title: "4. ማስተባበያ",
+            body: [
+              "በድህረ ገጻችን ላይ የቀረበው መረጃ ለአጠቃላይ መረጃ አገልግሎት ብቻ ነው። ለትክክለኛነቱ ጥረት ብናደርግም፣ በጣቢያው ላይ ስላለው መረጃ ምሉዕነት፣ ትክክለኛነት፣ አስተማማኝነት ወይም ተገኝነት ማንኛውንም አይነት ግልጽ ወይም ድምዳሜያዊ ዋስትና አንሰጥም።"
+            ]
+          },
+          {
+            title: "5. የተጠያቂነት ገደብ",
+            body: [
+              "Armada Mining በምንም አይነት ሁኔታ ድህረ ገጻችንን ወይም አገልግሎቶቻችንን በመጠቀምዎ ምክንያት ለሚመጣ ማንኛውም አይነት ቀጥተኛ ወይም ቀጥተኛ ያልሆነ ጉዳት ተጠያቂ አይሆንም።"
+            ]
+          },
+          {
+            title: "6. የሚገዛው ህግ",
+            body: [
+              "እነዚህ የአጠቃቀም ደንቦች በኢትዮጵያ ህጎች መሰረት የሚተረጎሙ እና የሚመሩ ይሆናሉ።"
+            ]
+          }
+        ]
+      },
+      "/cookies": {
+        slug: "legal",
+        title: "የኩኪ ፖሊሲ",
+        heading: "የኩኪ ፖሊሲ",
+        lead: "ይህ ፖሊሲ Armada Mining በድህረ ገጻችን ላይ ያለዎትን ልምድ ለማሻሻል ኩኪዎችን እና መሰል ቴክኖሎጂዎችን እንዴት እንደሚጠቀም ያብራራል።",
+        introTag: "ህጋዊ",
+        introHeading: "ስለ ኩኪዎች መረዳት",
+        introBody: "ኩኪዎች ድህረ ገጽ ሲጎበኙ በመሳሪያዎ ላይ የሚቀመጡ ትናንሽ የጽሁፍ ፋይሎች ናቸው። የእርስዎን ምርጫዎች እንድናስታውስ፣ ከጣቢያችን ጋር እንዴት እንደሚገናኙ እንድንረዳ እና አጠቃላይ የአሰሳ ተሞክሮዎን ለማሻሻል ይረዱናል።",
+        sections: [
+          {
+            title: "1. ኩኪዎችን እንዴት እንደምንጠቀምባቸው",
+            body: [
+              "ኩኪዎችን ለተለያዩ ምክንያቶች እንጠቀማለን፤ ይህም ድህረ ገጻችን በትክክል እንዲሰራ ማድረግን፣ ጎብኚዎች ጣቢያችንን እንዴት እንደሚጠቀሙ መተንተንን እና የእርስዎን የቋንቋ ምርጫዎች እና ሌሎች ቅንብሮችን ማስታወስን ይጨምራል።",
+              "አንዳንድ ኩኪዎች ለጣቢያችን አሠራር አስፈላጊ ሲሆኑ፣ ሌሎች ደግሞ ለአፈጻጸም እና ለተግባራዊነት ዓላማዎች ያገለግላሉ።"
+            ]
+          },
+          {
+            title: "2. የምንጠቀማቸው የኩኪ አይነቶች",
+            body: [
+              "አስፈላጊ ኩኪዎች፡ እነዚህ ለድህረ ገጹ መስራት አስፈላጊ ናቸው እና በእኛ ስርዓቶች ውስጥ ሊጠፉ አይችሉም።",
+              "የአፈጻጸም ኩኪዎች፡ እነዚህ የጣቢያችንን አፈጻጸም ለመለካት እና ለማሻሻል እንድንችል ጉብኝቶችን እና የትራፊክ ምንጮችን ለመቁጠር ያስችሉናል።",
+              "ተግባራዊ ኩኪዎች፡ እነዚህ ድህረ ገጹ የተሻሻለ ተግባር እና ግላዊነትን እንዲያቀርብ ያስችሉታል።"
+            ]
+          },
+          {
+            title: "3. ኩኪዎችዎን ማስተዳደር",
+            body: [
+              "አብዛኛዎቹ የድረ-ገጽ አሳሾች በቅንብሮቻቸው በኩል ኩኪዎችን እንዲቆጣጠሩ ያስችሉዎታል። ኩኪዎችን ለማገድ ወይም ለመሰረዝ መምረጥ ይችላሉ፣ ነገር ግን ይህ በአንዳንድ የድህረ ገጻችን ባህሪያት የመጠቀም ችሎታዎ ላይ ተጽዕኖ ሊያሳድር ይችላል።",
+              "ስለ ኩኪዎች የበለጠ ለማወቅ፣ የትኞቹ ኩኪዎች እንደተቀመጡ እና እንዴት ማስተዳደር እና መሰረዝ እንደሚቻል ለማየት www.aboutcookies.org ወይም www.allaboutcookies.org ን ይጎብኙ።"
+            ]
+          }
+        ]
       },
     },
   },

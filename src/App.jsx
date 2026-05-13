@@ -2,10 +2,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import pattern from "../assets/pattern.svg";
-import heroImage from "../assets/heroimage.webp";
-import galleryWide from "../assets/image_2026-04-16_16-14-43.png";
-import galleryPortraitB from "../assets/image_2026-04-16_19-37-21.png";
-import galleryTallB from "../assets/photo_2026-04-16_19-39-498.jpg";
+import heroImage from "../assets/about_bakground.jpg";
+import heroImage2 from "../assets/gold_wash.jpg";
+import galleryWide from "../assets/home_pic1.png";
+import galleryPortraitB from "../assets/home_pic2.png";
+import galleryTallB from "../assets/home_pic3.png";
 import homeHeroImage from "../assets/home_hero.png";
 import logo from "../assets/Logo.svg";
 import {
@@ -16,6 +17,8 @@ import {
   pageOrder,
   supportedLanguages,
 } from "./siteData";
+
+const GOLD_STORAGE_KEY = "armada_gold_prices";
 
 const pageTransition = {
   initial: { opacity: 0, y: 18 },
@@ -68,7 +71,15 @@ function normalizePath(pathname) {
     return "/";
   }
 
-  const trimmed = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+  // Remove .html extension and index.html if present
+  let normalized = pathname.replace(/\.html$/, "").replace(/\/index$/, "");
+  
+  // Ensure it starts with /
+  if (!normalized.startsWith("/")) {
+    normalized = "/" + normalized;
+  }
+
+  const trimmed = normalized.endsWith("/") ? normalized.slice(0, -1) : normalized;
   return trimmed || "/";
 }
 
@@ -93,22 +104,45 @@ function App() {
   const footerData = getFooterData(language);
   const uiText = getUiText(language);
 
-  const goldPrices = goldRateSnapshot
-    ? [
-        {
-          currency: "USD",
-          value: `$${Number(goldRateSnapshot.usd).toFixed(2)}`,
-          trend: "neutral",
-          note: uiText.goldRateNote(goldRateSnapshot.date),
-        },
-        {
-          currency: "ETB",
-          value: `${Number(goldRateSnapshot.birr).toLocaleString()} ETB`,
-          trend: "neutral",
-          note: uiText.goldRateNote(goldRateSnapshot.date),
-        },
-      ]
-    : uiText.defaultGoldPrices;
+const [goldPrices, setGoldPrices] = useState(() => {
+  try {
+    const saved = localStorage.getItem(GOLD_STORAGE_KEY);
+
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+});
+
+useEffect(() => {
+  if (!goldRateSnapshot) return;
+
+const updatedPrices = {
+  date: goldRateSnapshot.date,
+
+  items: [
+    {
+      currency: "USD/gm",
+      value: `$${Number(goldRateSnapshot.usd).toFixed(2)}`,
+      trend: "up",
+    },
+    {
+      currency: "ETB/gm",
+      value: `${Number(goldRateSnapshot.birr).toLocaleString()} ETB`,
+      trend: "down",
+    },
+  ],
+};
+  
+
+  setGoldPrices(updatedPrices);
+
+  localStorage.setItem(
+    GOLD_STORAGE_KEY,
+    JSON.stringify(updatedPrices)
+  );
+
+}, [goldRateSnapshot]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -269,81 +303,104 @@ function App() {
         <div className="site-backdrop-glow site-backdrop-glow-right" />
       </div>
 
- <header className="site-header">
-  <div className="shell">
-    <div className={`navbar${isScrolled ? " is-scrolled" : ""}`}>
-      <a
-        className="brand-lockup"
-        href="/"
-        onClick={(event) => onNavClick(event, "/")}
-      >
-        <img src={logo} alt="Armada Mining" className="brand-logo" />
-      </a>
-      <nav
-        ref={navPanelRef}
-        className={`nav-panel${menuOpen ? " is-open" : ""}`}
-      >
-        <div className="nav-links">
-          {primaryLinks.map((link) => (
+      <header className="site-header">
+
+        {/* TOP MARKET BAR */}
+        <div className="market-bar">
+          <div className="shell">
+      <div className="market-bar-inner">
+
+        {goldPrices?.items?.length > 0 && (
+          <>
+
+            <div className="market-date-global">
+              Date: {goldPrices.date}
+            </div>
+
+            <div className="market-price-group">
+
+              {goldPrices.items.map((item) => (
+                <div key={item.currency} className="market-item">
+
+                  <span className="market-currency">
+                    {item.currency}
+                  </span>
+
+                  <span className="market-price">
+                    {item.value}
+                  </span>
+
+                </div>
+              ))}
+
+            </div>
+
+          </>
+        )}
+
+      </div>
+          </div>
+        </div>
+
+        {/* MAIN NAVBAR */}
+        <div className="shell">
+          <div className={`navbar${isScrolled ? " is-scrolled" : ""}`}>
+
             <a
-              key={link.path}
-              href={link.path}
-              className={currentPath === link.path ? "is-active" : ""}
-              onClick={(event) => onNavClick(event, link.path)}
+              className="brand-lockup"
+              href="/"
+              onClick={(event) => onNavClick(event, "/")}
             >
-              {link.label}
+              <img src={logo} alt="Armada Mining" className="brand-logo" />
             </a>
-          ))}
-        </div>
-        <div className="mobile-language-toggle">
-          {supportedLanguages.map((item) => (
-            <button
-              key={item.code}
-              className={`language-toggle-button${language === item.code ? " is-active" : ""}`}
-              onClick={() => setLanguage(item.code)}
+
+            <nav
+              ref={navPanelRef}
+              className={`nav-panel${menuOpen ? " is-open" : ""}`}
             >
-              {item.toggleLabel}
-            </button>
-          ))}
-        </div>
-      </nav>
-      <div className={`nav-market${isScrolled ? " is-visible" : ""}`}>
-        <div className="nav-market-grid">
-          {goldPrices.map((item) => (
-            <article key={item.currency} className="nav-market-card">              
-              <div className="nav-market-topline">
-                <span className="nav-market-value">
-                  {item.currency}: {item.value}
-                </span>
+              <div className="nav-links">
+                {primaryLinks.map((link) => (
+                  <a
+                    key={link.path}
+                    href={link.path}
+                    className={currentPath === link.path ? "is-active" : ""}
+                    onClick={(event) => onNavClick(event, link.path)}
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
-            </article>
-          ))}
+            </nav>
+
+            <div ref={navActionsRef} className="nav-actions">
+
+              <div className="language-toggle desktop-language-toggle">
+                {supportedLanguages.map((item) => (
+                  <button
+                    key={item.code}
+                    className={`language-toggle-button${language === item.code ? " is-active" : ""}`}
+                    onClick={() => setLanguage(item.code)}
+                  >
+                    {item.toggleLabel}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className="menu-toggle"
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen((open) => !open)}
+              >
+                <span />
+                <span />
+                <span />
+              </button>
+
+            </div>
+          </div>
         </div>
-      </div>
-      <div ref={navActionsRef} className="nav-actions">
-        <div className="language-toggle desktop-language-toggle">
-          {supportedLanguages.map((item) => (
-            <button
-              key={item.code}
-              className={`language-toggle-button${language === item.code ? " is-active" : ""}`}
-              onClick={() => setLanguage(item.code)}
-            >
-              {item.toggleLabel}
-            </button>
-          ))}
-        </div>
-        <button
-          type="button"
-          className="menu-toggle"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span /><span /><span />
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
+      </header>
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -490,6 +547,7 @@ function Footer({ onNavClick, footerData, uiText }) {
 }
 
 function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
+  const [selectedImg, setSelectedImg] = useState(null);
   return (
     <>
       <section className="page-hero page-hero-home" ref={heroRef}>
@@ -695,7 +753,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
         </div>
       </section>
 
-      <section className="home-gallery-section shell">
+<section className="home-gallery-section shell">
         <motion.div
           className="home-section-heading"
           initial="hidden"
@@ -718,6 +776,9 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
               viewport={{ once: true, amount: 0.16 }}
               custom={index * 0.05}
               variants={revealUp}
+              // 3. ADD THE CLICK HANDLER HERE
+              onClick={() => setSelectedImg(image.src)}
+              style={{ cursor: 'zoom-in' }}
             >
               <img src={image.src} alt={image.alt} />
             </motion.figure>
@@ -759,11 +820,33 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
           </div>
         </motion.div>
       </section>
+      <AnimatePresence>
+        {selectedImg && (
+          <motion.div 
+            className="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImg(null)}
+          >
+            <span className="close" onClick={() => setSelectedImg(null)}>&times;</span>
+            <motion.img 
+              src={selectedImg} 
+              className="modal-content"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()} 
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
 
 function ContactPageSection({ page, revealUp, uiText }) {
+
   return (
     <>
       <section className="page-hero">
@@ -882,7 +965,7 @@ function ESGPageSection({ page, revealUp }) {
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={page.heroImage || heroImage} alt={page.heading} />
+          <img src={heroImage2} alt={page.heading} />
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
@@ -918,6 +1001,64 @@ function ESGPageSection({ page, revealUp }) {
   );
 }
 
+function LegalPageSection({ page, revealUp }) {
+  return (
+    <>
+      <section className="page-hero">
+        <div className="page-hero-media">
+          <img src={heroImage} alt={page.heading} />
+        </div>
+        <div className="page-hero-overlay" />
+        <div className="page-hero-pattern">
+          <img src={pattern} alt="" aria-hidden="true" />
+        </div>
+
+        <div className="shell page-hero-grid">
+          <motion.div className="page-hero-copy" initial="hidden" animate="show" variants={revealUp}>
+            <h1>{page.heading}</h1>
+            <p className="lead-copy">{page.lead}</p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="legal-content-section shell">
+        <div className="legal-layout">
+          <motion.div
+            className="legal-intro"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={revealUp}
+          >
+            <p className="eyebrow">{page.introTag}</p>
+            <h2>{page.introHeading}</h2>
+            <p className="description-text">{page.introBody}</p>
+          </motion.div>
+
+          <div className="legal-articles">
+            {page.sections.map((section, index) => (
+              <motion.article
+                key={section.title}
+                className="legal-article"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.1 }}
+                custom={index * 0.05}
+                variants={revealUp}
+              >
+                <h3>{section.title}</h3>
+                {section.body.map((paragraph, pIndex) => (
+                  <p key={pIndex}>{paragraph}</p>
+                ))}
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText }) {
   if (page.slug === "home") {
     return (
@@ -937,6 +1078,10 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText 
 
   if (page.slug === "esg") {
     return <ESGPageSection page={page} revealUp={revealUp} />;
+  }
+
+  if (page.slug === "legal") {
+    return <LegalPageSection page={page} revealUp={revealUp} />;
   }
 
   const previousPath =
@@ -999,20 +1144,26 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText 
 
         <div className="content-grid">
           {page.cards.map((card, index) => (
-            <motion.article
-              key={card.title}
-              className="content-card"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.22 }}
-              custom={index * 0.08}
-              variants={revealUp}
-            >
-              <div className="card-accent" />
-              <p className="card-label">{card.label}</p>
-              <h3>{card.title}</h3>
-              <p>{card.body}</p>
-            </motion.article>
+<motion.article
+  key={card.title}
+  className="content-card"
+  initial="hidden"
+  whileInView="show"
+  // Add this line:
+  whileHover={{ scale: 1.05 }} 
+  transition={{ 
+    duration: 0.25, 
+    ease: "easeOut" // or [0.25, 0.1, 0.25, 1.0] for a custom cubic-bezier
+  }}
+  viewport={{ once: true, amount: 0.22 }}
+  custom={index * 0.08}
+  variants={revealUp}
+>
+  <div className="card-accent" />
+  <p className="card-label">{card.label}</p>
+  <h3>{card.title}</h3>
+  <p>{card.body}</p>
+</motion.article>
           ))}
         </div>
       </section>

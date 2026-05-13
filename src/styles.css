@@ -154,6 +154,145 @@ button {
   padding: 0;
 }
 
+/* =========================================================
+   TOP MARKET BAR
+========================================================= */
+
+.market-bar {
+  width: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(12, 8, 6, 0.96),
+      rgba(28, 18, 12, 0.96)
+    );
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.06);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.market-bar-inner {
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.market-date {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.market-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,0.12);
+}
+
+.market-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.market-currency {
+  color: rgba(255,255,255,0.72);
+
+  font-size: 0.74rem;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+}
+
+.market-price {
+  color: #ffffff;
+
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.market-meta {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.market-note {
+  color: rgba(255,255,255,0.78);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.market-arrow {
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.trend-up {
+  color: #9ce36a;
+  
+}
+
+.trend-down {
+  color: #ff6b6b;
+}
+
+.market-price-group {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  flex-wrap: wrap;
+}
+
+.market-date-global {
+  color: #ffffff;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+
+  .market-bar-inner {
+    gap: 10px;
+
+    padding: 6px 0;
+  }
+
+  .market-date {
+    font-size: 0.68rem;
+  }
+
+  .market-currency,
+  .market-price,
+  .market-meta {
+    font-size: 0.68rem;
+  }
+
+  .market-divider {
+    display: none;
+  }
+}
 
 /* =========================================================
    1. BASE LAYOUT
@@ -301,63 +440,6 @@ button {
   transform: scaleX(1);
 }
 
-/* =========================================================
-   MARKET SECTION
-========================================================= */
-
-.nav-market {
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-market-grid {
-  display: flex;
-  flex-direction: column;
-
-  gap: 4px;
-
-  padding: 10px 14px;
-
-  border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.08);
-
-  border: 1px solid rgba(255, 255, 255, 0.12);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.04);
-}
-
-.nav-market-card {
-  display: flex;
-  align-items: center;
-
-  padding: 0;
-
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-
-.nav-market-topline {
-  display: flex;
-  align-items: center;
-}
-
-.nav-market-value {
-  color: #ffffff;
-
-  font-size: 0.82rem;
-  font-weight: 700;
-
-  white-space: nowrap;
-
-  text-shadow:
-    0 1px 2px rgba(0,0,0,0.35);
-}
 
 /* =========================================================
    5. ACTIONS / LANGUAGE
@@ -1120,13 +1202,13 @@ h6 {
   gap: 20px;
   margin-top: 28px;
 }
-
 .detail-item {
   display: grid;
   grid-template-columns: 68px minmax(0, 1fr);
   gap: 18px;
   padding: 18px 0;
   border-top: 1px solid var(--line);
+
 }
 
 .detail-item:first-child {
@@ -1309,13 +1391,17 @@ h6 {
 .home-intro-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+  /* Define the layout map */
+  grid-template-areas: 
+    "heading panel"
+    "copy    panel";
   gap: 28px;
   align-items: start;
 }
 
 .home-intro-heading {
-  grid-column: 1 / -1;
-  max-width: 780px;
+  grid-area: heading;
+  max-width: 100%;
 }
 
 .home-section-heading {
@@ -1366,11 +1452,17 @@ h6 {
   line-height: 1.8;
 }
 
+.home-intro-copy {
+  grid-area: copy;
+}
+
 .home-responsibility-copy p {
   color: rgba(255, 239, 231, 0.76);
 }
 
 .home-intro-panel {
+  grid-area: panel;
+  align-self: start;
   position: relative;
   overflow: hidden;
   padding: 32px;
@@ -1411,6 +1503,8 @@ h6 {
   display: grid;
   gap: 16px;
   margin-top: 20px;
+  transition: transform 0.55s ease;
+  
 }
 
 .home-intro-facts article {
@@ -1421,6 +1515,11 @@ h6 {
   border-radius: 14px;
   background: var(--bg-soft);
   border: 1px solid var(--line);
+  transition: transform 0.25s ease;
+}
+.home-intro-facts article:hover {
+  /* Scales the box to 120% of its original size */
+  transform: scale(1.09); 
 }
 
 .home-intro-facts span {
@@ -1436,6 +1535,7 @@ h6 {
   font-family: var(--font-heading);
   font-size: var(--text-sm);
   font-weight: 800;
+  transition: transform 0.25s ease-in-out;
 }
 
 .home-intro-facts p {
@@ -1444,6 +1544,17 @@ h6 {
   font-size: var(--text-sm);
   font-weight: 500;
   line-height: 1.5;
+}
+
+@media (max-width: 860px) {
+  .home-intro-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "heading"
+      "copy"
+      "panel";
+    gap: 32px;
+  }
 }
 
 .home-focus-grid {
@@ -1727,7 +1838,7 @@ h6 {
 .home-gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: 220px;
+  grid-auto-rows: 320px;
   gap: 18px;
   margin-top: 34px;
 }
@@ -1893,7 +2004,7 @@ h6 {
   .home-section-heading h2,
   .home-approach-copy h2,
   .home-responsibility-copy h2 {
-    font-size: clamp(2.15rem, 8.6vw, 3.25rem);
+    font-size: clamp(1.15rem, 5.6vw, 2.25rem);
   }
 
   .home-intro-section,
@@ -2183,15 +2294,17 @@ h6 {
 
 .footer-contact-actions {
   position: absolute;
-  top: 0;
-  left: 80%;
+  top: 50%;
+  left: calc(90%);
+  transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 8px;
   display: flex;
+  align-items: center;
   gap: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
   z-index: 10;
   white-space: nowrap;
 }
@@ -2201,10 +2314,28 @@ h6 {
   color: white;
   border: none;
   padding: 4px 8px;
-  border-radius: 3px;
+  border-radius: 2px;
   font-size: 0.8rem;
   cursor: pointer;
   transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .footer-contact-actions {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 6px;
+    display: inline-flex;
+    white-space: normal;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  }
 }
 
 .footer-contact-actions button:hover {
@@ -2578,5 +2709,154 @@ h6 {
 
   .menu-toggle span {
     width: 16px;
+  }
+}
+
+/* 1. FORCE THE LAYOUT */
+.home-intro-section .home-intro-layout {
+  display: grid;
+  /* Columns: Left is 60%, Right (Panel) is 40% */
+  grid-template-columns: 1fr 400px; 
+  grid-template-areas: 
+    "heading panel"
+    "copy    panel";
+  gap: 40px;
+  align-items: start;
+}
+
+/* 2. FORCE THE HEADING SIZE & POSITION */
+.home-intro-section .home-section-heading.home-intro-heading {
+  grid-area: heading;
+  max-width: 100%;
+  grid-column: auto; /* This cancels the "1 / -1" if it's stuck from another rule */
+  margin: 0;
+}
+
+/* This targets the <h2> directly with high specificity */
+.home-intro-section .home-intro-heading h2 {
+  /* This overrides var(--text-5xl) */
+  font-size: clamp(1.8rem, 4vw, 2.9rem) !important; 
+  line-height: 1.1;
+  margin-top: 0;
+}
+
+/* 3. POSITION THE COPY */
+.home-intro-section .home-intro-copy {
+  grid-area: copy;
+}
+
+/* 4. POSITION THE PANEL */
+.home-intro-section .home-intro-panel {
+  grid-area: panel;
+  margin-top: 0; /* Ensures it aligns perfectly with the top of the H2 */
+}
+
+/* 5. MOBILE OVERRIDE */
+@media (max-width: 900px) {
+  .home-intro-section .home-intro-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "heading"
+      "copy"
+      "panel";
+  }
+  
+  .home-intro-section .home-intro-panel {
+    max-width: 100%;
+  }
+}
+
+.modal {
+  display: flex; /* React handles showing/hiding */
+  position: fixed;
+  z-index: 2000; /* Higher than navbar */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 11, 8, 0.95);
+  backdrop-filter: blur(10px);
+  cursor: zoom-out;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  cursor: default;
+}
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: white;
+  font-size: 50px;
+  font-weight: 200;
+  cursor: pointer;
+  line-height: 1;
+}
+/* -- Legal Page Styles ------------------------------ */
+.legal-content-section {
+  padding: 100px 0;
+}
+
+.legal-layout {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.legal-intro {
+  margin-bottom: 64px;
+}
+
+.legal-intro h2 {
+  font-size: var(--text-4xl);
+  color: var(--ink);
+  margin-top: 12px;
+  line-height: 1.1;
+}
+
+.legal-intro .description-text {
+  margin-top: 24px;
+  font-size: var(--text-lg);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.legal-articles {
+  display: grid;
+  gap: 48px;
+}
+
+.legal-article h3 {
+  font-size: var(--text-xl);
+  color: var(--ink);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.legal-article p {
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.legal-article p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .legal-content-section {
+    padding: 64px 0;
+  }
+  
+  .legal-intro h2 {
+    font-size: var(--text-3xl);
   }
 }
