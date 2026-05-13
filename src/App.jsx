@@ -4,7 +4,6 @@ import Lenis from "lenis";
 import pattern from "../assets/pattern.svg";
 import heroImage from "../assets/about_bakground.jpg";
 import heroImage2 from "../assets/gold_wash.jpg";
-import heroImage3 from "../assets/heroimage.webp";
 import galleryWide from "../assets/home_pic1.png";
 import galleryPortraitB from "../assets/home_pic2.png";
 import galleryTallB from "../assets/home_pic3.png";
@@ -482,16 +481,6 @@ function Footer({ onNavClick, footerData, uiText }) {
             <div className="footer-social">
               <p className="card-label">{uiText.footerFollow}</p>
               <div className="footer-social-links">
-                <a className="footer-social-link" href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99H7.9v-2.9h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.55v1.87h2.78l-.44 2.9h-2.34V22C18.34 21.12 22 16.99 22 12Z" />
-                  </svg>
-                </a>
-                <a className="footer-social-link" href="https://t.me" target="_blank" aria-label="Telegram">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
-                  </svg>
-                </a>
                 <a className="footer-social-link" href="https://www.linkedin.com/company/armada-mining/" target="_blank" aria-label="LinkedIn">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
@@ -782,9 +771,8 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
               viewport={{ once: true, amount: 0.16 }}
               custom={index * 0.05}
               variants={revealUp}
-              // 3. ADD THE CLICK HANDLER HERE
               onClick={() => setSelectedImg(image.src)}
-              style={{ cursor: 'zoom-in' }}
+              style={{ cursor: "zoom-in" }}
             >
               <img src={image.src} alt={image.alt} />
             </motion.figure>
@@ -857,7 +845,7 @@ function ContactPageSection({ page, revealUp, uiText }) {
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={heroImage} alt={page.heading} />
+          <img src={page.heroImage || heroImage} alt={page.heading} />
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
@@ -971,7 +959,7 @@ function ESGPageSection({ page, revealUp }) {
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={heroImage2} alt={page.heading} />
+          <img src={page.heroImage || heroImage2} alt={page.heading} />
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
@@ -1012,7 +1000,7 @@ function LegalPageSection({ page, revealUp }) {
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={heroImage} alt={page.heading} />
+          <img src={page.heroImage || heroImage} alt={page.heading} />
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
@@ -1155,11 +1143,10 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText 
   className="content-card"
   initial="hidden"
   whileInView="show"
-  // Add this line:
-  whileHover={{ scale: 1.05 }} 
-  transition={{ 
-    duration: 0.25, 
-    ease: "easeOut" // or [0.25, 0.1, 0.25, 1.0] for a custom cubic-bezier
+  whileHover={{ scale: 1.05 }}
+  transition={{
+    duration: 0.25,
+    ease: "easeOut",
   }}
   viewport={{ once: true, amount: 0.22 }}
   custom={index * 0.08}

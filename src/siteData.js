@@ -1,5 +1,6 @@
 import capabilitiesImage from "../assets/gold_wash.jpg";
 import homeHeroImage from "../assets/home_hero.png";
+import heroImage3 from "../assets/heroimage.webp";
 
 export const pageOrder = ["/", "/about", "/capabilities", "/esg", "/approach", "/contact"];
 
@@ -297,6 +298,7 @@ const content = {
         heading: "An approach built on data, mapping, systems, and people.",
         lead:
           "ARMADA Mining combines modern operating systems with human capital investment so mining decisions and field execution can become more consistent, transparent, and productive.",
+        heroImage: heroImage3,
         primaryAction: { label: "Visit contact", path: "/contact" },
         secondaryAction: { label: "View capabilities", path: "/capabilities" },
         introTag: "Operating model",
@@ -357,6 +359,7 @@ const content = {
         heading: "Connect with Armada Mining",
         lead:
           "For investor, operator, or partnership conversations, ARMADA Mining can be reached directly through its website, phone number, and headquarters in Addis Ababa, Ethiopia.",
+        heroImage: heroImage3,
         primaryAction: { label: "Return home", path: "/" },
         secondaryAction: { label: "See capabilities", path: "/capabilities" },
         introTag: "Contact details",
@@ -791,6 +794,7 @@ const content = {
         heading: "በውሂብ፣ በካርታ፣ በስርዓት እና በሰዎች ላይ የተመሠረተ አቀራረብ።",
         lead:
           "ARMADA Mining አርማዳ ማይኒንግ ዘመናዊ አሰራርን ከሰው ኃይል ስልጠና ጋር በማቀናጀት፣ የማዕድን ውሳኔዎች እና የተግባር ስራዎች ወጥ፣ ግልጽ እና ውጤታማ እንዲሆኑ ያደርጋል።",
+        heroImage: heroImage3,
         primaryAction: { label: "ወደ አድራሻ ሂድ", path: "/contact" },
         secondaryAction: { label: "አቅሞችን ይመልከቱ", path: "/capabilities" },
         introTag: "የአሰራር ሞዴል",
@@ -843,6 +847,7 @@ const content = {
         heading: "ከARMADA Mining ጋር ይገናኙ",
         lead:
           "ለባለሀብት፣ ለኦፕሬተር ወይም ለሽርክና ውይይት ARMADA Mining በድህረ ገጹ፣ በስልክ ቁጥሩ እና በአዲስ አበባ ዋና መስሪያ ቤቱ በቀጥታ ሊደረስበት ይችላል።",
+        heroImage: heroImage3,
         primaryAction: { label: "ወደ መነሻ ተመለስ", path: "/" },
         secondaryAction: { label: "አቅሞችን ይመልከቱ", path: "/capabilities" },
         introTag: "የመገናኛ መረጃ",
