@@ -2,13 +2,20 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import pattern from "../assets/pattern.svg";
+
 import heroImage from "../assets/about_bakground.jpg";
 import heroImage2 from "../assets/gold_wash.jpg";
+import heroImage3 from "../assets/esg_hero.jpg";
+import heroImage4 from "../assets/hero_contact.jpg";
+import bodyImage1 from "../assets/capabilities_body.jpg";
+import bodyImage2 from "../assets/approch_body.jpg";
+
 import galleryWide from "../assets/home_pic1.png";
 import galleryPortraitB from "../assets/home_pic2.png";
 import galleryTallB from "../assets/home_pic3.png";
-import homeHeroImage from "../assets/home_hero.png";
+import homeHeroImage from "../assets/home_hero.jpg";
 import logo from "../assets/Logo.svg";
+
 import {
   getFooterData,
   getPages,
@@ -959,7 +966,7 @@ function ESGPageSection({ page, revealUp }) {
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={page.heroImage || heroImage2} alt={page.heading} />
+          <img src={page.heroImage || heroImage3} alt={page.heading} />
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
