@@ -1,4 +1,4 @@
-import capabilitiesImage from "../assets/capabilities_background.jpg";
+import capabilitiesImage from "../assets/gold_wash.jpg";
 import homeHeroImage from "../assets/home_hero.png";
 
 export const pageOrder = ["/", "/about", "/capabilities", "/esg", "/approach", "/contact"];
@@ -21,13 +21,12 @@ const content = {
     uiText: {
       baseTitle: "Armada Mining",
       brandHomeAria: "Armada Mining home",
-      goldPriceAria: "Indicative gold price",
+      goldPriceAria: "Gold Price 24K: ",
       menuToggleAria: "Toggle navigation",
       primaryNavAria: "Primary",
       scrollToTopAria: "Scroll to top",
       languageToggleAria: "Change site language",
-      
-      goldRateNote: (date) => `24K / ${date}`,
+      goldprice:"Gold Price 24K: ",
       footerFollow: "Follow us",
       copy: "Copy",
       copied: "Copied!",
@@ -530,12 +529,11 @@ const content = {
     uiText: {
       baseTitle: "Armada Mining",
       brandHomeAria: "የArmada Mining መነሻ ገጽ",
-      goldPriceAria: "ጠቋሚ የወርቅ ዋጋ",
+      goldPriceAria: "የወርቅ ዋጋ 24K: ",
       menuToggleAria: "መንገድ መቀየሪያን ክፈት",
       primaryNavAria: "ዋና መንገድ",
       scrollToTopAria: "ወደ ላይ ተመለስ",
       languageToggleAria: "የጣቢያ ቋንቋ ቀይር",
-      goldRateNote: (date) => `24K / ${date}`,
       footerFollow: "ይከተሉን",
       copy: "ቅዳ",
       copied: "ተቀድቷል!",

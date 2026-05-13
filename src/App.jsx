@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import pattern from "../assets/pattern.svg";
 import heroImage from "../assets/about_bakground.jpg";
 import heroImage2 from "../assets/gold_wash.jpg";
+import heroImage3 from "../assets/heroimage.webp";
 import galleryWide from "../assets/home_pic1.png";
 import galleryPortraitB from "../assets/home_pic2.png";
 import galleryTallB from "../assets/home_pic3.png";
@@ -120,6 +121,8 @@ useEffect(() => {
 const updatedPrices = {
   date: goldRateSnapshot.date,
 
+  title: uiText.goldPriceAria,
+
   items: [
     {
       currency: "USD/gm",
@@ -133,7 +136,6 @@ const updatedPrices = {
     },
   ],
 };
-  
 
   setGoldPrices(updatedPrices);
 
@@ -308,37 +310,41 @@ const updatedPrices = {
         {/* TOP MARKET BAR */}
         <div className="market-bar">
           <div className="shell">
-      <div className="market-bar-inner">
+            <div className="market-bar-inner">
 
-        {goldPrices?.items?.length > 0 && (
-          <>
+              {goldPrices?.items?.length > 0 && (
+                <>
 
-            <div className="market-date-global">
-              Date: {goldPrices.date}
+                  <div className="market-date-global">
+                    Date: {goldPrices.date}
+                  </div>
+
+                  <div className="market-price">
+                    {goldPrices.title}
+                  </div>
+
+                  <div className="market-price-group">
+
+                    {goldPrices.items.map((item) => (
+                      <div key={item.currency} className="market-item">
+
+                        <span className="market-currency">
+                          {item.currency}
+                        </span>
+
+                        <span className="market-price">
+                          {item.value}
+                        </span>
+
+                      </div>
+                    ))}
+
+                  </div>
+
+                </>
+              )}
+
             </div>
-
-            <div className="market-price-group">
-
-              {goldPrices.items.map((item) => (
-                <div key={item.currency} className="market-item">
-
-                  <span className="market-currency">
-                    {item.currency}
-                  </span>
-
-                  <span className="market-price">
-                    {item.value}
-                  </span>
-
-                </div>
-              ))}
-
-            </div>
-
-          </>
-        )}
-
-      </div>
           </div>
         </div>
 
@@ -476,17 +482,17 @@ function Footer({ onNavClick, footerData, uiText }) {
             <div className="footer-social">
               <p className="card-label">{uiText.footerFollow}</p>
               <div className="footer-social-links">
-                <a className="footer-social-link" href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <a className="footer-social-link" href="https://www.facebook.com" target="_blank" aria-label="Facebook">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99H7.9v-2.9h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.55v1.87h2.78l-.44 2.9h-2.34V22C18.34 21.12 22 16.99 22 12Z" />
                   </svg>
                 </a>
-                <a className="footer-social-link" href="https://t.me" target="_blank" rel="noreferrer" aria-label="Telegram">
+                <a className="footer-social-link" href="https://t.me" target="_blank" aria-label="Telegram">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
                   </svg>
                 </a>
-                <a className="footer-social-link" href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <a className="footer-social-link" href="https://www.linkedin.com/company/armada-mining/" target="_blank" aria-label="LinkedIn">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
                   </svg>
