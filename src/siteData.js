@@ -30,7 +30,7 @@ const content = {
       primaryNavAria: "Primary",
       scrollToTopAria: "Scroll to top",
       languageToggleAria: "Change site language",
-      goldprice:"Gold Price 24K: ",
+      goldprice: "Gold Price 24K: ",
       footerFollow: "Follow us",
       copy: "Copy",
       copied: "Copied!",
@@ -84,7 +84,7 @@ const content = {
         },
         {
           title: "Contact",
-          details: ["Addis Ababa, Ethiopia", "+251 911 967 525", "admin@armadaeth.com"],
+          details: ["Haile Gebrselassie St. Addis Ababa, Ethiopia", "+251 911 967 525", "admin@armadaeth.com"],
         },
       ],
       copyright: `© ${new Date().getFullYear()} Armada Mining. All rights reserved.`,
@@ -158,6 +158,7 @@ const content = {
         galleryHeading: "Our work on the ground",
         galleryLead:
           "A view into the environments, operating realities, and execution context behind ARMADA Mining's work in Ethiopia.",
+
         globalCTA: {
           heading: "Ready to discuss the future of mining?",
           body: "Whether you are looking to invest, operate, or partner, Armada Mining is building the platform to make it possible.",
@@ -256,6 +257,12 @@ const content = {
               "Structured reporting and modern operating tools make it easier to improve accountability, productivity, and decision-making over time.",
           },
         ],
+
+        galleryTag2: "Field gallery",
+        galleryHeading2: "Some of Our Achievements from our ground work",
+        galleryLead2:
+          "A glimpse into our achievements and ongoing work in Ethiopia, showcasing how our capabilities translate into real-world impact on the ground.",
+
         closerHeading: "ARMADA's capabilities are meant to strengthen both operations and confidence.",
         closerBody:
           "By combining intelligence, execution systems, and human capital development, we help the sector work more effectively from plan to production.",
@@ -264,36 +271,45 @@ const content = {
       },
       "/esg": {
         slug: "esg",
-        title: "ESG",
-        heading: "Sustainable Gold Production",
+        title: "ESG Strategy",
+        heading: "Sustainable Gold Production in Ethiopia",
         lead:
-          "ARMADA Mining is committed to transparent and sustainable operations that integrate Environmental, Social, and Governance principles into every stage.",
+          "ARMADA Mining is committed to transparent, sustainable operations that integrate Environmental, Social, and Governance principles into every stage of the gold lifecycle, ensuring long-term economic growth and community stability.",
         primaryAction: { label: "Contact Us", path: "/contact" },
-        secondaryAction: { label: "View capabilities", path: "/capabilities" },
-        introTag: "Responsible mining",
-        introHeading: "Sustainable Gold Production",
+        secondaryAction: { label: "View Capabilities", path: "/capabilities" },
+        introTag: "Responsible Mining Initiative",
+        introHeading: "A Prerequisite for National Prosperity",
         introBody:
-          "ARMADA Mining is committed to transparent and sustainable operations that integrate Environmental, Social, and Governance principles into every stage.",
+          "In the Ethiopian context—where gold is a vital export commodity—adhering to global ESG standards is essential. We modernize the industry by addressing informal mining risks and environmental legacies, proving that gold production can be a force for good. Our strategy focuses on shifting toward cleaner extraction technologies, digital traceability, and renewable energy to safeguard Ethiopia’s natural and economic future.",
         esgPrinciples: [
           {
             icon: "E",
-            category: "Environmental",
+            category: "Environmental Stewardship",
             details:
-              "Reprocessing tailings reduces land disturbance and environmental waste legacy.",
+              "We minimize the ecological footprint through tailings reprocessing and mercury-free pollution mitigation. Our commitment includes restoring mined land and preserving biodiversity in key regions such as Oromia, Benishangul-Gumuz, Tigray, and Gambella, while integrating energy-efficient practices to reduce carbon intensity.",
           },
           {
             icon: "S",
-            category: "Social Impact",
+            category: "Social Impact & Community",
             details:
-              "Supporting mining communities through training and disciplined workforce organization.",
+              "Uplifting communities by transitioning informal sectors into disciplined, industrial workforces. We prioritize local employment, health and safety protocols, and investment in essential infrastructure—including clean water, education, and healthcare—to ensure mining benefits are shared equitably across remote regions.",
           },
           {
             icon: "G",
-            category: "Governance",
+            category: "Governance & Transparency",
             details:
-              "Structured custody and formal revenue pathways integrated with NBE systems.",
+              "Building trust through ethical leadership and formalization. We maintain a rigorous chain of custody fully integrated with National Bank of Ethiopia (NBE) systems. Our operations strictly adhere to the Ministry of Mines’ regulations and the World Gold Council’s Responsible Gold Mining Principles (RGMPs) to eliminate illegal trading.",
           },
         ],
+        strategicSignificance: [
+          { challenge: "Informal/Illegal Mining", solution: "Formalization and NBE-integrated revenue pathways." },
+          { challenge: "Environmental Legacy", solution: "Tailings reprocessing and land rehabilitation." },
+          { challenge: "Safety Risks", solution: "Disciplined workforce training and PPE standards." },
+          { challenge: "Economic Volatility", solution: "Attracting stable international FDI through transparency." }
+        ],
+        futureFocus:"Future Focus",
+        futureFocusHeading: "The Next Generation of Gold Production",
+        futureFocusBody: "The future of Ethiopia’s gold industry depends on cleaner extraction, digital traceability, and renewable energy. ARMADA Mining stands at the forefront of this evolution."
       },
       "/approach": {
         slug: "approach",
@@ -531,7 +547,7 @@ const content = {
       { label: "ESG", path: "/esg" },
       { label: "አቀራረብ", path: "/approach" },
       { label: "ያግኙን", path: "/contact" },
-      
+
     ],
     uiText: {
       baseTitle: "Armada Mining",
@@ -548,7 +564,7 @@ const content = {
       atAGlance: "በአጭሩ",
       corePillars: "ዋና ምሰሶዎች",
       nextSteps: "ቀጣይ እርምጃዎች",
-      inOurOwnWords: "በአርማዳ ማይኒንግ እይታ",
+      inOurOwnWords: "በ ARMADA MINING እይታ",
       continueExploring: "ማስረጃውን ቀጥሉ",
       previousPage: "ያለፈው ገጽ",
       nextPage: "ቀጣይ ገጽ",
@@ -716,7 +732,7 @@ const content = {
         introTag: "የችሎታ አቀራረብ",
         introHeading: " አገልግሎቶቻችን ስራን ለማቅለልና ውጤታማ ለማድረግ የተነደፉ ናቸው።",
         introBody:
-          "አርማዳ ማይኒንግ ትኩረት የሚያደርገው በዘርፉ ያለውን ተግዳሮት የተሻለ መረጃ፣ ግልጽ እቅድ፣ ጠንካራ የቡድን አደረጃጀት እና ግልጽነት ያለው አሰራር እንዲኖር በማድረግ የተሻለ ማዘመን ላይ ነው ።",
+          "የARMADA Mining ትኩረት የሚያደርገው በዘርፉ ያለውን ተግዳሮት የተሻለ መረጃ፣ ግልጽ እቅድ፣ ጠንካራ የቡድን አደረጃጀት እና ግልጽነት ያለው አሰራር እንዲኖር በማድረግ የተሻለ ማዘመን ላይ ነው ።",
         cards: [
           {
             label: "01",
@@ -757,6 +773,11 @@ const content = {
             body: "የተደራጀ ሪፖርት እና ዘመናዊ የኦፕሬሽን መሳሪያዎች ተጠያቂነትን፣ ምርታማነትን እና የውሳኔ ጥራትን በጊዜ ሂደት ማሻሻል ያስችላሉ።",
           },
         ],
+
+        galleryTag2: "የመስክ ማሳያ",
+        galleryHeading2: "በመሬት ላይ ካከናወናቸው ሥራዎቻችን የተገኙ የተወሰኑ ስኬቶች",
+        galleryLead2: "በኢትዮጵያ ያስመዘገብናቸው ስኬቶችና የሥራዎቻችን እይታ፤ አቅማችን በተግባር መሬት ላይ ትርጉም ያለው ለውጥ ሲያመጣ የሚያሳይ።.",
+
         closerHeading: "የARMADA አቅሞች ኦፕሬሽንንም እምነትንም ለማጠናከር ተዘጋጅተዋል።",
         closerBody: "የARMADA ዓላማ ዕውቀትን፣ የአሰራር ስርዓቶችን እና የሰው ኃይልን በማቀናጀት፣ ከዕቅድ እስከ ምርት ያለው ሂደት ይበልጥ ውጤታማ እንዲሆን ማድረግ ነው።",
         heroImage: capabilitiesImage,
@@ -764,40 +785,52 @@ const content = {
       },
       "/esg": {
         slug: "esg",
-        title: "ESG",
-        heading: "ዘላቂ የወርቅ ምርት",
+        title: "የESG ስትራቴጂ",
+        heading: "በኢትዮጵያ ዘላቂ የወርቅ ምርት",
         lead:
-          "ARMADA Mining የአካባቢ ጥበቃን፣ ማህበራዊ ኃላፊነትን እና መልካም አስተዳደርን ባገናዘበ መልኩ በግልጽነት እና በዘላቂነት መስራትን ቅድሚያ የሚሰጠው ተግባር ነው።",
+          "ARMADA Mining የረጅም ጊዜ የኢኮኖሚ ዕድገትን እና የማኅበረሰብ መረጋጋትን የሚያረጋግጡ የአካባቢ፣ ማኅበራዊ እና አስተዳደራዊ (ESG) መርሆዎችን በእያንዳንዱ የወርቅ የሕይወት ዑደት ደረጃ ላይ የሚያዋህዱ ግልጽነትና ዘላቂነት ላላቸው አሠራሮች ቁርጠኛ ነው።",
         primaryAction: { label: "ያግኙን", path: "/contact" },
-        secondaryAction: { label: "አቅሞችን ይመልከቱ", path: "/capabilities" },
-        introTag: "ኃላፊነት ያለው ማዕድን",
-        introHeading: "ዘላቂ የወርቅ ምርት",
+        secondaryAction: { label: "አቅሞቻችንን ይመልከቱ", path: "/capabilities" },
+        introTag: "ኃላፊነት የተሞላበት የማዕድን ማውጣት ተነሳሽነት",
+        introHeading: "ለሀገር ብልጽግና ቅድመ-ሁኔታ",
         introBody:
-          "ኩባንያችን በእያንዳንዱ የስራ ሂደት ውስጥ ለአካባቢ ጥበቃ፣ ለማህበረሰብ ደህንነት እና ለትክክለኛ አሰራር (ESG) ትኩረት ይሰጣል።",
+          "ወርቅ ወሳኝ የኤክስፖርት ምርት በሆነበት በኢትዮጵያ ነባራዊ ሁኔታ ዓለም አቀፍ የESG መስፈርቶችን ማክበር አስፈላጊ ነው። ሕገ-ወጥ/ያልተደራጁ የማዕድን ማውጣት አደጋዎችን እና የአካባቢ ላይ የሚቀሩ ጠባሳዎችን በመፍታት ወርቅ ማምረት ለበጎ ነገር ሊውል እንደሚችል እያረጋገጥን ኢንዱስትሪውን እናዘምነዋለን። ስትራቴጂያችን የኢትዮጵያን የተፈጥሮ እና የኢኮኖሚ የወደፊት ዕጣ ፈንታ ለመጠበቅ ወደ ንጹሕ የማውጫ ቴክኖሎጂዎች፣ ዲጂታል የክትትል ሥርዓቶች እና ታዳሽ ኃይል ላይ ማተኮርን አልሟል።",
         esgPrinciples: [
           {
             icon: "E",
-            category: "አካባቢ",
-            details: "የማዕድን ተረፈ-ምርቶችን መልሶ ጥቅም ላይ በማዋል፣ መሬት እንዳይበላሽ እና የአካባቢ ብክለት እንዳይከሰት ያደርጋል።",
+            category: "የአካባቢ ጥበቃ እና እንክብካቤ",
+            details:
+              "የማዕድን ተረፈ ምርቶችን መልሶ በማቀነባበር እና ከሜርኩሪ ነፃ በሆኑ የብክለት መቀነሻ ዘዴዎች ሥነ-ምህዳራዊ ተፅዕኖን እንቀንሳለን። ቁርጠኝነታችን የካርቦን መጠንን ለመቀነስ አነስተኛ ኃይል የሚጠቀሙ አሠራሮችን በማቀናጀት ማዕድን የወጣበትን መሬት መልሶ ማቋቋምን እና እንደ ኦሮሚያ፣ ቤኒሻንጉል-ጉሙዝ፣ ትግራይ እና ጋምቤላ ባሉ ቁልፍ ክልሎች የብዝሃ ሕይወትን መጠበቅን ያካትታል።",
           },
           {
             icon: "S",
-            category: "ማህበራዊ ተፅዕኖ",
-            details: "በስልጠና እና በተደራጀ የሰው ኃይል አደረጃጀት የማዕድን ማህበረሰቦችን እንደግፋለን።",
+            category: "ማኅበራዊ ተፅዕኖ እና ማኅበረሰብ",
+            details:
+              "ያልተደራጁ (ባህላዊ) ዘርፎችን ወደ ሥነ-ሥርዓት ወዳለው የኢንዱስትሪ የሰው ኃይል በመለወጥ ማኅበረሰቦችን ማሳደግ። የማዕድን ቁፋሮ ጥቅማጥቅሞች በሩቅ አካባቢዎች በፍትሐዊነት እንዲከፋፈሉ ለማድረግ ለአገር በቀል (ለአካባቢው) የሥራ ዕድል ፈጠራ፣ ለጤና እና ደኅንነት ደንቦች እንዲሁም ለንጹሕ ውኃ፣ ትምህርት እና ጤና ጥበቃን ጨምሮ መሠረታዊ መሠረተ-ልማቶች ላይ ኢንቨስት ለማድረግ ቅድሚያ እንሰጣለን።",
           },
           {
             icon: "G",
-            category: "አስተዳደር",
-            details: "የተደራጀ ንብረት እንክብካቤ እና መደበኛ የገቢ መንገዶች ከኢትዮጵያ ብሔራዊ ባንክ ስርዓቶች ጋር ተያይዘው ይሰራሉ።",
+            category: "አስተዳደር እና ግልጽነት",
+            details:
+              "በሥነ-ምግባራዊ አመራር እና ሕጋዊ አሠራር አማካኝነት እምነትን መገንባት። ከኢትዮጵያ ብሔራዊ ባንክ (NBE) ሥርዓቶች ጋር ሙሉ በሙሉ የተዋሃደ ጥብቅ የደኅንነትና የክትትል ሰንሰለት እንከተላለን። አሠራራችን ሕገ-ወጥ ንግድን ለማስቀረት የማዕድን ሚኒስቴር ደንቦችን እና የዓለም ወርቅ ምክር ቤት ኃላፊነት የተሞላበት የወርቅ ማዕድን ማውጣት መርሆዎችን (RGMPs) በጥብቅ ይከተላል።",
           },
         ],
+        strategicSignificance: [
+          { challenge: "ያልተደራጀ/ሕገ-ወጥ የማዕድን ማውጣት", solution: "ወደ ሕጋዊ መስመር ማስገባት እና ከብሔራዊ ባንክ (NBE) ጋር የተዋሃዱ የገቢ መስመሮች።" },
+          { challenge: "የአካባቢ ላይ የሚቀሩ ጠባሳዎች", solution: "የማዕድን ተረፈ ምርቶችን መልሶ ማቀነባበር እና መሬትን መልሶ ማቋቋም።" },
+          { challenge: "የደኅንነት አደጋዎች", solution: "ሥነ-ሥርዓት ላለው የሰው ኃይል ሥልጠና መስጠት እና የPPE (የደኅንነት መጠበቂያ) መስፈርቶች።" },
+          { challenge: "የኢኮኖሚ አለመረጋጋት", solution: "በግልጽነት አማካኝነት የተረጋጋ ዓለም አቀፍ ቀጥታ የውጭ ኢንቨስትመንትን (FDI) መሳብ።" }
+        ],
+        futureFocus: "የወደፊት ትኩረት",
+        futureFocusHeading: "አዲሱ ትውልድ የወርቅ ምርት",
+        futureFocusBody: "የኢትዮጵያ የወርቅ ኢንዱስትሪ የወደፊት ዕጣ ፈንታ በንጹሕ የማውጫ ዘዴዎች፣ በዲጂታል የክትትል ሥርዓት እና በታዳሽ ኃይል ላይ የተመሠረተ ነው። ARMADA Mining በዚህ ዕድገት ግንባር ቀደም ሆኖ ይቆማል።"
       },
       "/approach": {
         slug: "approach",
         title: "አቀራረብ",
         heading: "በውሂብ፣ በካርታ፣ በስርዓት እና በሰዎች ላይ የተመሠረተ አቀራረብ።",
         lead:
-          "ARMADA Mining አርማዳ ማይኒንግ ዘመናዊ አሰራርን ከሰው ኃይል ስልጠና ጋር በማቀናጀት፣ የማዕድን ውሳኔዎች እና የተግባር ስራዎች ወጥ፣ ግልጽ እና ውጤታማ እንዲሆኑ ያደርጋል።",
+          "ARMADA Mining ዘመናዊ አሰራርን ከሰው ኃይል ስልጠና ጋር በማቀናጀት፣ የማዕድን ውሳኔዎች እና የተግባር ስራዎች ወጥ፣ ግልጽ እና ውጤታማ እንዲሆኑ ያደርጋል።",
         heroImage: heroImage3,
         detailImage: bodyImage2,
         primaryAction: { label: "ወደ አድራሻ ሂድ", path: "/contact" },

@@ -13,6 +13,11 @@ import bodyImage2 from "../assets/approch_body.jpg";
 import galleryWide from "../assets/home_pic1.png";
 import galleryPortraitB from "../assets/home_pic2.png";
 import galleryTallB from "../assets/home_pic3.png";
+
+import galleryWide2 from "../assets/cap_image1.jpg";
+import galleryPortraitB2 from "../assets/cap_image2.png";
+import galleryTallB2 from "../assets/cap_image3.png";
+
 import homeHeroImage from "../assets/home_hero.jpg";
 import logo from "../assets/Logo.svg";
 
@@ -24,6 +29,7 @@ import {
   pageOrder,
   supportedLanguages,
 } from "./siteData";
+import { submitContactForm } from "./script";
 
 const GOLD_STORAGE_KEY = "armada_gold_prices";
 
@@ -60,6 +66,12 @@ const homeGalleryImages = [
   { src: galleryTallB, alt: "Armada Mining site image 3", layout: "is-wide-low" },
 ];
 
+const homeGalleryImages2 = [
+  { src: galleryWide2, alt: "Armada Mining site image 1", layout: "is-wide" },
+  { src: galleryPortraitB2, alt: "Armada Mining site image 2", layout: "is-portrait-b" },
+  { src: galleryTallB2, alt: "Armada Mining site image 3", layout: "is-wide-low" },
+];
+
 function BrandMark() {
   return (
     <svg viewBox="0 0 136 188" aria-hidden="true">
@@ -80,7 +92,7 @@ function normalizePath(pathname) {
 
   // Remove .html extension and index.html if present
   let normalized = pathname.replace(/\.html$/, "").replace(/\/index$/, "");
-  
+
   // Ensure it starts with /
   if (!normalized.startsWith("/")) {
     normalized = "/" + normalized;
@@ -105,52 +117,53 @@ function App() {
   const navActionsRef = useRef(null);
   const heroRef = useRef(null);
   const navPanelRef = useRef(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const primaryLinks = getPrimaryLinks(language);
   const pages = getPages(language);
   const footerData = getFooterData(language);
   const uiText = getUiText(language);
 
-const [goldPrices, setGoldPrices] = useState(() => {
-  try {
-    const saved = localStorage.getItem(GOLD_STORAGE_KEY);
+  const [goldPrices, setGoldPrices] = useState(() => {
+    try {
+      const saved = localStorage.getItem(GOLD_STORAGE_KEY);
 
-    return saved ? JSON.parse(saved) : [];
-  } catch {
-    return [];
-  }
-});
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
 
-useEffect(() => {
-  if (!goldRateSnapshot) return;
+  useEffect(() => {
+    if (!goldRateSnapshot) return;
 
-const updatedPrices = {
-  date: goldRateSnapshot.date,
+    const updatedPrices = {
+      date: goldRateSnapshot.date,
 
-  title: uiText.goldPriceAria,
+      title: uiText.goldPriceAria,
 
-  items: [
-    {
-      currency: "USD/gm",
-      value: `$${Number(goldRateSnapshot.usd).toFixed(2)}`,
-      trend: "up",
-    },
-    {
-      currency: "ETB/gm",
-      value: `${Number(goldRateSnapshot.birr).toLocaleString()} ETB`,
-      trend: "down",
-    },
-  ],
-};
+      items: [
+        {
+          currency: "USD/gm",
+          value: `$${Number(goldRateSnapshot.usd).toFixed(2)}`,
+          trend: "up",
+        },
+        {
+          currency: "ETB/gm",
+          value: `${Number(goldRateSnapshot.birr).toLocaleString()} ETB`,
+          trend: "down",
+        },
+      ],
+    };
 
-  setGoldPrices(updatedPrices);
+    setGoldPrices(updatedPrices);
 
-  localStorage.setItem(
-    GOLD_STORAGE_KEY,
-    JSON.stringify(updatedPrices)
-  );
+    localStorage.setItem(
+      GOLD_STORAGE_KEY,
+      JSON.stringify(updatedPrices)
+    );
 
-}, [goldRateSnapshot]);
+  }, [goldRateSnapshot]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -313,49 +326,57 @@ const updatedPrices = {
 
       <header className="site-header">
 
-        {/* TOP MARKET BAR */}
-        <div className="market-bar">
-          <div className="shell">
-            <div className="market-bar-inner">
+{/* TOP MARKET BAR */}
+<div className="market-bar">
 
-              {goldPrices?.items?.length > 0 && (
-                <>
+  <div className="market-bar-track">
 
-                  <div className="market-date-global">
-                    Date: {goldPrices.date}
-                  </div>
+    {[0, 1].map((copyIndex) => (
+      <div
+        key={copyIndex}
+        className="market-bar-content"
+        aria-hidden={copyIndex === 1}
+      >
 
-                  <div className="market-price">
-                    {goldPrices.title}
-                  </div>
-
-                  <div className="market-price-group">
-
-                    {goldPrices.items.map((item) => (
-                      <div key={item.currency} className="market-item">
-
-                        <span className="market-currency">
-                          {item.currency}
-                        </span>
-
-                        <span className="market-price">
-                          {item.value}
-                        </span>
-
-                      </div>
-                    ))}
-
-                  </div>
-
-                </>
-              )}
-
+        {goldPrices?.items?.length > 0 && (
+          <>
+            <div className="market-date-global">
+              Date: {goldPrices.date}
             </div>
-          </div>
-        </div>
+
+            <div className="market-ticker-title">
+              {goldPrices.title}
+            </div>
+
+            <div className="market-price-group">
+              {goldPrices.items.map((item) => (
+                <div
+                  key={`${copyIndex}-${item.currency}`}
+                  className="market-item"
+                >
+                  <span className="market-currency">
+                    {item.currency}
+                  </span>
+
+                  <span className="market-price">
+                    {item.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+      </div>
+    ))}
+
+  </div>
+
+</div>
+
 
         {/* MAIN NAVBAR */}
-        <div className="shell">
+        <div className="navbar-container">
           <div className={`navbar${isScrolled ? " is-scrolled" : ""}`}>
 
             <a
@@ -430,8 +451,31 @@ const updatedPrices = {
             revealUp={revealUp}
             heroRef={heroRef}
             uiText={uiText}
+            setSelectedImg={setSelectedImg}
           />
         </motion.main>
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {selectedImg && (
+          <motion.div
+            className="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImg(null)}
+          >
+            <span className="close" onClick={() => setSelectedImg(null)}>&times;</span>
+            <motion.img
+              src={selectedImg}
+              className="modal-content"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
       </AnimatePresence>
 
       <button
@@ -453,14 +497,16 @@ function Footer({ onNavClick, footerData, uiText }) {
   const [copiedDetail, setCopiedDetail] = useState(null);
 
   const handleCopy = async (detail) => {
-    await navigator.clipboard.writeText(detail);
+    const isLocation = !detail.includes("@") && !detail.includes("+");
+    const textToCopy = isLocation ? "https://maps.app.goo.gl/NMyKv8NgXQLgD35s6" : detail;
+    await navigator.clipboard.writeText(textToCopy);
     setCopiedDetail(detail);
     window.setTimeout(() => setCopiedDetail(null), 2000);
   };
 
   const handleGo = (detail) => {
     const isEmail = detail.includes("@");
-    const isPhone = detail.includes("+") || /^\d/.test(detail);
+    const isPhone = detail.includes("+");
 
     if (isEmail) {
       window.location.href = `mailto:${detail}`;
@@ -469,7 +515,11 @@ function Footer({ onNavClick, footerData, uiText }) {
 
     if (isPhone) {
       window.location.href = `tel:${detail}`;
+      return;
     }
+
+    // Default to location maps link
+    window.open("https://maps.app.goo.gl/NMyKv8NgXQLgD35s6", "_blank");
   };
 
   return (
@@ -478,11 +528,7 @@ function Footer({ onNavClick, footerData, uiText }) {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="/" className="brand-lockup" onClick={(event) => onNavClick(event, "/")}>
-              <BrandMark />
-              <span className="brand-wordmark">
-                <span>Armada</span>
-                <span>Mining</span>
-              </span>
+              <img src={logo} alt="Armada Mining" className="brand-logo" />
             </a>
             <p className="footer-description">{footerData.brand.description}</p>
             <div className="footer-social">
@@ -524,11 +570,9 @@ function Footer({ onNavClick, footerData, uiText }) {
                             <button type="button" onClick={() => handleCopy(detail)}>
                               {copiedDetail === detail ? uiText.copied : uiText.copy}
                             </button>
-                            {(detail.includes("@") || detail.includes("+")) && (
-                              <button type="button" onClick={() => handleGo(detail)}>
-                                {uiText.go}
-                              </button>
-                            )}
+                            <button type="button" onClick={() => handleGo(detail)}>
+                              {uiText.go}
+                            </button>
                           </div>
                         )}
                       </div>
@@ -548,8 +592,7 @@ function Footer({ onNavClick, footerData, uiText }) {
   );
 }
 
-function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
-  const [selectedImg, setSelectedImg] = useState(null);
+function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText, setSelectedImg }) {
   return (
     <>
       <section className="page-hero page-hero-home" ref={heroRef}>
@@ -755,7 +798,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
         </div>
       </section>
 
-<section className="home-gallery-section shell">
+      <section className="home-gallery-section shell">
         <motion.div
           className="home-section-heading"
           initial="hidden"
@@ -821,32 +864,31 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText }) {
           </div>
         </motion.div>
       </section>
-      <AnimatePresence>
-        {selectedImg && (
-          <motion.div 
-            className="modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImg(null)}
-          >
-            <span className="close" onClick={() => setSelectedImg(null)}>&times;</span>
-            <motion.img 
-              src={selectedImg} 
-              className="modal-content"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()} 
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }
 
 function ContactPageSection({ page, revealUp, uiText }) {
+  const [status, setStatus] = useState("idle");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus("sending");
+
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      await submitContactForm(data);
+      setStatus("success");
+      event.target.reset();
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
 
   return (
     <>
@@ -907,20 +949,34 @@ function ContactPageSection({ page, revealUp, uiText }) {
             custom={0.1}
             variants={revealUp}
           >
-            <form className="contact-form" onSubmit={(event) => event.preventDefault()}>
+            <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-grid">
                 <div className="form-group">
                   <label htmlFor="name">{uiText.form.fullName}</label>
-                  <input type="text" id="name" placeholder={uiText.form.fullNamePlaceholder} />
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    autocomplete="name"
+                    placeholder={uiText.form.fullNamePlaceholder}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">{uiText.form.emailAddress}</label>
-                  <input type="email" id="email" placeholder="john@example.com" />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    autocomplete="email"
+                    placeholder="john@example.com"
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="subject">{uiText.form.subject}</label>
-                <select id="subject">
+                <select id="subject" name="subject" required>
                   <option value="">{uiText.form.selectOption}</option>
                   <option value="investment">{uiText.form.subjectOptions.investment}</option>
                   <option value="partnership">{uiText.form.subjectOptions.partnership}</option>
@@ -930,11 +986,47 @@ function ContactPageSection({ page, revealUp, uiText }) {
               </div>
               <div className="form-group">
                 <label htmlFor="message">{uiText.form.message}</label>
-                <textarea id="message" rows="5" placeholder={uiText.form.messagePlaceholder} />
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  placeholder={uiText.form.messagePlaceholder}
+                />
               </div>
-              <button type="submit" className="button button-accent">
-                {uiText.form.sendMessage}
-              </button>
+
+              <div className="form-actions">
+                <button
+                  type="submit"
+                  className="button button-accent"
+                  disabled={status === "sending"}
+                >
+                  {status === "sending" ? "Sending..." : uiText.form.sendMessage}
+                </button>
+
+                <AnimatePresence>
+                  {status === "success" && (
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="form-feedback success"
+                    >
+                      Message sent successfully!
+                    </motion.p>
+                  )}
+                  {status === "error" && (
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="form-feedback error"
+                    >
+                      Failed to send message. Please try again.
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </div>
             </form>
           </motion.div>
         </div>
@@ -943,7 +1035,7 @@ function ContactPageSection({ page, revealUp, uiText }) {
   );
 }
 
-function ESGPageSection({ page, revealUp }) {
+function ESGPageSection({ page, revealUp, onNavClick, uiText }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -964,39 +1056,171 @@ function ESGPageSection({ page, revealUp }) {
 
   return (
     <>
+      {/* HERO */}
       <section className="page-hero">
         <div className="page-hero-media">
           <img src={page.heroImage || heroImage3} alt={page.heading} />
         </div>
+
         <div className="page-hero-overlay" />
+
         <div className="page-hero-pattern">
           <img src={pattern} alt="" aria-hidden="true" />
         </div>
 
         <div className="shell page-hero-grid">
-          <motion.div className="page-hero-copy" initial="hidden" animate="show" variants={revealUp}>
+          <motion.div
+            className="page-hero-copy"
+            initial="hidden"
+            animate="show"
+            variants={revealUp}
+          >
             <h1>{page.heading}</h1>
-            <p className="lead-copy">{page.lead}</p>
+
+            <p className="lead-copy">
+              {page.lead}
+            </p>
+
+            <div className="hero-actions">
+              {page.primaryAction && (
+                <a
+                  href={page.primaryAction.path}
+                  className="button button-accent"
+                  onClick={(e) => onNavClick(e, page.primaryAction.path)}
+                >
+                  {page.primaryAction.label}
+                </a>
+              )}
+
+              {page.secondaryAction && (
+                <a
+                  href={page.secondaryAction.path}
+                  className="button button-ghost"
+                  onClick={(e) => onNavClick(e, page.secondaryAction.path)}
+                >
+                  {page.secondaryAction.label}
+                </a>
+              )}
+            </div>
           </motion.div>
         </div>
       </section>
 
+      {/* INTRO */}
       <section className="esg-section shell">
+
         <div className="section-intro reveal">
-          <p className="eyebrow">{page.introTag}</p>
-          <h2>{page.introHeading}</h2>
-          <p className="description-text">{page.introBody}</p>
+          <p className="eyebrow">
+            {page.introTag}
+          </p>
+
+          <h2>
+            {page.introHeading}
+          </h2>
+
+          <p className="description-text">
+            {page.introBody}
+          </p>
         </div>
 
+        {/* ESG PRINCIPLES */}
         <div className="esg-grid reveal reveal-stagger">
           {page.esgPrinciples.map((item) => (
-            <article key={item.category} className="service-card service-card--icon">
-              <div className="service-icon">{item.icon}</div>
-              <h3>{item.category}</h3>
-              <p>{item.details}</p>
+            <article
+              key={item.category}
+              className="service-card service-card--icon"
+            >
+              <div className="service-icon">
+                {item.icon}
+              </div>
+
+              <h3>
+                {item.category}
+              </h3>
+
+              <p>
+                {item.details}
+              </p>
             </article>
           ))}
         </div>
+
+      </section>
+
+      {/* STRATEGIC SIGNIFICANCE */}
+      <section className="shell esg-significance-section">
+        <motion.div
+          className="section-intro"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={revealUp}
+        >
+          <p className="eyebrow">Strategic Importance</p>
+          <h2>Addressing Ethiopia’s Mining Challenges</h2>
+        </motion.div>
+
+        <div className="significance-grid">
+          {page.strategicSignificance.map((item, index) => (
+            <motion.article
+              key={item.challenge}
+              className="significance-card"
+              initial="hidden"
+              whileInView="show"
+              whileHover={{ 
+                y: -6, 
+                scale: 1.03,
+                transition: { duration: 0.2, ease: "easeOut" } 
+              }}
+              viewport={{ once: true, amount: 0.2 }}
+              custom={index * 0.1}
+              variants={revealUp}
+            >
+              <div className="significance-card-header">
+                <p className="card-label">Challenge</p>
+                <h3>{item.challenge}</h3>
+              </div>
+              <div className="significance-card-body">
+                <p className="card-label label-solution">Solution</p>
+                <p>{item.solution}</p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      {/* FUTURE FOCUS */}
+      <section className="shell future-focus-section">
+        <motion.div
+          className="future-focus-card"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={revealUp}
+        >
+          <div className="future-focus-content">
+            <p className="eyebrow">{page.futureFocus}</p>
+            <h2>{page.futureFocusHeading}</h2>
+            <p>{page.futureFocusBody}</p>
+          </div>
+
+          <div className="pager-actions" style={{ marginTop: "32px" }}>
+            <a
+              className="button button-ghost"
+              href="/capabilities"
+              onClick={(event) => onNavClick(event, "/capabilities")}
+            >
+              {uiText.previousPage}
+            </a>
+            <a
+              className="button button-accent"
+              href="/approach"
+              onClick={(event) => onNavClick(event, "/approach")}
+            >
+              {uiText.nextPage}
+            </a>
+          </div>
+        </motion.div>
       </section>
     </>
   );
@@ -1060,7 +1284,7 @@ function LegalPageSection({ page, revealUp }) {
   );
 }
 
-function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText }) {
+function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText, setSelectedImg }) {
   if (page.slug === "home") {
     return (
       <HomePageSection
@@ -1069,6 +1293,7 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText 
         revealUp={revealUp}
         heroRef={heroRef}
         uiText={uiText}
+        setSelectedImg={setSelectedImg}
       />
     );
   }
@@ -1078,7 +1303,7 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText 
   }
 
   if (page.slug === "esg") {
-    return <ESGPageSection page={page} revealUp={revealUp} />;
+    return <ESGPageSection page={page} revealUp={revealUp} onNavClick={onNavClick} uiText={uiText} />;
   }
 
   if (page.slug === "legal") {
@@ -1145,25 +1370,25 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText 
 
         <div className="content-grid">
           {page.cards.map((card, index) => (
-<motion.article
-  key={card.title}
-  className="content-card"
-  initial="hidden"
-  whileInView="show"
-  whileHover={{ scale: 1.05 }}
-  transition={{
-    duration: 0.25,
-    ease: "easeOut",
-  }}
-  viewport={{ once: true, amount: 0.22 }}
-  custom={index * 0.08}
-  variants={revealUp}
->
-  <div className="card-accent" />
-  <p className="card-label">{card.label}</p>
-  <h3>{card.title}</h3>
-  <p>{card.body}</p>
-</motion.article>
+            <motion.article
+              key={card.title}
+              className="content-card"
+              initial="hidden"
+              whileInView="show"
+              whileHover={{ scale: 1.05 }}
+              transition={{
+                duration: 0.25,
+                ease: "easeOut",
+              }}
+              viewport={{ once: true, amount: 0.22 }}
+              custom={index * 0.08}
+              variants={revealUp}
+            >
+              <div className="card-accent" />
+              <p className="card-label">{card.label}</p>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </motion.article>
           ))}
         </div>
       </section>
@@ -1215,6 +1440,41 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText 
           </div>
         </section>
       )}
+
+      {page.slug === "capabilities" && (
+        <section className="home-gallery-section shell">
+          <motion.div
+            className="home-section-heading"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={revealUp}
+          >
+            <p className="eyebrow">{page.galleryTag2}</p>
+            <h2>{page.galleryHeading2}</h2>
+            <p className="home-gallery-lead">{page.galleryLead2}</p>
+          </motion.div>
+
+          <div className="home-gallery-grid">
+            {homeGalleryImages2.map((image, index) => (
+              <motion.figure
+                key={image.src}
+                className={`home-gallery-tile ${image.layout}`}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.16 }}
+                custom={index * 0.05}
+                variants={revealUp}
+                onClick={() => setSelectedImg(image.src)}
+                style={{ cursor: "zoom-in" }}
+              >
+                <img src={image.src} alt={image.alt} />
+              </motion.figure>
+            ))}
+          </div>
+        </section>
+      )}
+
 
       <section className="pager-section shell">
         <motion.div
