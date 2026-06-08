@@ -170,14 +170,15 @@ const content = {
         slug: "about",
         title: "About",
         heading: "Making Ethiopian gold mining simple and accessible",
-        lead:
-          "ARMADA Mining is building a technology-first platform for Ethiopian gold mining, combining sector intelligence, operational readiness, and disciplined field execution.",
+        lead: "ARMADA Mining is building a technology-first platform for Ethiopian gold mining, combining sector intelligence, operational readiness, and disciplined field execution.",
+
         primaryAction: { label: "See the approach", path: "/approach" },
         secondaryAction: { label: "Back home", path: "/" },
-        introTag: "Company overview",
+        
+        introTag: "About Armada Mining",
         introHeading: "ARMADA Mining turns sector intelligence into real operating capability.",
         introBody:
-          "Armada begins by addressing the information gap that slows the mining sector down, then use that intelligence to support exploration planning, production readiness, and well-structured small-scale operations.",
+          "At Armada, we bridge the gap between theoretical potential and operational reality. We are not just consultants or analysts; we are an on-the-ground team with over two years of direct, field-based experience in the complex gold processing landscapes of Ethiopia.",
         cards: [
           {
             label: "01",
@@ -198,10 +199,52 @@ const content = {
               "Our headquarters are in Addis Ababa, Ethiopia, positioning us close to the policy, coordination, and network-building work shaping the sector.",
           },
         ],
+        secondheading:"Our edge lies in Execution. ",
+        secondBody: "We understand that success in the mining sector requires more than just desktop studies it demands a deep familiarity with local corridors, material behavior, and the logistical realities of field operations.",
+        
+        pillers:"Our Core Pillars",
+        pillersbody:[
+          {
+            label:"Local Operating Knowledge", 
+            content:"Grounded in the Benishangul-Gumuz region, our experience provides a practical understanding of feed handling, field conditions, and the specific constraints that matter during early-scale plant deployment.",
+          },
+          {
+            label:"Feedstock Origination", 
+            content:"We possess the unique capability to identify, assess, and pursue high-value tailings and quartz-hosted material through our established local operating networks.",
+          },
+          {
+            label:"Build-and-Operate Practicality", 
+            content:"We employ an 'owner-builder' logic. We prioritize fast deployment, disciplined scope, and practical sourcing over over-engineered complexity to ensure Phase 1 projects are viable and efficient.",
+          },
+          {
+            label:"Control-Oriented Execution", 
+            content:"Our operations are structured around rigorous QA/QC, clear SOPs, and security discipline. We ensure every step of the process is evidence-based and tracked with commercial-grade documentation.",
+          },
+        ],
+        tableTag: "Our Proven Track Record",
+        tableHeading: "In just one year of active mining and processing, our team has achieved significant operational milestones:",
+        tableBody: [
+          {
+            titles: "Metric", value: "Achievements",
+          },
+          {
+            labels: "Field Exposure", values: "2+ Years of direct local gold-processing activity.",
+          },
+          {
+            labels: "Regional Reach", values: "Active operations and references in the Kumruk, Sherkole, and Menge corridors",
+          },
+          {
+            labels: "Material Expertise", values: "Proven recovery patterns across Quartz material, residues, and tailings.",
+          }
+        ],
+        Advatages:"The Armada Advantage",
+        advantagesBody:" We translate field visibility into operating assumptions and execute with precision. From crushing services to gold-output tracking, we understand the connection between feed quality, processing discipline, and recovered gold.",
+        
         closerHeading: "ARMADA Mining is positioning itself as both an operator and a sector builder.",
         closerBody:
           "That combination of intelligence, execution, and ecosystem support is central to how the company creates long-term value.",
       },
+
       "/capabilities": {
         slug: "capabilities",
         title: "Capabilities",
@@ -292,7 +335,7 @@ const content = {
             icon: "S",
             category: "Social Impact & Community",
             details:
-              "Uplifting communities by transitioning informal sectors into disciplined, industrial workforces. We prioritize local employment, health and safety protocols, and investment in essential infrastructure—including clean water, education, and healthcare—to ensure mining benefits are shared equitably across remote regions.",
+              "Uplifting communities by transitioning informal sectors into disciplined, industrial workforces. We prioritize local employment, health and safety protocols, and investment in essential infrastructure including clean water, education, and healthcare to ensure mining benefits are shared equitably across remote regions.",
           },
           {
             icon: "G",
@@ -688,16 +731,17 @@ const content = {
       },
       "/about": {
         slug: "about",
-        title: "ስለ እኛ",
+        title: "ስለ ARMADA Mining",
         heading: "የኢትዮጵያን የወርቅ ማዕድን ቀላል እና ተደራሽ ማድረግ",
-        lead:
-          "ARMADA Mining የዘርፍ መረጃን፣ የኦፕሬሽን ዝግጁነትን እና የተደራጀ የመስክ አፈፃፀምን በማጣመር ለኢትዮጵያ የወርቅ ማዕድን ቴክኖሎጂን የሚመራ መድረክ እየገነባ ነው።",
+        lead:"ARMADA Mining የዘርፍ መረጃን፣ የኦፕሬሽን ዝግጁነትን እና የተደራጀ የመስክ አፈፃፀምን በማጣመር ለኢትዮጵያ የወርቅ ማዕድን ቴክኖሎጂን የሚመራ መድረክ እየገነባ ነው።",
+        
         primaryAction: { label: "አቀራረባችንን ይመልከቱ", path: "/approach" },
         secondaryAction: { label: "ወደ መነሻ ተመለስ", path: "/" },
+        
         introTag: "የኩባንያ አጠቃላይ እይታ",
         introHeading: "ARMADA Mining የዘርፍ መረጃን ወደ እውነተኛ የኦፕሬሽን ችሎታ ይቀይራል።",
         introBody:
-          "የማዕድን ዘርፉን የሚዘገይ የመረጃ ክፍተትን በመቅረፍ እንጀምራለን፤ ከዚያም ያ መረጃ ለምርመራ እቅድ፣ ለምርት ዝግጁነት እና ለተደራጀ አነስተኛ ኦፕሬሽን ድጋፍ እንዲውል እናደርጋለን።",
+          "በአርማዳ፣ በንድፈ ሀሳብ ያለውን አቅም እና በተግባር ያለውን የስራ እውነታ እናገናኛለን። እኛ አማካሪዎች ወይም ተንታኞች ብቻ አይደለንም፤ በኢትዮጵያ ውስብስብ የወርቅ ማቀነባበሪያ ዘርፍ ውስጥ ከሁለት ዓመት በላይ ቀጥተኛ የመስክ ልምድ ያለን በተግባር የምንሰራ ቡድን ነን።",
         cards: [
           {
             label: "01",
@@ -718,6 +762,47 @@ const content = {
               "ዋና መስሪያ ቤታችን በአዲስ አበባ፣ ኢትዮጵያ ይገኛል፤ ይህም ዘርፉን የሚቀይሩ የፖሊሲ፣ የትብብር እና የኔትወርክ ስራዎች አጠገብ እንድንሆን ያደርገናል።",
           },
         ],
+        secondheading:"ጠንካራ አቅማችን በአፈፃፀም ውስጥ ነው።",
+        secondBody: "በማዕድን ዘርፍ ውስጥ ስኬት ለማግኘት ከጽሕፈት ቤት ጥናቶች በላይ ነገር እንደሚያስፈልግ እናውቃለን፤ ይህም የአካባቢ መስመሮችን፣ የማቴሪያል ባህሪያትን እና የመስክ ስራዎችን ሎጂስቲክ እውነታዎች በጥልቀት መረዳትን ይጠይቃል።",
+        
+        pillers:"ዋና ዋና መሠረቶቻችን",
+        pillersbody:[
+          {
+            label:"የአካባቢ የስራ እውቀት", 
+            content:"በቤኒሻንጉል-ጉሙዝ ክልል ላይ የተመሰረተ ልምዳችን፣ የማቴሪያል አያያዝ፣ የመስክ ሁኔታዎች እና በመጀመሪያ ደረጃ ፕላንት ግንባታ ወቅት አስፈላጊ የሆኑ ገደቦችን በተግባር እንድንረዳ አድርጎናል።",
+          },
+          {
+            label:"የመመገቢያ ማቴሪያል ምንጭ ማስገኘት", 
+            content:"ከተቋቋሙ የአካባቢ የስራ ኔትወርኮቻችን በመጠቀም ከፍተኛ ዋጋ ያላቸውን ቴይሊንግስ (Tailings) እና በኳርትዝ የተሸከሙ ማቴሪያሎችን መለየት፣ መገምገም እና ማግኘት የምንችል ልዩ አቅም አለን።",
+          },
+          {
+            label:"ተግባራዊ የግንባታና ስራ አስኪያጅነት", 
+            content:"“Owner-Builder” የሚባለውን አቀራረብ እንከተላለን። የመጀመሪያ ደረጃ ፕሮጀክቶች ተግባራዊ እና ቀልጣፋ እንዲሆኑ ፈጣን ስራ ማስጀመርን፣ የተገደበ የስራ ወሰንን እና ተግባራዊ የአቅርቦት መፍትሄዎችን ከአስቸጋሪ እና ከመጠን በላይ የተንደላቀቁ ዲዛይኖች በላይ እናስቀድማለን።",
+          },
+          {
+            label:"ቁጥጥር-ተኮር አፈፃፀም", 
+            content:"ስራዎቻችን በጥብቅ QA/QC፣ ግልጽ SOPs እና በደህንነት ስርዓት የተደራጁ ናቸው። እያንዳንዱ የሂደት ደረጃ በማስረጃ የተደገፈ እና በንግድ ደረጃ ሰነዶች የተመዘገበ እንዲሆን እናረጋግጣለን።",
+          },
+        ],
+        tableTag: "የተረጋገጠ የስራ ልምዳችን",
+        tableHeading: "በአንድ ዓመት ውስጥ ብቻ በንቁ የማዕድን ማውጣትና ማቀነባበር ስራዎች የሚከተሉትን አስፈላጊ ውጤቶች አሳክተናል።",
+        tableBody: [
+          {
+            title: "መለኪያ", value: "Achievements",
+          },
+          {
+            labels: "የመስክ ልምድ", values: "ከ2 ዓመት በላይ ቀጥተኛ የአካባቢ የወርቅ ማቀነባበሪያ ልምድ",
+          },
+          {
+            labels: "የክልል ተደራሽነት", values: "በኩምሩክ፣ ሸርኮሌ እና መንጌ ኮሪደሮች ውስጥ ንቁ ስራዎችና ማጣቀሻዎች",
+          },
+          {
+            labels: "የማቴሪያል እውቀት", values: "በኳርትዝ ማቴሪያል፣ ቅሪቶች እና ቴይሊንግስ ላይ የተረጋገጡ የማገገሚያ ውጤቶች",
+          }
+        ],
+        Advatages:"የARMADA ልዩ ጥቅም",
+        advantagesBody:" በመስክ የምናገኘውን እይታ ወደ ተግባራዊ የስራ ግምቶች በመቀየር በትክክል እንፈጽማለን። ከድንጋይ መፍጨት አገልግሎቶች ጀምሮ እስከ የወርቅ ምርት ክትትል ድረስ፣ የመመገቢያ ጥራት፣ የማቀነባበር ስርዓት እና የተመለሰ ወርቅ መጠን መካከል ያለውን ግንኙነት በጥልቀት እንረዳለን።",
+        
         closerHeading: "ARMADA Mining እንደ ኦፕሬተርም እንደ ዘርፍ አበልጣጭም ራሱን እያቆመ ነው።",
         closerBody: "ይህ የመረጃ፣ የአፈፃፀም እና የስርዓት ድጋፍ ጥምረት ኩባንያው የረጅም ጊዜ እሴት እንዲፈጥር ዋና መሠረት ነው።",
       },

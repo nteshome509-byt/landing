@@ -1310,6 +1310,18 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText,
     return <LegalPageSection page={page} revealUp={revealUp} />;
   }
 
+  if (page.slug === "about") {
+  return (
+    <AboutPageSection
+      page={page}
+      revealUp={revealUp}
+      onNavClick={onNavClick}
+      currentPath={currentPath}
+      uiText={uiText}
+    />
+  );
+}
+
   const previousPath =
     pageOrder[Math.max(0, pageOrder.indexOf(currentPath) - 1)] ?? pageOrder[0];
   const nextPath =
@@ -1495,6 +1507,232 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText,
               {uiText.previousPage}
             </a>
             <a className="button button-accent" href={nextPath} onClick={(event) => onNavClick(event, nextPath)}>
+              {uiText.nextPage}
+            </a>
+          </div>
+        </motion.div>
+      </section>
+    </>
+  );
+}
+
+function AboutPageSection({
+  page,
+  revealUp,
+  onNavClick,
+  currentPath,
+  uiText,
+}) {
+  const previousPath =
+    pageOrder[Math.max(0, pageOrder.indexOf(currentPath) - 1)] ??
+    pageOrder[0];
+
+  const nextPath =
+    pageOrder[
+      Math.min(
+        pageOrder.length - 1,
+        pageOrder.indexOf(currentPath) + 1
+      )
+    ] ?? pageOrder[pageOrder.length - 1];
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="page-hero">
+        <div className="page-hero-media">
+          <img src={page.heroImage || heroImage} alt={page.title} />
+        </div>
+
+        <div className="page-hero-overlay" />
+
+        <div className="page-hero-pattern">
+          <img src={pattern} alt="" aria-hidden="true" />
+        </div>
+
+        <div className="shell page-hero-grid">
+          <motion.div
+            className="page-hero-copy"
+            initial="hidden"
+            animate="show"
+            variants={revealUp}
+          >
+            <h1>{page.heading}</h1>
+            <p className="lead-copy">{page.lead}</p>
+
+            <div className="hero-actions">
+              {page.primaryAction && (
+                <a
+                  className="button button-accent"
+                  href={page.primaryAction.path}
+                  onClick={(e) =>
+                    onNavClick(e, page.primaryAction.path)
+                  }
+                >
+                  {page.primaryAction.label}
+                </a>
+              )}
+
+              {page.secondaryAction && (
+                <a
+                  className="button button-ghost"
+                  href={page.secondaryAction.path}
+                  onClick={(e) =>
+                    onNavClick(e, page.secondaryAction.path)
+                  }
+                >
+                  {page.secondaryAction.label}
+                </a>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Intro */}
+      <section className="content-section shell">
+        <motion.div
+          className="content-intro"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={revealUp}
+        >
+          <p className="eyebrow">{page.introTag}</p>
+          <h2>{page.introHeading}</h2>
+          <p>{page.introBody}</p>
+        </motion.div>
+
+        <div className="content-grid">
+          {page.cards.map((card, index) => (
+            <motion.article
+              key={card.title}
+              className="content-card"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              custom={index * 0.08}
+              variants={revealUp}
+            >
+              <div className="card-accent" />
+              <p className="card-label">{card.label}</p>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      {/* Execution */}
+      <section className="about-execution-section shell">
+        <motion.div
+          className="about-execution"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={revealUp}
+        >
+          <h2>{page.secondheading}</h2>
+          <p>{page.secondBody}</p>
+        </motion.div>
+      </section>
+
+      {/* Core Pillars */}
+      <section className="about-pillars-section shell">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={revealUp}
+        >
+          <h2>{page.pillers}</h2>
+        </motion.div>
+
+        <div className="pillar-list">
+          {page.pillersbody.map((pillar, index) => (
+            <motion.article
+              key={pillar.label}
+              className="pillar-item"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              custom={index * 0.08}
+              variants={revealUp}
+            >
+              <h3>{pillar.label}</h3>
+              <p>{pillar.content}</p>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      {/* Track Record */}
+      <section className="about-track-record shell">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={revealUp}
+        >
+          <p className="eyebrow">{page.tableTag}</p>
+          <h2>{page.tableHeading}</h2>
+          
+          <div className="track-record-table">
+            <div className="track-header">
+              <div>{page.tableBody[0].titles}</div>
+              <div>{page.tableBody[0].value}</div>
+            </div>
+            {page.tableBody.slice(1).map((row) => (
+              <div key={row.labels} className="track-row">
+                <div className="track-label">
+                  {row.labels}
+                </div>
+
+                <div className="track-value">
+                  {row.values}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Pager */}
+      <section className="pager-section shell">
+        <motion.div
+          className="pager-card"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={revealUp}
+        >
+          <div>
+            <p className="eyebrow">
+              {uiText.continueExploring}
+            </p>
+
+            <h2>{page.closerHeading}</h2>
+
+            <p>{page.closerBody}</p>
+          </div>
+
+          <div className="pager-actions">
+            <a
+              className="button button-ghost"
+              href={previousPath}
+              onClick={(e) =>
+                onNavClick(e, previousPath)
+              }
+            >
+              {uiText.previousPage}
+            </a>
+
+            <a
+              className="button button-accent"
+              href={nextPath}
+              onClick={(e) =>
+                onNavClick(e, nextPath)
+              }
+            >
               {uiText.nextPage}
             </a>
           </div>
