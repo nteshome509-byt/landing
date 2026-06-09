@@ -1,9 +1,9 @@
-import capabilitiesImage from "../assets/gold_wash.jpg";
-import bodyImage1 from "../assets/capabilities_body.jpg";
-import bodyImage2 from "../assets/approch_body.jpg";
-import homeHeroImage from "../assets/home_hero.jpg";
+import capabilitiesImage from "../assets/gold_wash.webp";
+import bodyImage1 from "../assets/capabilities_body.webp";
+import bodyImage2 from "../assets/approch_body.webp";
+import homeHeroImage from "../assets/home_hero.webp";
 import heroImage3 from "../assets/hero_approach.webp";
-import heroImage4 from "../assets/hero_contact.jpg";
+import heroImage4 from "../assets/hero_contact.webp";
 
 export const pageOrder = ["/", "/about", "/capabilities", "/esg", "/approach", "/contact"];
 
@@ -178,7 +178,7 @@ const content = {
         introTag: "About Armada Mining",
         introHeading: "ARMADA Mining turns sector intelligence into real operating capability.",
         introBody:
-          "At Armada, we bridge the gap between theoretical potential and operational reality. We are not just consultants or analysts; we are an on-the-ground team with over two years of direct, field-based experience in the complex gold processing landscapes of Ethiopia.",
+          "At Armada, we bridge the gap between theoretical potential and operational reality. We are not just consultants or analysts; we are an on-the-ground team with over two years of direct, field-based experience in the complex gold processing landscapes of Ethiopia. Our core strength lies in execution. We understand that success in the mining sector requires more than just desktop studies—it demands a deep familiarity with local corridors, material behavior, and the logistical realities of field operations.",
         cards: [
           {
             label: "01",
@@ -199,8 +199,8 @@ const content = {
               "Our headquarters are in Addis Ababa, Ethiopia, positioning us close to the policy, coordination, and network-building work shaping the sector.",
           },
         ],
-        secondheading:"Our edge lies in Execution. ",
-        secondBody: "We understand that success in the mining sector requires more than just desktop studies it demands a deep familiarity with local corridors, material behavior, and the logistical realities of field operations.",
+        secondheading:"",
+        secondBody: "",
         
         pillers:"Our Core Pillars",
         pillersbody:[
@@ -739,9 +739,9 @@ const content = {
         secondaryAction: { label: "ወደ መነሻ ተመለስ", path: "/" },
         
         introTag: "የኩባንያ አጠቃላይ እይታ",
-        introHeading: "ARMADA Mining የዘርፍ መረጃን ወደ እውነተኛ የኦፕሬሽን ችሎታ ይቀይራል።",
+        introHeading: "ARMADA Mining የዘርፍ መረጃን ወደ እውነተኛ የኦፕሬሽን ችሎታ ይቀይራል",
         introBody:
-          "በአርማዳ፣ በንድፈ ሀሳብ ያለውን አቅም እና በተግባር ያለውን የስራ እውነታ እናገናኛለን። እኛ አማካሪዎች ወይም ተንታኞች ብቻ አይደለንም፤ በኢትዮጵያ ውስብስብ የወርቅ ማቀነባበሪያ ዘርፍ ውስጥ ከሁለት ዓመት በላይ ቀጥተኛ የመስክ ልምድ ያለን በተግባር የምንሰራ ቡድን ነን።",
+          "በአርማዳ፣ በንድፈ ሀሳብ ያለውን አቅም እና በተግባር ያለውን የስራ እውነታ እናገናኛለን። እኛ አማካሪዎች ወይም ተንታኞች ብቻ አይደለንም፤ በኢትዮጵያ ውስብስብ የወርቅ ማቀነባበሪያ ዘርፍ ውስጥ ከሁለት ዓመት በላይ ቀጥተኛ የመስክ ልምድ ያለን በተግባር የምንሰራ ቡድን ነን። ጠንካራ አቅማችን በአፈፃፀም ውስጥ ነው። በማዕድን ዘርፍ ውስጥ ስኬት ለማግኘት ከጽሕፈት ቤት ጥናቶች በላይ ነገር እንደሚያስፈልግ እናውቃለን፤ ይህም የአካባቢ መስመሮችን፣ የማቴሪያል ባህሪያትን እና የመስክ ስራዎችን ሎጂስቲክ እውነታዎች በጥልቀት መረዳትን ይጠይቃል።",
         cards: [
           {
             label: "01",
@@ -762,8 +762,8 @@ const content = {
               "ዋና መስሪያ ቤታችን በአዲስ አበባ፣ ኢትዮጵያ ይገኛል፤ ይህም ዘርፉን የሚቀይሩ የፖሊሲ፣ የትብብር እና የኔትወርክ ስራዎች አጠገብ እንድንሆን ያደርገናል።",
           },
         ],
-        secondheading:"ጠንካራ አቅማችን በአፈፃፀም ውስጥ ነው።",
-        secondBody: "በማዕድን ዘርፍ ውስጥ ስኬት ለማግኘት ከጽሕፈት ቤት ጥናቶች በላይ ነገር እንደሚያስፈልግ እናውቃለን፤ ይህም የአካባቢ መስመሮችን፣ የማቴሪያል ባህሪያትን እና የመስክ ስራዎችን ሎጂስቲክ እውነታዎች በጥልቀት መረዳትን ይጠይቃል።",
+        secondheading:"",
+        secondBody: "",
         
         pillers:"ዋና ዋና መሠረቶቻችን",
         pillersbody:[
@@ -785,7 +785,7 @@ const content = {
           },
         ],
         tableTag: "የተረጋገጠ የስራ ልምዳችን",
-        tableHeading: "በአንድ ዓመት ውስጥ ብቻ በንቁ የማዕድን ማውጣትና ማቀነባበር ስራዎች የሚከተሉትን አስፈላጊ ውጤቶች አሳክተናል።",
+        tableHeading: "በአንድ ዓመት ውስጥ ብቻ በንቁ የማዕድን ማውጣትና ማቀነባበር ስራዎች የሚከተሉትን አስፈላጊ ውጤቶች አሳክተናል:",
         tableBody: [
           {
             title: "መለኪያ", value: "Achievements",

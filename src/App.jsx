@@ -3,22 +3,22 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import pattern from "../assets/pattern.svg";
 
-import heroImage from "../assets/about_bakground.jpg";
-import heroImage2 from "../assets/gold_wash.jpg";
-import heroImage3 from "../assets/esg_hero.jpg";
-import heroImage4 from "../assets/hero_contact.jpg";
-import bodyImage1 from "../assets/capabilities_body.jpg";
-import bodyImage2 from "../assets/approch_body.jpg";
+import heroImage from "../assets/about_bakground.webp";
+import heroImage2 from "../assets/gold_wash.webp";
+import heroImage3 from "../assets/esg_hero.webp";
+import heroImage4 from "../assets/hero_contact.webp";
+import bodyImage1 from "../assets/capabilities_body.webp";
+import bodyImage2 from "../assets/approch_body.webp";
 
-import galleryWide from "../assets/home_pic1.png";
-import galleryPortraitB from "../assets/home_pic2.png";
-import galleryTallB from "../assets/home_pic3.png";
+import galleryWide from "../assets/home_pic1.webp";
+import galleryPortraitB from "../assets/home_pic2.webp";
+import galleryTallB from "../assets/home_pic3.webp";
 
-import galleryWide2 from "../assets/cap_image1.jpg";
-import galleryPortraitB2 from "../assets/cap_image2.png";
-import galleryTallB2 from "../assets/cap_image3.png";
+import galleryWide2 from "../assets/cap_image1.webp";
+import galleryPortraitB2 from "../assets/cap_image2.webp";
+import galleryTallB2 from "../assets/cap_image3.webp";
 
-import homeHeroImage from "../assets/home_hero.jpg";
+import homeHeroImage from "../assets/home_hero.webp";
 import logo from "../assets/Logo.svg";
 
 import {
@@ -384,7 +384,7 @@ function App() {
               href="/"
               onClick={(event) => onNavClick(event, "/")}
             >
-              <img src={logo} alt="Armada Mining" className="brand-logo" />
+              <img src={logo} alt="Armada Mining" className="brand-logo"/>
             </a>
 
             <nav
@@ -528,7 +528,7 @@ function Footer({ onNavClick, footerData, uiText }) {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="/" className="brand-lockup" onClick={(event) => onNavClick(event, "/")}>
-              <img src={logo} alt="Armada Mining" className="brand-logo" />
+              <img src={logo} alt="Armada Mining" className="brand-logo"/>
             </a>
             <p className="footer-description">{footerData.brand.description}</p>
             <div className="footer-social">
@@ -597,7 +597,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText, setSelec
     <>
       <section className="page-hero page-hero-home" ref={heroRef}>
         <div className="page-hero-media">
-          <img src={page.heroImage || homeHeroImage} alt={page.heading} />
+          <img src={page.heroImage || homeHeroImage} alt={page.heading}/>
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
@@ -756,7 +756,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText, setSelec
 
       <section className="home-responsibility-section">
         <div className="home-responsibility-pattern" aria-hidden="true">
-          <img src={pattern} alt="" />
+          <img src={pattern} alt="" loading="lazy"/>
         </div>
         <div className="shell home-responsibility-layout">
           <motion.div
@@ -824,7 +824,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText, setSelec
               onClick={() => setSelectedImg(image.src)}
               style={{ cursor: "zoom-in" }}
             >
-              <img src={image.src} alt={image.alt} />
+              <img src={image.src} alt={image.alt} loading="lazy"/>
             </motion.figure>
           ))}
         </div>
@@ -839,7 +839,7 @@ function HomePageSection({ page, onNavClick, revealUp, heroRef, uiText, setSelec
           variants={revealUp}
         >
           <div className="global-cta-pattern" aria-hidden="true">
-            <img src={pattern} alt="" />
+            <img src={pattern} alt="" loading="lazy"/>
           </div>
           <div className="global-cta-content">
             <p className="eyebrow">{uiText.nextSteps}</p>
@@ -894,11 +894,11 @@ function ContactPageSection({ page, revealUp, uiText }) {
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={page.heroImage || heroImage} alt={page.heading} />
+          <img src={page.heroImage || heroImage} alt={page.heading}/>
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
-          <img src={pattern} alt="" aria-hidden="true" />
+          <img src={pattern} alt="" aria-hidden="true"/>
         </div>
 
         <div className="shell page-hero-grid">
@@ -1059,13 +1059,13 @@ function ESGPageSection({ page, revealUp, onNavClick, uiText }) {
       {/* HERO */}
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={page.heroImage || heroImage3} alt={page.heading} />
+          <img src={page.heroImage || heroImage3} alt={page.heading}/>
         </div>
 
         <div className="page-hero-overlay" />
 
         <div className="page-hero-pattern">
-          <img src={pattern} alt="" aria-hidden="true" />
+          <img src={pattern} alt="" aria-hidden="true"/>
         </div>
 
         <div className="shell page-hero-grid">
@@ -1231,11 +1231,11 @@ function LegalPageSection({ page, revealUp }) {
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={page.heroImage || heroImage} alt={page.heading} />
+          <img src={page.heroImage || heroImage} alt={page.heading}/>
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
-          <img src={pattern} alt="" aria-hidden="true" />
+          <img src={pattern} alt="" aria-hidden="true"/>
         </div>
 
         <div className="shell page-hero-grid">
@@ -1332,11 +1332,11 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText,
     <>
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={page.heroImage || heroImage} alt={page.title} />
+          <img src={page.heroImage || heroImage} alt={page.title}/>
         </div>
         <div className="page-hero-overlay" />
         <div className="page-hero-pattern">
-          <img src={pattern} alt="" aria-hidden="true" />
+          <img src={pattern} alt="" aria-hidden="true"/>
         </div>
 
         <div className="shell page-hero-grid">
@@ -1416,9 +1416,9 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText,
               variants={revealUp}
             >
               <div className="visual-panel-pattern">
-                <img src={pattern} alt="" aria-hidden="true" />
+                <img src={pattern} alt="" aria-hidden="true"/>
               </div>
-              <img className="visual-panel-image" src={page.detailImage || heroImage} alt={`${page.title} visual`} />
+              <img className="visual-panel-image" src={page.detailImage || heroImage} alt={`${page.title} visual`} loading="lazy"/>
               {page.visualQuote && (
                 <div className="visual-panel-copy">
                   <p className="card-label">{uiText.inOurOwnWords}</p>
@@ -1480,7 +1480,7 @@ function PageSection({ page, currentPath, onNavClick, revealUp, heroRef, uiText,
                 onClick={() => setSelectedImg(image.src)}
                 style={{ cursor: "zoom-in" }}
               >
-                <img src={image.src} alt={image.alt} />
+                <img src={image.src} alt={image.alt} loading="lazy"/>
               </motion.figure>
             ))}
           </div>
@@ -1540,13 +1540,13 @@ function AboutPageSection({
       {/* Hero */}
       <section className="page-hero">
         <div className="page-hero-media">
-          <img src={page.heroImage || heroImage} alt={page.title} />
+          <img src={page.heroImage || heroImage} alt={page.title}/>
         </div>
 
         <div className="page-hero-overlay" />
 
         <div className="page-hero-pattern">
-          <img src={pattern} alt="" aria-hidden="true" />
+          <img src={pattern} alt="" aria-hidden="true"/>
         </div>
 
         <div className="shell page-hero-grid">
@@ -1620,20 +1620,6 @@ function AboutPageSection({
             </motion.article>
           ))}
         </div>
-      </section>
-
-      {/* Execution */}
-      <section className="about-execution-section shell">
-        <motion.div
-          className="about-execution"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={revealUp}
-        >
-          <h2>{page.secondheading}</h2>
-          <p>{page.secondBody}</p>
-        </motion.div>
       </section>
 
       {/* Core Pillars */}
