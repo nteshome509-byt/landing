@@ -788,7 +788,7 @@ const content = {
         tableHeading: "በአንድ ዓመት ውስጥ ብቻ በንቁ የማዕድን ማውጣትና ማቀነባበር ስራዎች የሚከተሉትን አስፈላጊ ውጤቶች አሳክተናል:",
         tableBody: [
           {
-            title: "መለኪያ", value: "Achievements",
+            titles: "መለኪያ", value: "ስኬት",
           },
           {
             labels: "የመስክ ልምድ", values: "ከ2 ዓመት በላይ ቀጥተኛ የአካባቢ የወርቅ ማቀነባበሪያ ልምድ",
