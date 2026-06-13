@@ -150,7 +150,7 @@ function App() {
         },
         {
           currency: "ETB/gm",
-          value: `${Number(goldRateSnapshot.birr).toLocaleString()} ETB`,
+          value: `${Number(goldRateSnapshot.birr).toLocaleString()}`,
           trend: "down",
         },
       ],
@@ -353,14 +353,15 @@ function App() {
                 <div
                   key={`${copyIndex}-${item.currency}`}
                   className="market-item"
-                >
+                >                  
+                  <span className="market-price">
+                      {item.value}
+                  </span>
+
                   <span className="market-currency">
                     {item.currency}
                   </span>
 
-                  <span className="market-price">
-                    {item.value}
-                  </span>
                 </div>
               ))}
             </div>
