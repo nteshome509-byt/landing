@@ -20,4 +20,4 @@ COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
-CMD ["/bin/sh", "-c", "PORT=${PORT:-80}; echo \"Starting nginx on port ${PORT}\"; envsubst '$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"]
+CMD ["/bin/sh", "-c", "export PORT=${PORT:-80}; echo \"Starting nginx on port ${PORT}\"; envsubst '$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"]
