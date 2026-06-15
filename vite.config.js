@@ -22,6 +22,7 @@ export default defineConfig({
         privacy: resolve(__dirname, "privacy/index.html"),
         terms: resolve(__dirname, "terms/index.html"),
         cookies: resolve(__dirname, "cookies/index.html"),
+        esg: resolve(__dirname, "ESG/index.html"),
       },
     },
   },
