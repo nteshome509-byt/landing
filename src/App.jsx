@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import pattern from "../assets/pattern.svg";
-
 import heroImage from "../assets/about_bakground.webp";
 import heroImage2 from "../assets/gold_wash.webp";
 import heroImage3 from "../assets/esg_hero.webp";
@@ -20,6 +19,8 @@ import galleryTallB2 from "../assets/cap_image3.webp";
 
 import homeHeroImage from "../assets/home_hero.webp";
 import logo from "../assets/Logo.svg";
+
+import bimage from "../assets/bcgen_top_fade_v2.png";
 
 import {
   getFooterData,
@@ -1652,36 +1653,56 @@ function AboutPageSection({
         </div>
       </section>
 
-      {/* Track Record */}
-      <section className="about-track-record shell">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={revealUp}
-        >
-          <p className="eyebrow">{page.tableTag}</p>
-          <h2>{page.tableHeading}</h2>
-          
-          <div className="track-record-table">
-            <div className="track-header">
-              <div>{page.tableBody[0].titles}</div>
-              <div>{page.tableBody[0].value}</div>
-            </div>
-            {page.tableBody.slice(1).map((row) => (
-              <div key={row.labels} className="track-row">
-                <div className="track-label">
-                  {row.labels}
-                </div>
+{/* Track Record */}
+<section className="about-track-record shell">
+  <motion.div
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    variants={revealUp}
+  >
+    <p className="eyebrow">{page.tableTag}</p>
+    <h2>{page.tableHeading}</h2>
+    
+    <div className="track-record-grid">
+      {page.tableBody?.map((row, index) => {
+        const isFirstCard = index === 0;
 
-                <div className="track-value">
-                  {row.values}
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
+        return (
+          <motion.article
+            key={row.labels || index}
+            className="track-record-card"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            custom={index * 0.08}
+            variants={revealUp}
+          >
+            {/* Top image section - identical for all 3 cards */}
+            <div 
+              className="card-media"
+              style={{ backgroundImage: row.bgImage ? `url(${row.bgImage})` : undefined }}
+            />
+            
+            {/* Bottom text section - first card conditionally gets the bimage background */}
+            <div 
+              className="card-info"
+              style={isFirstCard ? { 
+                backgroundImage: `url(${bimage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'right center',
+                backgroundRepeat: 'no-repeat'
+              } : {}}
+            >
+              <h3 className="card-title">{row.labels}</h3>
+              <p className="card-body">{row.values}</p>
+            </div>
+          </motion.article>
+        );
+      })}
+    </div>
+  </motion.div>
+</section>
 
       {/* Pager */}
       <section className="pager-section shell">

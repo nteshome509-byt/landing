@@ -4,6 +4,9 @@ import bodyImage2 from "../assets/approch_body.webp";
 import homeHeroImage from "../assets/home_hero.webp";
 import heroImage3 from "../assets/hero_approach.webp";
 import heroImage4 from "../assets/hero_contact.webp";
+import img1 from"../assets/1st.png";
+import img2 from"../assets/2nd.png";
+import img3 from"../assets/3rd.png";
 
 export const pageOrder = ["/", "/about", "/capabilities", "/esg", "/approach", "/contact"];
 
@@ -225,16 +228,13 @@ const content = {
         tableHeading: "In just one year of active mining and processing, our team has achieved significant operational milestones:",
         tableBody: [
           {
-            titles: "Metric", value: "Achievements",
+            labels: "Field Exposure", values: "2+ Years of direct local gold-processing activity.", bgImage:img1,
           },
           {
-            labels: "Field Exposure", values: "2+ Years of direct local gold-processing activity.",
+            labels: "Regional Reach", values: "Active operations and references in the Kumruk, Sherkole, and Menge corridors",bgImage:img2,
           },
           {
-            labels: "Regional Reach", values: "Active operations and references in the Kumruk, Sherkole, and Menge corridors",
-          },
-          {
-            labels: "Material Expertise", values: "Proven recovery patterns across Quartz material, residues, and tailings.",
+            labels: "Material Expertise", values: "Proven recovery patterns across Quartz material, residues, and tailings.", bgImage:img3,
           }
         ],
         Advatages:"The Armada Advantage",
