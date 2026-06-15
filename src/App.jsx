@@ -1696,6 +1696,7 @@ function AboutPageSection({
             >
               <h3 className="card-title">{row.labels}</h3>
               <p className="card-body">{row.values}</p>
+              <p className="card-body">{row.values2}</p>
             </div>
           </motion.article>
         );

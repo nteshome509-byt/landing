@@ -228,7 +228,7 @@ const content = {
         tableHeading: "In just one year of active mining and processing, our team has achieved significant operational milestones:",
         tableBody: [
           {
-            labels: "Field Exposure", values: "2+ Years of direct local gold-processing activity.", bgImage:img1,
+            labels: "Field Exposure", values: "2+ Years of direct local ", values2:"gold-processing activity.",bgImage:img1,
           },
           {
             labels: "Regional Reach", values: "Active operations and references in the Kumruk, Sherkole, and Menge corridors",bgImage:img2,
